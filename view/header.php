@@ -2,7 +2,7 @@
     <img id="img_postlogo" src="./images/postlogo.png" alt="postlogo">
     <span class="div_headertitle">
         <p class="p_headertitle">
-            Jump-In App Konfiguration
+            Jump-In Konfiguration
         </p>
     </span>
 </header>

@@ -5,7 +5,7 @@
         <!DOCTYPE html>
 		<html>
 			<head>
-				<title>The Internet's History</title>
+				<title>Jump-In Konfiguration</title>
 				<link rel="stylesheet" href="./css/style.css">
 				<meta charset="UTF-8">
 			</head>
@@ -15,7 +15,7 @@
 					?> 
 				<main>
 					<?php
-						require_once './view/' . $file; 
+						require_once $file; 
 					?> 
 				</main>
 			</body>

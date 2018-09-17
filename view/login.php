@@ -1,7 +1,12 @@
+<img id="img_login" src="./images/user.png" alt="usericon">
 <form action="validate_anmelden" method="post">
-	<div>
-		<input class="" type="text" name="benutzername" placeholder="Benutzername" required/>
-		<input class="" type="password" name="passwort" placeholder="Passwort" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Das Passwort muss aus mindestens 8 Zeichen, 1 Zahl und 1 Grossbuchstaben bestehen!" required/>
-		<input class="" type="submit" value="Login"/>
+	<div id="div_login">
+		<p class="p_login">Benutzername</p>
+		<input class="forms_login" type="text" name="benutzername" required/>
+		<br>
+		<p class="p_login">Passwort</p>
+		<input class="forms_login" type="password" name="passwort" required/>
+		<br>
+		<input id="button_login" type="submit" value="Login"/>
 	</div>
 </form>

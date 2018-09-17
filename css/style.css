@@ -32,3 +32,49 @@ header{
 .p_headertitle{
     margin: 7% 0 0 0;
 }
+
+#img_login{
+    position: absolute;
+    left: 50%;
+    margin-top: 3%;
+    margin-left: -100px;
+    width: 200px;
+}
+
+#div_login{
+    position: absolute;
+    left: 50%;
+    width: 355px;
+    margin-left: -177.5px;
+    margin-top: 22%;
+}
+
+.p_login{
+    margin: 0;
+    font-size: 9pt;
+    font-weight: 800;
+}
+
+.forms_login{
+    height: 25px;
+    width: 350px;
+    margin-bottom: 10px;
+    background: #f5f1e8;
+    border: 2px solid #806f60;
+}
+
+#button_login{
+    float: right;
+    height: 30px;
+    width: 100px;
+    font-size: 11pt;
+    border-radius: 3px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+
+#button_login:hover{
+    background-color: #FFCC00;
+    color: #584125; 
+}

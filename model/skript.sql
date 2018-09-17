@@ -1,11 +1,11 @@
-CREATE DATABASE JumpIN;
+CREATE DATABASE JumpIn;
 
 USE JumpIN;
 
 CREATE TABLE GRUPPE(
     id_gruppe INT AUTO_INCREMENT,
     name VARCHAR(30),
-    PRIMARY KEY id_gruppe
+    PRIMARY KEY (id_gruppe)
 );
 
 CREATE TABLE BENUTZER(
@@ -34,7 +34,7 @@ CREATE TABLE BENUTZER_GRUPPE(
 CREATE TABLE ART(
     id_art INT AUTO_INCREMENT,
     name VARCHAR(30),
-    PRIMARY KEY id_art
+    PRIMARY KEY (id_art)
 );
 
 CREATE TABLE AKTIVITÄT(
@@ -48,7 +48,7 @@ CREATE TABLE AKTIVITÄT(
     startzeit DATETIME,
     endzeit DATETIME,
     info VARCHAR(500),
-    PRIMARY KEY (id_aktivität)
+    PRIMARY KEY (id_aktivität),
     FOREIGN KEY (art_id)
         REFERENCES ART(id_art)
         ON DELETE CASCADE
@@ -58,7 +58,7 @@ CREATE TABLE AKTIVITÄT(
 CREATE TABLE NOTFALLKATEGORIE(
     id_notfallkategorie INT AUTO_INCREMENT,
     name VARCHAR(30),
-    info VARCHAR(300)
+    info VARCHAR(300),
     PRIMARY KEY (id_notfallkategorie)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE EINSCHREIBEN(
     benutzer_id INT,
     PRIMARY KEY (aktivität_id, benutzer_id),
     FOREIGN KEY (aktivität_id)
-        REFERENCES AKTIVITÄT(aktivität_id)
+        REFERENCES AKTIVITÄT(id_aktivität)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (benutzer_id)
@@ -121,4 +121,4 @@ CREATE TABLE FEEDBACKBOGEN(
 );
 
 INSERT INTO BENUTZER VALUES
-(NULL, "admin", "1234", "adminus", "grandus");
+(NULL, "admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus");
