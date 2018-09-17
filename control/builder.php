@@ -1,5 +1,4 @@
 <?php
-	$year;
     function build($file){
 ?>
         <!DOCTYPE html>

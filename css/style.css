@@ -15,6 +15,10 @@ header{
     background-color: #FFCC00;
 }
 
+nav{
+    display: inline;
+}
+
 #img_postlogo{
     height: 100px;
 }
@@ -29,46 +33,67 @@ header{
     color: #584125;
 }
 
+.span_headertitle{
+    position: absolute;
+    overflow: auto;
+    right: 0;
+    height: 110px;
+    margin: 30px 20px 0 0;
+}
+
+#a_headertitle{
+    border-left: 2px solid #584125;
+    text-decoration: none;
+    font-size: 25pt;
+    font-weight: 900;
+    color: #584125;
+}
+
+#a_headertitle:hover{
+    color: #000000;
+    border-left: 2px solid #000000;
+}
+
 .p_headertitle{
-    margin: 7% 0 0 0;
+    margin: 10% 20px 0 0;
 }
 
 #img_login{
     position: absolute;
     left: 50%;
-    margin-top: 3%;
-    margin-left: -100px;
-    width: 200px;
+    margin-top: 50px;
+    margin-left: -175px;
+    width: 350px;
 }
 
 #div_login{
     position: absolute;
     left: 50%;
-    width: 355px;
-    margin-left: -177.5px;
-    margin-top: 22%;
+    width: 705px;
+    margin: 400px 0 0 -352.5px;
 }
 
 .p_login{
     margin: 0;
-    font-size: 9pt;
+    font-size: 18pt;
     font-weight: 800;
 }
 
 .forms_login{
-    height: 25px;
-    width: 350px;
+    height: 50px;
+    width: 700px;
     margin-bottom: 10px;
+    font-size: 18pt;
     background: #f5f1e8;
     border: 2px solid #806f60;
 }
 
 #button_login{
     float: right;
-    height: 30px;
-    width: 100px;
-    font-size: 11pt;
-    border-radius: 3px;
+    height: 40px;
+    width: 130px;
+    font-size: 16pt;
+    border-radius: 5px;
     background-color: #584125;
     color: #ebe4d1; 
     border: 1px solid #584125;
@@ -77,4 +102,26 @@ header{
 #button_login:hover{
     background-color: #FFCC00;
     color: #584125; 
+}
+
+#div_home_main{
+    overflow: auto;
+    width: 85%;
+    height: 735px;
+    margin: 50px 7.5%;
+    background-color: #ebe4d1;
+
+}
+
+#div_home_float{
+    margin: 2% 4%;
+    width: 92%;
+    height: 80%;
+}
+
+#p_stack{
+    margin: 20px 20px;
+    font-size: 30pt;
+    font-weight: 900;
+    color: #584125;
 }
