@@ -18,6 +18,24 @@
 			case 'logout':
 				build('logout.php');
 				break;
+			case 'allgemein':
+				build('./view/allgemein.php');
+				break;
+			case 'aktivitaetsart':
+				build('./view/aktivitaetsart.php');
+				break;
+			case 'aktivitaet':
+				build('./view/aktivitaet.php');
+				break;
+			case 'steckbrief':
+				build('./view/steckbrief.php');
+				break;
+			case 'notfallkarte':
+				build('./view/notfallkarte.php');
+				break;
+			case 'feedback':
+				build('./view/feedback.php');
+				break;
 			default:
 				build('./view/login.php');
 				break;

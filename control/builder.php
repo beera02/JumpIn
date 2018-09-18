@@ -14,6 +14,19 @@
 					?> 
 				<main>
 					<?php
+						if ($file == './view/login.php') {
+							if($_SESSION['benutzer']){
+								$file = './view/home.php';
+							}
+						}
+						elseif ($file == 'validate_anmelden.php') {
+							
+						}
+						else {
+							if(!$_SESSION['benutzer']){
+								$file = './view/login.php';
+							}
+						}
 						require_once $file; 
 					?> 
 				</main>
