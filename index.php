@@ -36,6 +36,21 @@
 			case 'feedback':
 				build('./view/feedback.php');
 				break;
+			case 'user_add':
+				build('./view/user_add.php');
+				break;
+			case 'user_edit':
+				build('./view/user_edit.php');
+				break;
+			case 'validate_user_add':
+				build('validate_user_add.php');
+				break;
+			case 'user_add_group_add':
+				build('./view/user_add_group_add.php');
+				break;
+			case 'validate_user_add_group_add':
+				build('validate_user_add_group_add.php');
+				break;
 			default:
 				build('./view/login.php');
 				break;

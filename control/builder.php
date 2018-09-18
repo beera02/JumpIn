@@ -17,6 +17,7 @@
 						if ($file == './view/login.php') {
 							if($_SESSION['benutzer']){
 								$file = './view/home.php';
+								setStack($file);
 							}
 						}
 						elseif ($file == 'validate_anmelden.php') {
@@ -26,6 +27,9 @@
 							if(!$_SESSION['benutzer']){
 								$file = './view/login.php';
 							}
+							else{
+								setStack($file);
+							}
 						}
 						require_once $file; 
 					?> 
@@ -34,4 +38,38 @@
 		</html>
 		<?php	 
 	}
+
+	function setStack($target){
+		$targetarray = explode(".",$target);
+		$targetstring = $targetarray[count($targetarray) - 2];
+		$targetarray2 = explode("/",$targetstring);
+		$finalstring = $targetarray2[count($targetarray2) - 1];
+
+		$stackstring = $_SESSION['stack'];
+		$stackarray = explode("/",$stackstring);
+		$finalstringbefore = $stackarray[count($stackarray) - 2];
+
+		$_SESSION['stack'] .= $finalstring.'/';
+
+		/*if(in_array($finalstring, $stackarray)){
+			if($finalstringbefore != $finalstring){
+				
+			}
+			$number = array_search($finalstring, $stackarray);
+			foreach($stackarray as $value){
+				$i = 0;
+				while($i <= $number){
+					$finalstackarray[$i] = $value;
+					$i++;
+				};
+				$finalstring = implode("",$finalstackarray);
+				$_SESSION['stack'] = $finalstring;
+			}
+		}*/
+	}
+
+	function getDatabase(){
+        $db = array("localhost", "jumpin", "1234", "jumpin");
+        return $db;
+    }
 ?>

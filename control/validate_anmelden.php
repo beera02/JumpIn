@@ -1,13 +1,17 @@
 <?php
-    $db = new Mysqli('localhost', 'jumpin', '1234', 'jumpin');
+    $dbarray = getDatabase();
+    $db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
     $invalid = false;
 
     if(!(empty($_POST['passwort'])) && !(empty($_POST['benutzername']))){
-        $passwortabfrage = $db->query("SELECT passwort FROM benutzer
-            WHERE benutzername = '" . $_POST['benutzername'] . "' LIMIT 1");
+        $benutzername = $_POST['benutzername'];
+        $passwort = $_POST['passwort'];
+
+        $passwortabfrage = $db->query("SELECT passwort FROM BENUTZER
+            WHERE benutzername = '$benutzername' LIMIT 1");
         $passwortabfragearray = mysqli_fetch_assoc($passwortabfrage);
         $dbpasswort = $passwortabfragearray['passwort'];
-        $usrpasswort = hash('sha256', $_POST['passwort'] . $_POST['benutzername']);
+        $usrpasswort = hash('sha256', $passwort . $benutzername);
         
         if($usrpasswort == $dbpasswort){
             $gruppenabfrage = $db->query("SELECT g.name AS gruppenname FROM gruppe AS g

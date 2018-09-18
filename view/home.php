@@ -1,11 +1,11 @@
-<div id="div_main">
+<div class="div_main">
     <?php
-        echo '<p id="p_stack">Beispiel/Beispiel/Beispiel</p>'
+        echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
-    <div id="div_flex">
+    <div class="div_flex">
         <a href="allgemein">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/allgemein.png" alt="einstellungsrad">
+                <img class="img_einstellungsbox" src="./image/allgemein.png" alt="einstellungsrad">
                 <p class="p_einstellungsbox">
                     Allgemein
                 </p>
@@ -13,7 +13,7 @@
         </a>
         <a href="aktivitaetsart">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/aktivitaetsart.png" alt="wandermensch">
+                <img class="img_einstellungsbox" src="./image/aktivitaetsart.png" alt="wandermensch">
                 <p class="p_einstellungsbox">
                     Aktivitätsart
                 </p>
@@ -21,7 +21,7 @@
         </a>
         <a href="aktivitaet">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/aktivitaet.png" alt="kalender">
+                <img class="img_einstellungsbox" src="./image/aktivitaet.png" alt="kalender">
                 <p class="p_einstellungsbox">
                     Aktivität
                 </p>
@@ -29,7 +29,7 @@
         </a>
         <a href="steckbrief">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/steckbrief.png" alt="köpfe">
+                <img class="img_einstellungsbox" src="./image/steckbrief.png" alt="köpfe">
                 <p class="p_einstellungsbox">
                     Steckbrief
                 </p>
@@ -37,7 +37,7 @@
         </a>
         <a href="notfallkarte">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/notfallkarte.png" alt="krankenwagen">
+                <img class="img_einstellungsbox" src="./image/notfallkarte.png" alt="krankenwagen">
                 <p class="p_einstellungsbox">
                     Notfallkarte
                 </p>
@@ -45,7 +45,7 @@
         </a>
         <a href="feedback">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./images/feedback.png" alt="sprechblase">
+                <img class="img_einstellungsbox" src="./image/feedback.png" alt="sprechblase">
                 <p class="p_einstellungsbox">
                     Feedback
                 </p>

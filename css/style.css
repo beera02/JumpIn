@@ -104,15 +104,14 @@ nav{
     color: #584125; 
 }
 
-#div_main{
+.div_main{
     overflow: auto;
     width: 85%;
     margin: 50px 7.5%;
     background-color: #ebe4d1;
-
 }
 
-#div_flex{
+.div_flex{
     margin: 2% 4%;
     width: 92%;
     display: flex;
@@ -140,16 +139,94 @@ nav{
 }
 
 .img_einstellungsbox{
-    position: absolute;
-    margin-top: 25px;
-    width: 150px;
+    display: block;
+    margin: 10px auto;
+    height: 120px;
 }
 
 .p_einstellungsbox{
     display: inline-block;
-    margin: 200px 0 0 0;
+    margin: 5px 0;
     font-size: 25pt;
     font-weight: 900;
     color: #584125;
     text-decoration: none;
 }
+
+.div_form{
+    margin: 2% 4%;
+    width: 92%;
+    background-color: white;
+}
+
+.p_form_title{
+    margin: 20px;
+    font-size: 35pt;
+    font-weight: 900;
+    color: #584125;
+}
+
+.p_form{
+    margin: 20px 0 0 20px;
+    font-size: 25pt;
+    font-weight: 900;
+    color: #584125;
+}
+
+.forms_textfield{
+    margin-left: 20px;
+    height: 40px;
+    width: 500px;
+    font-size: 18pt;
+    background: #f5f1e8;
+    border: 2px solid #806f60;
+}
+
+.button_weiter{
+    margin: 20px 0 20px 220px;
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+
+.button_weiter:hover{
+    background-color: #FFCC00;
+    color: #584125; 
+}
+
+.button_zurück{
+    float: left;
+    margin: 20px;
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #ebe4d1;
+    color: #584125; 
+    border: 1px solid #584125;
+}
+
+.button_zurück:hover{
+    background-color: #584125;
+    color: #ebe4d1;
+}
+
+.div_forms_checkbox{
+    margin: 20px 0 0 20px;
+    font-size: 25pt;
+    font-weight: 900;
+    color: #584125;
+}
+
+.forms_checkbox{
+    margin-left: 20px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+

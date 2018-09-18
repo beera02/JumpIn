@@ -1,4 +1,4 @@
-<img id="img_login" src="./images/user.png" alt="usericon">
+<img id="img_login" src="./image/user.png" alt="usericon">
 <form action="validate_anmelden" method="post">
 	<div id="div_login">
 		<p class="p_login">Benutzername</p>
