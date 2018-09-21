@@ -36,6 +36,9 @@
 			case 'feedback':
 				build('./view/feedback.php');
 				break;
+			case 'user':
+				build('./view/user.php');
+				break;
 			case 'user_add':
 				build('./view/user_add.php');
 				break;

@@ -6,7 +6,7 @@
     if($_POST['submit_btn'] == "Zurück"){
         $sql = "DELETE FROM BENUTZER WHERE id_benutzer = '".$benutzerid."'";
         mysqli_query($db,$sql);
-        header('Location: allgemein');
+        header('Location: user_add');
     }
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['group'])){
@@ -20,7 +20,7 @@
                 $preparedquery->bind_param("ii", $resultatstring, $benutzerid);
                 $preparedquery->execute();
             }
-            header('Location: allgemein');
+            header('Location: user');
         }
     }
     $db->close();

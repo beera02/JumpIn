@@ -1,6 +1,6 @@
 @font-face { 
     font-family: "Frutiger"; 
-    src: url("../fonts/Frutiger-Light.ttf"); 
+    src: url("../font/Frutiger-Light.ttf"); 
 }
 html{
     font-family: Frutiger;

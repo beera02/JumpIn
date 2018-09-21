@@ -8,22 +8,22 @@
                 Benutzer zum JumpIn hinzufügen
             </p>
             <p class="p_form">Name</p>
-            <input class="forms_textfield" type="text" name="name" required/>
+            <input class="forms_textfield" type="text" name="name"/>
 		    <br>
 		    <p class="p_form">Vorname</p>
-		    <input class="forms_textfield" type="text" name="vorname" required/>
+		    <input class="forms_textfield" type="text" name="vorname"/>
             <br>
             <p class="p_form">Benutzername</p>
-		    <input class="forms_textfield" type="text" name="benutzername" required/>
+		    <input class="forms_textfield" type="text" name="benutzername"/>
             <br>
             <p class="p_form">Passwort</p>
-		    <input class="forms_textfield" type="password" name="passwort" required/>
+		    <input class="forms_textfield" type="password" name="passwort"/>
             <br>
             <p class="p_form">Passwort wiederholen</p>
-	    	<input class="forms_textfield" type="password" name="passwort2" required/>
+	    	<input class="forms_textfield" type="password" name="passwort2"/>
             <br>
-            <button class="button_zurück" onclick="history.back()">Zurück</button>
-            <input class="button_weiter" type="submit" value="Weiter"/>
+            <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
+            <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
         </form>
     </div>
 </div>
