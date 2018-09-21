@@ -25,30 +25,25 @@
             } 
         }
         if($invalid == true){
+            $id = $_SESSION['user_edit'];
             $name = $_POST['name'];
             $vorname = $_POST['vorname'];
             $benutzername = $_POST['benutzername'];
             $passwort = $_POST['passwort'];
 
             $hash = hash('sha256', $passwort . $benutzername);
-            $preparedquery = $db->prepare("INSERT INTO BENUTZER (id_benutzer, benutzername, passwort, name, vorname) VALUES (NULL,?,?,?,?)");
+            $preparedquery = $db->prepare("UPDATE BENUTZER SET benutzername = ?, passwort = ?, name = ?, vorname = ? WHERE id_benutzer = '$id'");
             $preparedquery->bind_param("ssss", $benutzername, $hash, $name, $vorname);
             $preparedquery->execute();
 
-            $sql = ("SELECT id_benutzer FROM BENUTZER WHERE benutzername = '$benutzername' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
-            $resultatstring = $resultatarray['id_benutzer'];
-
-            $_SESSION['user_add'] = $resultatstring;
-            header('Location: user_group_add');
+            header('Location: user_group_edit');
         }
         else{
-            header('Location: user_add');
+            header('Location: user_edit');
         }
         $db->close();
     }      
     if($_POST['submit_btn'] == "Zurück"){
-        header('Location: user');
+        header('Location: user_edit_choice');
     }
 ?>

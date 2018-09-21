@@ -11,7 +11,7 @@
                 </p>
             </div>
         </a>
-        <a href="user_edit">
+        <a href="user_edit_choice">
             <div class="einstellungsbox">
                 <img class="img_einstellungsbox" src="./image/user_edit.png" alt="einstellungsrad">
                 <p class="p_einstellungsbox">

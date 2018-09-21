@@ -42,17 +42,32 @@
 			case 'user_add':
 				build('./view/user_add.php');
 				break;
-			case 'user_edit':
-				build('./view/user_edit.php');
-				break;
 			case 'validate_user_add':
 				build('validate_user_add.php');
 				break;
-			case 'user_add_group_add':
-				build('./view/user_add_group_add.php');
+			case 'user_group_add':
+				build('./view/user_group_add.php');
 				break;
-			case 'validate_user_add_group_add':
-				build('validate_user_add_group_add.php');
+			case 'validate_user_group_add':
+				build('validate_user_group_add.php');
+				break;
+			case 'user_edit_choice':
+				build('./view/user_edit_choice.php');
+				break;
+			case 'validate_user_edit_choice':
+				build('validate_user_edit_choice.php');
+				break;
+			case 'user_edit':
+				build('./view/user_edit.php');
+				break;
+			case 'user_group_edit':
+				build('./view/user_group_edit.php');
+				break;
+			case 'validate_user_edit':
+				build('validate_user_edit.php');
+				break;
+			case 'validate_user_group_edit':
+				build('validate_user_group_edit.php');
 				break;
 			default:
 				build('./view/login.php');

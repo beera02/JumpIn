@@ -1,7 +1,7 @@
 <?php
     $dbarray = getDatabase();
     $db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
-    $benutzerid = (int)$_SESSION['user'];
+    $benutzerid = (int)$_SESSION['user_add'];
 
     if($_POST['submit_btn'] == "Zurück"){
         $sql = "DELETE FROM BENUTZER WHERE id_benutzer = '".$benutzerid."'";
