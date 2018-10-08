@@ -42,7 +42,7 @@
                         }
                     }
                 ?>
-                <input class="button_weiter" type="submit" name="submit_btn" value="Abschliessen">
+                <input class="button_weiter" type="submit" name="submit_btn" value="Ändern">
             </div>
         </form>
     </div>

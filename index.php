@@ -69,6 +69,24 @@
 			case 'validate_user_group_edit':
 				build('validate_user_group_edit.php');
 				break;
+			case 'group':
+				build('./view/group.php');
+				break;
+			case 'group_add':
+				build('./view/group_add.php');
+				break;
+			case 'group_edit_choice':
+				build('./view/group_edit_choice.php');
+				break;
+			case 'group_edit':
+				build('./view/group_edit.php');
+				break;
+			case 'validate_group_add':
+				build('validate_group_add.php');
+				break;
+			case 'validate_group_edit':
+				build('validate_group_edit.php');
+				break;
 			default:
 				build('./view/login.php');
 				break;

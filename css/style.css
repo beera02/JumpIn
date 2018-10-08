@@ -198,6 +198,10 @@ nav{
     color: #584125; 
 }
 
+.button_weiter:disabled{
+    opacity: 0.6;
+}
+
 .button_zurück{
     float: left;
     margin: 20px;

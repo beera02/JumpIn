@@ -3,19 +3,19 @@
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_flex">
-        <a href="user_add">
+        <a href="group_add">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./image/user_add.png" alt="benutzer/hinzufügenbutton">
+                <img class="img_einstellungsbox" src="./image/group_add.png" alt="gruppe/hinzufügenbutton">
                 <p class="p_einstellungsbox">
-                    Benutzer hinzufügen
+                    Gruppe hinzufügen
                 </p>
             </div>
         </a>
-        <a href="user_edit_choice">
+        <a href="group_edit_choice">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./image/user_edit.png" alt="benutzer/einstellungsrad">
+                <img class="img_einstellungsbox" src="./image/group_edit.png" alt="gruppe/einstellungsrad">
                 <p class="p_einstellungsbox">
-                    Benutzer bearbeiten
+                    Gruppe bearbeiten
                 </p>
             </div>
         </a>

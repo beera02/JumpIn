@@ -21,15 +21,6 @@
             return $resultatarray['id_benutzer'];
         }
     
-        function getGroupnameByUsername($username){
-            $db = getDatabase();
-            return $db->query("SELECT g.name AS gruppenname FROM gruppe AS g
-                INNER JOIN benutzer_gruppe AS bg ON g.id_gruppe=bg.gruppe_id
-                INNER JOIN benutzer AS b ON bg.benutzer_id=b.id_benutzer
-                WHERE b.benutzername = '" . $username . "'");
-            $db->close();
-        }
-    
         function getPasswordByUsername($username){
             $db = getDatabase();
             $passwortabfrage = $db->query("SELECT passwort FROM BENUTZER
@@ -64,6 +55,34 @@
             $db->close();
             return $gruppenabfrage;
         }
+
+        function getGroupByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM GRUPPE WHERE id_gruppe = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+        
+        function getGroupnameByGroupname($groupname){
+            $db = getDatabase();
+            $sql = ("SELECT name FROM GRUPPE WHERE name = '$groupname' LIMIT 1");
+            $resultat = $db->query($sql);
+            $resultatarray = mysqli_fetch_assoc($resultat);
+            $resultatstring = $resultatarray['name'];
+            $db->close();
+            return $resultatstring;
+        }
+
+        function getGroupnameByUsername($username){
+            $db = getDatabase();
+            return $db->query("SELECT g.name AS gruppenname FROM gruppe AS g
+                INNER JOIN benutzer_gruppe AS bg ON g.id_gruppe=bg.gruppe_id
+                INNER JOIN benutzer AS b ON bg.benutzer_id=b.id_benutzer
+                WHERE b.benutzername = '" . $username . "'");
+            $db->close();
+        }
     
         function getGroupIDByName($name){
             $db = getDatabase();
@@ -86,6 +105,14 @@
             $hash = hash('sha256', $password . $username);
             $preparedquery = $db->prepare("INSERT INTO BENUTZER (id_benutzer, benutzername, passwort, name, vorname) VALUES (NULL,?,?,?,?)");
             $preparedquery->bind_param("ssss", $username, $hash, $name, $prename);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertGroup($groupname){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO GRUPPE (id_gruppe, name) VALUES (NULL,?)");
+            $preparedquery->bind_param("s", $groupname);
             $preparedquery->execute();
             $db->close();
         }
@@ -117,6 +144,14 @@
             $hash = hash('sha256', $password . $username);
             $preparedquery = $db->prepare("UPDATE BENUTZER SET benutzername = ?, passwort = ?, name = ?, vorname = ? WHERE id_benutzer = '$userid'");
             $preparedquery->bind_param("ssss", $username, $hash, $name, $prename);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateGroupByID($groupid, $groupname){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE GRUPPE SET name = ? WHERE id_gruppe = '$groupid'");
+            $preparedquery->bind_param("s", $groupname);
             $preparedquery->execute();
             $db->close();
         }
