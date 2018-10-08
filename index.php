@@ -87,6 +87,12 @@
 			case 'validate_group_edit':
 				build('validate_group_edit.php');
 				break;
+			case 'reset':
+				build('./view/reset.php');
+				break;
+			case 'validate_reset':
+				build('validate_reset.php');
+				break;
 			default:
 				build('./view/login.php');
 				break;

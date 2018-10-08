@@ -155,4 +155,24 @@
             $preparedquery->execute();
             $db->close();
         }
+
+        function resetJumpin(){
+            $db = getDatabase();
+            $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('admin','coach')";
+            mysqli_query($db,$sql1);
+            $sql2 = "DELETE FROM BENUTZER
+                WHERE id_benutzer NOT IN(
+                    SELECT benutzer_id from BENUTZER_GRUPPE
+                    WHERE gruppe_id IN(
+                        SELECT id_gruppe FROM GRUPPE
+                        WHERE name IN ('coach','admin')
+                    )
+                )
+            ;";
+            mysqli_query($db,$sql2);
+            $sql3 = "DELETE FROM AKTIVITÄT";
+            mysqli_query($db,$sql3);
+            $db->close();
+        }
+        
 ?>

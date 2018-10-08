@@ -58,6 +58,12 @@ nav{
     margin: 10% 20px 0 0;
 }
 
+.p_content{
+    font-size: 20pt;
+    margin-left: 20px;
+    color: #584125;
+}
+
 #img_login{
     position: absolute;
     left: 50%;

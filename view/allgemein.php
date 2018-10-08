@@ -19,5 +19,13 @@
                 </p>
             </div>
         </a>
+        <a href="reset">
+            <div class="einstellungsbox">
+                <img class="img_einstellungsbox" src="./image/reset.png" alt="gruppe">
+                <p class="p_einstellungsbox">
+                    Jump-In zurücksetzen
+                </p>
+            </div>
+        </a>
     </div>
 </div>
