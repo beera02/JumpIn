@@ -67,25 +67,5 @@
 			}
 		}*/
 	}
-
-	function getDatabase(){
-        $db = array("localhost", "jumpin", "1234", "jumpin");
-        return $db;
-	}
-	
-	function getAllUser(){
-		$dbarray = getDatabase();
-		$db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
-		$sql = ("SELECT * FROM BENUTZER");
-		return ($db->query($sql)); 
-	}
-
-	function getUserByID($id){
-		$dbarray = getDatabase();
-		$db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
-		$sql = ("SELECT * FROM BENUTZER WHERE id_benutzer = '$id'");
-		$userbyid = $db->query($sql);
-		$datensatz = mysqli_fetch_assoc($userbyid);
-		return $datensatz;
-	}
+	require_once 'database.php';
 ?>

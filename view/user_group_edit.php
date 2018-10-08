@@ -9,12 +9,10 @@
         <form action="validate_user_group_edit" method="post">
             <div class="div_forms_checkbox">
                 <?php
-                    $dbarray = getDatabase();
-                    $db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
-                    $gruppenabfrage = $db->query("SELECT * FROM GRUPPE");
+                    $gruppenabfrage = getAllGroups();
 
                     $id = $_SESSION['user_edit'];
-                    $gruppenbenutzerabfrage = $db->query("SELECT * FROM BENUTZER_GRUPPE WHERE benutzer_id = '$id'");
+                    $gruppenbenutzerabfrage = getAllUserGroupsByUserID($id);
 
                     $gruppen = array();
                     $gruppenbenutzer = array();
@@ -43,9 +41,8 @@
                             ';
                         }
                     }
-                    $db->close();
                 ?>
-                <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen">
+                <input class="button_weiter" type="submit" name="submit_btn" value="Abschliessen">
             </div>
         </form>
     </div>

@@ -9,9 +9,7 @@
         <form action="validate_user_group_add" method="post">
             <div class="div_forms_checkbox">
                 <?php
-                    $dbarray = getDatabase();
-                    $db = new Mysqli($dbarray[0], $dbarray[1], $dbarray[2], $dbarray[3]);
-                    $gruppenabfrage = $db->query("SELECT * FROM GRUPPE");
+                    $gruppenabfrage = getAllGroups();
 
                     while($row = mysqli_fetch_assoc($gruppenabfrage)){
                         echo '
@@ -19,7 +17,6 @@
                             value="'.$row['name'].'"> '.$row['name'].'<br>
                         ';
                     }
-                    $db->close();
                 ?>
                 <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen">
                 <input class="button_zurück" type="submit" name="submit_btn" value="Zurück">
