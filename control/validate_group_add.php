@@ -1,10 +1,10 @@
 <?php
     $invalid = false;
 
-    if($_POST['submit_btn'] == "Weiter"){
+    if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['gruppenname'])){
             if(strlen($_POST['gruppenname']) <= 30){              
-                $dbgroupname = getGroupnameByGroupname($_POST['gruppenname']);;
+                $dbgroupname = getGroupnameByGroupname($_POST['gruppenname']);
     
 	            if ($dbgroupname != $_POST['gruppenname']){
                     $invalid = true;

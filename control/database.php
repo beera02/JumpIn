@@ -99,6 +99,32 @@
             $db->close();
             return $gruppenbenutzerabfrage;
         }
+
+        function getArtnameByArtname($artname){
+            $db = getDatabase();
+            $sql = ("SELECT name FROM ART WHERE name = '$artname' LIMIT 1");
+            $resultat = $db->query($sql);
+            $resultatarray = mysqli_fetch_assoc($resultat);
+            $resultatstring = $resultatarray['name'];
+            $db->close();
+            return $resultatstring;
+        }
+
+        function getAllArts(){
+            $db = getDatabase();
+            $artabfrage = $db->query("SELECT * FROM ART");
+            $db->close();
+            return $artabfrage;
+        }
+
+        function getArtByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM ART WHERE id_art = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -121,6 +147,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO BENUTZER_GRUPPE (gruppe_id,benutzer_id) VALUES (?,?)");
             $preparedquery->bind_param("ii", $groupid, $userid);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertArt($artname){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO ART (id_art, name) VALUES (NULL,?)");
+            $preparedquery->bind_param("s", $artname);
             $preparedquery->execute();
             $db->close();
         }
@@ -152,6 +186,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE GRUPPE SET name = ? WHERE id_gruppe = '$groupid'");
             $preparedquery->bind_param("s", $groupname);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateArtByID($artid, $artname){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE ART SET name = ? WHERE id_art = '$artid'");
+            $preparedquery->bind_param("s", $artname);
             $preparedquery->execute();
             $db->close();
         }

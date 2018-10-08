@@ -24,6 +24,21 @@
 			case 'aktivitaetsart':
 				build('./view/aktivitaetsart.php');
 				break;
+			case 'aktivitaetsart_add':
+				build('./view/aktivitaetsart_add.php');
+				break;
+			case 'aktivitaetsart_edit_choice':
+				build('./view/aktivitaetsart_edit_choice.php');
+				break;
+			case 'aktivitaetsart_edit':
+				build('./view/aktivitaetsart_edit.php');
+				break;
+			case 'validate_aktivitaetsart_add':
+				build('validate_aktivitaetsart_add.php');
+				break;
+			case 'validate_aktivitaetsart_edit':
+				build('validate_aktivitaetsart_edit.php');
+				break;
 			case 'aktivitaet':
 				build('./view/aktivitaet.php');
 				break;
