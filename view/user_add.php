@@ -22,7 +22,7 @@
             <p class="p_form">Passwort wiederholen</p>
 	    	<input class="forms_textfield" type="password" name="passwort2"/>
             <br>
-            <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
+            <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen"/>
             <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
         </form>
     </div>

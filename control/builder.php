@@ -68,4 +68,31 @@
 		}*/
 	}
 	require_once 'database.php';
+
+	function validateActivity($artofactivity, $startdate, $starttime, $enddate, $endtime, $writeindate, $writeintime){
+		$startdatetime = validateDateTime($startdate, $starttime);
+		$enddatetime = validateDateTime($enddate, $endtime);
+		$artid = getArtIDByName($artofactivity);
+		if($writeintime != null & $writeindate != null){
+			$writeindatetime = validateDateTime($writeindate, $writeintime);
+			return array("startzeit"=>$startdatetime, "endzeit"=>$enddatetime, "art_id"=>$artid, "einschreibezeit"=>$writeindatetime);
+		}
+		else{
+			return array("startzeit"=>$startdatetime, "endzeit"=>$enddatetime, "art_id"=>$artid);
+		}
+	}
+
+	function validateDateTime($date, $time){
+		$time = strtotime($time);
+		$date = strtotime($date);
+
+		$hours = date('G', $time);
+		$minutes = date('i', $time);
+		$month = date('n', $date);
+		$day = date('j', $date);
+		$year = date('Y', $date);
+
+		$newdate = mktime($hours,$minutes,0,$month,$day,$year);
+		return date("Y-m-d H:i:s", $newdate);
+	}
 ?>

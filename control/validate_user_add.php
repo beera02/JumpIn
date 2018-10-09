@@ -1,9 +1,9 @@
 <?php
     $invalid = false;
 
-    if($_POST['submit_btn'] == "Weiter"){
-        if(!empty($_POST['benutzername']) && !empty($_POST['vorname']) && !empty($_POST['name']) && !empty($_POST['passwort']) && !empty($_POST['passwort2'])){
-            if(strlen($_POST['benutzername']) <= 30 && strlen($_POST['vorname']) <= 50 && strlen($_POST['name']) <= 50){              
+    if($_POST['submit_btn'] == "Erstellen"){
+        if(!empty($_POST['benutzername']) & !empty($_POST['vorname']) & !empty($_POST['name']) & !empty($_POST['passwort']) & !empty($_POST['passwort2'])){
+            if(strlen($_POST['benutzername']) <= 30 & strlen($_POST['vorname']) <= 50 & strlen($_POST['name']) <= 50){              
                 $dbbenutzername = getUsernameByUsername($_POST['benutzername']);;
     
 	            if ($dbbenutzername != $_POST['benutzername']){

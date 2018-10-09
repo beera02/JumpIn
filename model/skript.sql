@@ -37,9 +37,9 @@ CREATE TABLE ART(
     PRIMARY KEY (id_art)
 );
 
-CREATE TABLE AKTIVITÄT(
-    id_aktivität INT AUTO_INCREMENT,
-    aktivitätsname VARCHAR(30),
+CREATE TABLE AKTIVITAET(
+    id_aktivitaet INT AUTO_INCREMENT,
+    aktivitaetsname VARCHAR(30),
     art_id INT,
     treffpunkt VARCHAR(30),
     einschreiben TINYINT,
@@ -48,9 +48,23 @@ CREATE TABLE AKTIVITÄT(
     startzeit DATETIME,
     endzeit DATETIME,
     info VARCHAR(500),
-    PRIMARY KEY (id_aktivität),
+    PRIMARY KEY (id_aktivitaet),
     FOREIGN KEY (art_id)
         REFERENCES ART(id_art)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE AKTIVITAET_GRUPPE(
+    gruppe_id INT,
+    aktivitaet_id INT,
+    PRIMARY KEY (gruppe_id, aktivitaet_id),
+    FOREIGN KEY (gruppe_id)
+        REFERENCES GRUPPE(id_gruppe)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (aktivitaet_id)
+        REFERENCES AKTIVITAET(id_aktivitaet)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
@@ -85,11 +99,11 @@ CREATE TABLE STECKBRIEF(
 );
 
 CREATE TABLE EINSCHREIBEN(
-    aktivität_id INT,
+    aktivitaet_id INT,
     benutzer_id INT,
-    PRIMARY KEY (aktivität_id, benutzer_id),
-    FOREIGN KEY (aktivität_id)
-        REFERENCES AKTIVITÄT(id_aktivität)
+    PRIMARY KEY (aktivitaet_id, benutzer_id),
+    FOREIGN KEY (aktivitaet_id)
+        REFERENCES AKTIVITAET(id_aktivitaet)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     FOREIGN KEY (benutzer_id)
@@ -138,6 +152,6 @@ INSERT INTO BENUTZER VALUES
 INSERT INTO BENUTZER VALUES
 (NULL, "minolettin", "1234", "nathanael", "minoletti");
 INSERT INTO BENUTZER_GRUPPE VALUES
-(4,4);
+(2,2);
 INSERT INTO BENUTZER_GRUPPE VALUES
-(5,5);
+(3,3);

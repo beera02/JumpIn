@@ -42,6 +42,33 @@
 			case 'aktivitaet':
 				build('./view/aktivitaet.php');
 				break;
+			case 'aktivitaet_add':
+				build('./view/aktivitaet_add.php');
+				break;
+			case 'aktivitaet_edit_choice':
+				build('./view/aktivitaet_edit_choice.php');
+				break;
+			case 'aktivitaet_edit':
+				build('./view/aktivitaet_edit.php');
+				break;
+			case 'validate_aktivitaet_add':
+				build('validate_aktivitaet_add.php');
+				break;
+			case 'aktivitaet_add_einschreiben':
+				build('./view/aktivitaet_add_einschreiben.php');
+				break;
+			case 'validate_aktivitaet_add_einschreiben':
+				build('validate_aktivitaet_add_einschreiben.php');
+				break;
+			case 'aktivitaet_add_group':
+				build('./view/aktivitaet_add_group.php');
+				break;
+			case 'validate_aktivitaet_add_group':
+				build('validate_aktivitaet_add_group.php');
+				break;
+			case 'validate_aktivitaet_edit':
+				build('validate_aktivitaet_edit.php');
+				break;
 			case 'steckbrief':
 				build('./view/steckbrief.php');
 				break;

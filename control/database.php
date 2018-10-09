@@ -125,6 +125,15 @@
             $db->close();
             return $resultarray;
         }
+
+        function getArtIDByName($name){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM ART WHERE name = '$name'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray['id_art'];
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -155,6 +164,23 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO ART (id_art, name) VALUES (NULL,?)");
             $preparedquery->bind_param("s", $artname);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertActivity($activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO aktivitaet (id_aktivitaet, aktivitaetsname, art_id, treffpunkt, einschreiben, anzahlteilnehmer, einschreibezeit, startzeit, endzeit, info) VALUES (NULL,?,?,?,?,?,?,?,?,?)");
+            $preparedquery->bind_param("sisiissss", $activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info);
+            $preparedquery->execute();
+            $_SESSION['activity_add'] = $db->insert_id;
+            $db->close();
+        }
+
+        function insertActivityGroup($groupid, $activityid){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO AKTIVITAET_GRUPPE (gruppe_id,aktivitaet_id) VALUES (?,?)");
+            $preparedquery->bind_param("ii", $groupid, $activityid);
             $preparedquery->execute();
             $db->close();
         }
@@ -212,7 +238,7 @@
                 )
             ;";
             mysqli_query($db,$sql2);
-            $sql3 = "DELETE FROM AKTIVITÄT";
+            $sql3 = "DELETE FROM AKTIVITAET";
             mysqli_query($db,$sql3);
             $db->close();
         }
