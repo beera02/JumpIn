@@ -1,25 +1,23 @@
 <?php
     $invalid = false;
 
-    if($_POST['submit_btn'] == "Weiter"){
-        if(!empty($_POST['anzahlteilnehmer']) & !empty($_POST['writeindate']) & !empty($_POST['writeintime'])){
-            if(ctype_digit($_POST['anzahlteilnehmer'])){
-                $invalid = true;
-            }
+    if(!empty($_POST['anzahlteilnehmer']) & !empty($_POST['writeindate']) & !empty($_POST['writeintime'])){
+        if(ctype_digit($_POST['anzahlteilnehmer'])){
+            $invalid = true;
         }
-        if($invalid){
-            $validatedarray = validateActivity($_SESSION['aktivitaetsart'], $_SESSION['startdate'], $_SESSION['starttime'], $_SESSION['enddate'], $_SESSION['endtime'], $_POST['writeindate'], $_POST['writeintime']);
-            if(!empty($_SESSION['info'])){
-                insertActivity($_SESSION['aktivitaetsname'], $validatedarray['art_id'], $_SESSION['treffpunkt'], 1, $_POST['anzahlteilnehmer'], $validatedarray['einschreibezeit'], $validatedarray['startzeit'], $validatedarray['endzeit'], $_SESSION['info']);
-            }
-            else{
-                insertActivity($_SESSION['aktivitaetsname'], $validatedarray['art_id'], $_SESSION['treffpunkt'], 1, $_POST['anzahlteilnehmer'], $validatedarray['einschreibezeit'], $validatedarray['startzeit'], $validatedarray['endzeit'], NULL);
-            }
-            unset($_SESSION["info"]);
-            header('Location: aktivitaet_add_group');
+    }
+    if($invalid){
+        $validatedarray = validateActivity($_SESSION['aktivitaetsart'], $_SESSION['startdate'], $_SESSION['starttime'], $_SESSION['enddate'], $_SESSION['endtime'], $_POST['writeindate'], $_POST['writeintime']);
+        if(!empty($_SESSION['info'])){
+            insertActivity($_SESSION['aktivitaetsname'], $validatedarray['art_id'], $_SESSION['treffpunkt'], 1, $_POST['anzahlteilnehmer'], $validatedarray['einschreibezeit'], $validatedarray['startzeit'], $validatedarray['endzeit'], $_SESSION['info']);
         }
         else{
-            header('Location: aktivitaet_add_einschreiben');
+            insertActivity($_SESSION['aktivitaetsname'], $validatedarray['art_id'], $_SESSION['treffpunkt'], 1, $_POST['anzahlteilnehmer'], $validatedarray['einschreibezeit'], $validatedarray['startzeit'], $validatedarray['endzeit'], NULL);
         }
+        unset($_SESSION["info"]);
+        header('Location: aktivitaet_add_group');
+    }
+    else{
+        header('Location: aktivitaet_add_einschreiben');
     }
 ?>

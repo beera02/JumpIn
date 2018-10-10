@@ -4,36 +4,40 @@
     ?>
     <div class="div_form">
         <p class="p_form_title">
-            Benutzer zum bearbeiten auswählen
+            Aktivität zum bearbeiten auswählen
         </p>
         <table>
             <tr>
                 <th>ID</th>
-                <th>Benutzername</th>
-                <th>Vorname</th>
-                <th>Nachname</th>
+                <th>Aktivitätsname</th>
+                <th>Aktivitätsart</th>
+                <th>Einschreiben</th>
+                <th>Startzeit</th>
                 <th></th>
             </tr>
             <?php
-                $allusers = getAllUser();
-                while($row = mysqli_fetch_assoc($allusers)){
+                $allactivities = getAllActivitiesOrdered();
+                while($row = mysqli_fetch_assoc($allactivities)){
                     echo '
                         <tr>
-                            <form action="user_edit" method="post">
+                            <form action="aktivitaet_edit" method="post">
                                 <th>
-                                    '.$row['id_benutzer'].'
+                                    '.$row['id_aktivitaet'].'
                                 </th>
                                 <th>
-                                    '.$row['benutzername'].'
+                                    '.$row['aktivitaetsname'].'
                                 </th>
                                 <th>
-                                    '.$row['vorname'].'
+                                    '.getArtNameByID($row['art_id']).'
                                 </th>
                                 <th>
-                                    '.$row['name'].'
+                                    '.$row['einschreiben'].'
                                 </th>
                                 <th>
-                                    <input type="hidden" name="id_benutzer" value="'.$row['id_benutzer'].'"/>
+                                    '.getDaysHours($row['startzeit']).'
+                                </th>
+                                <th>
+                                    <input type="hidden" name="id_aktivitaet" value="'.$row['id_aktivitaet'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
                                 </th>
                             </form>  

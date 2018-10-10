@@ -259,6 +259,25 @@ label{
     opacity: 0.6;
 }
 
+.button_weiter_table{
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+
+.button_weiter_table:hover{
+    background-color: #FFCC00;
+    color: #584125; 
+}
+
+.button_weiter_table:disabled{
+    opacity: 0.6;
+}
+
 .button_zurück{
     float: left;
     margin: 20px;
@@ -295,4 +314,18 @@ input[type='radio'] {
     transform: scale(1.5);
 }
 
+table{
+    border-collapse: collapse;
+    width: 95%;
+    margin: 20px;
+    font-size: 18pt;
+    font-weight: initial;
+    color: #584125;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
 

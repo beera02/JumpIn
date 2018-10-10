@@ -6,7 +6,7 @@
             $resultatstring = getGroupIDByName($checked);
             insertActivityGroup($resultatstring, $aktivitaetid);
         }
-        header('Location: aktivitaet');
     }
+    header('Location: aktivitaet');
 
 ?>

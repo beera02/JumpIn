@@ -11,7 +11,7 @@
                 $resultatstring = getGroupIDByName($checked);
                 insertUserGroup($resultatstring, $benutzerid);
             }
-            header('Location: user');
         }
     }
+    header('Location: user');
 ?>

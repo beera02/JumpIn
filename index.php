@@ -69,6 +69,18 @@
 			case 'validate_aktivitaet_edit':
 				build('validate_aktivitaet_edit.php');
 				break;
+			case 'aktivitaet_edit_einschreiben':
+				build('./view/aktivitaet_edit_einschreiben.php');
+				break;
+			case 'aktivitaet_edit_group':
+				build('./view/aktivitaet_edit_group.php');
+				break;
+			case 'validate_aktivitaet_edit_einschreiben':
+				build('validate_aktivitaet_edit_einschreiben.php');
+				break;
+			case 'validate_aktivitaet_edit_group':
+				build('validate_aktivitaet_edit_group.php');
+				break;
 			case 'steckbrief':
 				build('./view/steckbrief.php');
 				break;
