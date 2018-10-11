@@ -21,6 +21,7 @@
 			case 'allgemein':
 				build('./view/allgemein.php');
 				break;
+
 			case 'aktivitaetsart':
 				build('./view/aktivitaetsart.php');
 				break;
@@ -39,6 +40,7 @@
 			case 'validate_aktivitaetsart_edit':
 				build('validate_aktivitaetsart_edit.php');
 				break;
+
 			case 'aktivitaet':
 				build('./view/aktivitaet.php');
 				break;
@@ -60,6 +62,7 @@
 			case 'validate_aktivitaet_add_einschreiben':
 				build('validate_aktivitaet_add_einschreiben.php');
 				break;
+
 			case 'aktivitaet_add_group':
 				build('./view/aktivitaet_add_group.php');
 				break;
@@ -81,6 +84,7 @@
 			case 'validate_aktivitaet_edit_group':
 				build('validate_aktivitaet_edit_group.php');
 				break;
+
 			case 'steckbrief':
 				build('./view/steckbrief.php');
 				break;
@@ -99,6 +103,7 @@
 			case 'validate_steckbrief_edit':
 				build('validate_steckbrief_edit.php');
 				break;
+
 			case 'notfallkarte':
 				build('./view/notfallkarte.php');
 				break;
@@ -117,9 +122,38 @@
 			case 'validate_notfallkarte_edit':
 				build('validate_notfallkarte_edit.php');
 				break;
+
 			case 'feedback':
 				build('./view/feedback.php');
 				break;
+			case 'feedback_add':
+				build('./view/feedback_add.php');
+				break;
+			case 'feedback_add_optionen':
+				build('./view/feedback_add_optionen.php');
+				break;
+			case 'feedback_edit_choice':
+				build('./view/feedback_edit_choice.php');
+				break;
+			case 'feedback_edit':
+				build('./view/feedback_edit.php');
+				break;
+			case 'feedback_edit_optionen':
+				build('./view/feedback_edit_optionen.php');
+				break;
+			case 'validate_feedback_add':
+				build('validate_feedback_add.php');
+				break;
+			case 'validate_feedback_add_optionen':
+				build('validate_feedback_add_optionen.php');
+				break;
+			case 'validate_feedback_edit':
+				build('validate_feedback_edit.php');
+				break;
+			case 'validate_feedback_edit_optionen':
+				build('validate_feedback_edit_optionen.php');
+				break;
+
 			case 'user':
 				build('./view/user.php');
 				break;
@@ -153,6 +187,7 @@
 			case 'validate_user_group_edit':
 				build('validate_user_group_edit.php');
 				break;
+
 			case 'group':
 				build('./view/group.php');
 				break;
@@ -171,6 +206,7 @@
 			case 'validate_group_edit':
 				build('validate_group_edit.php');
 				break;
+
 			case 'reset':
 				build('./view/reset.php');
 				break;

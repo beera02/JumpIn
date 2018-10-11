@@ -197,6 +197,15 @@
             $db->close();
             return $resultarray;
         }
+
+        function getFeedbackCategoryByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM FEEDBACKKATEGORIE WHERE id_feedbackkategorie = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -260,6 +269,23 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO NOTFALLKATEGORIE (id_notfallkategorie, name, info) VALUES (NULL,?,?)");
             $preparedquery->bind_param("ss", $name, $info);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertFeedbackCategory($question, $options){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO FEEDBACKKATEGORIE (id_feedbackkategorie, frage, anzahloptionen) VALUES (NULL,?,?)");
+            $preparedquery->bind_param("si", $question, $options);
+            $preparedquery->execute();
+            $_SESSION['feedback_add'] = $db->insert_id;
+            $db->close();
+        }
+
+        function insertOption($id, $answer){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO OPTIONEN (id_optionen, feedbackkategorie_id, antwort) VALUES (NULL,?,?)");
+            $preparedquery->bind_param("is", $id, $answer);
             $preparedquery->execute();
             $db->close();
         }
