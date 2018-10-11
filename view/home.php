@@ -31,7 +31,7 @@
             <div class="einstellungsbox">
                 <img class="img_einstellungsbox" src="./image/steckbrief.png" alt="köpfe">
                 <p class="p_einstellungsbox">
-                    Steckbrief
+                    Steckbrief kategorie
                 </p>
             </div>
         </a>

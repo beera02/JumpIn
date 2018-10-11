@@ -84,6 +84,21 @@
 			case 'steckbrief':
 				build('./view/steckbrief.php');
 				break;
+			case 'steckbrief_add':
+				build('./view/steckbrief_add.php');
+				break;
+			case 'steckbrief_edit_choice':
+				build('./view/steckbrief_edit_choice.php');
+				break;
+			case 'steckbrief_edit':
+				build('./view/steckbrief_edit.php');
+				break;
+			case 'validate_steckbrief_add':
+				build('validate_steckbrief_add.php');
+				break;
+			case 'validate_steckbrief_edit':
+				build('validate_steckbrief_edit.php');
+				break;
 			case 'notfallkarte':
 				build('./view/notfallkarte.php');
 				break;

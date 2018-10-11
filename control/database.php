@@ -165,6 +165,22 @@
             $db->close();
             return $abfrage;
         }
+
+        function getAllCharacteristicsCategories(){
+            $db = getDatabase();
+            $artabfrage = $db->query("SELECT * FROM STECKBRIEFKATEGORIE");
+            $db->close();
+            return $artabfrage;
+        }
+
+        function getCharacteristicsCategoryByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM STECKBRIEFKATEGORIE WHERE id_steckbriefkategorie = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -212,6 +228,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO AKTIVITAET_GRUPPE (gruppe_id,aktivitaet_id) VALUES (?,?)");
             $preparedquery->bind_param("ii", $groupid, $activityid);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertCharacteristicsCategory($name, $obligate, $oneliner){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO STECKBRIEFKATEGORIE (id_steckbriefkategorie, name, obligation, einzeiler) VALUES (NULL,?,?,?)");
+            $preparedquery->bind_param("sii", $name, $obligate, $oneliner);
             $preparedquery->execute();
             $db->close();
         }
@@ -266,6 +290,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE aktivitaet SET aktivitaetsname = ?, art_id = ?, treffpunkt = ?, einschreiben = ?, anzahlteilnehmer = ?, einschreibezeit = ?, startzeit = ?, endzeit = ?, info = ? WHERE id_aktivitaet = '$activityid'");
             $preparedquery->bind_param("sisiissss", $activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateCharacteristicsCategory($id, $name, $obligate, $oneliner){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE STECKBRIEFKATEGORIE SET name = ?, obligation = ?, einzeiler = ? WHERE id_steckbriefkategorie = '$id'");
+            $preparedquery->bind_param("sii", $name, $obligate, $oneliner);
             $preparedquery->execute();
             $db->close();
         }

@@ -130,4 +130,13 @@
 		}
 		return $result;
 	}
+
+	function getJaNein($id){
+		if($id == 1){
+			return 'Ja';
+		}
+		else{
+			return 'Nein';
+		}
+	}
 ?>

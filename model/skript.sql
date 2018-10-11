@@ -80,6 +80,7 @@ CREATE TABLE STECKBRIEFKATEGORIE(
     id_steckbriefkategorie INT AUTO_INCREMENT,
     name VARCHAR(30),
     obligation TINYINT,
+    einzeiler TINYINT,
     PRIMARY KEY (id_steckbriefkategorie)
 );
 
