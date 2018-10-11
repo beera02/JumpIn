@@ -168,14 +168,30 @@
 
         function getAllCharacteristicsCategories(){
             $db = getDatabase();
-            $artabfrage = $db->query("SELECT * FROM STECKBRIEFKATEGORIE");
+            $abfrage = $db->query("SELECT * FROM STECKBRIEFKATEGORIE");
             $db->close();
-            return $artabfrage;
+            return $abfrage;
         }
 
         function getCharacteristicsCategoryByID($id){
             $db = getDatabase();
             $sql = ("SELECT * FROM STECKBRIEFKATEGORIE WHERE id_steckbriefkategorie = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getAllEmergencyCategories(){
+            $db = getDatabase();
+            $abfrage = $db->query("SELECT * FROM NOTFALLKATEGORIE");
+            $db->close();
+            return $abfrage;
+        }
+
+        function getEmergencyCategoryByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM NOTFALLKATEGORIE WHERE id_notfallkategorie = '$id'");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
@@ -239,6 +255,14 @@
             $preparedquery->execute();
             $db->close();
         }
+
+        function insertEmergencyCategory($name, $info){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO NOTFALLKATEGORIE (id_notfallkategorie, name, info) VALUES (NULL,?,?)");
+            $preparedquery->bind_param("ss", $name, $info);
+            $preparedquery->execute();
+            $db->close();
+        }
     
         function deleteUserGroup($groupid, $userid){
             $db = getDatabase();
@@ -298,6 +322,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE STECKBRIEFKATEGORIE SET name = ?, obligation = ?, einzeiler = ? WHERE id_steckbriefkategorie = '$id'");
             $preparedquery->bind_param("sii", $name, $obligate, $oneliner);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateEmergencyCategory($id, $name, $info){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE NOTFALLKATEGORIE SET name = ?, info = ? WHERE id_notfallkategorie = '$id'");
+            $preparedquery->bind_param("ss", $name, $info);
             $preparedquery->execute();
             $db->close();
         }

@@ -102,6 +102,21 @@
 			case 'notfallkarte':
 				build('./view/notfallkarte.php');
 				break;
+			case 'notfallkarte_add':
+				build('./view/notfallkarte_add.php');
+				break;
+			case 'notfallkarte_edit_choice':
+				build('./view/notfallkarte_edit_choice.php');
+				break;
+			case 'notfallkarte_edit':
+				build('./view/notfallkarte_edit.php');
+				break;
+			case 'validate_notfallkarte_add':
+				build('validate_notfallkarte_add.php');
+				break;
+			case 'validate_notfallkarte_edit':
+				build('validate_notfallkarte_edit.php');
+				break;
 			case 'feedback':
 				build('./view/feedback.php');
 				break;
