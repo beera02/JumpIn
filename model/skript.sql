@@ -116,7 +116,19 @@ CREATE TABLE EINSCHREIBEN(
 CREATE TABLE FEEDBACKKATEGORIE(
     id_feedbackkategorie INT AUTO_INCREMENT,
     frage VARCHAR(300),
+    anzahloptionen INT,
     PRIMARY KEY (id_feedbackkategorie)
+);
+
+CREATE TABLE OPTIONEN(
+    id_optionen INT AUTO_INCREMENT,
+    feedbackkategorie_id INT,
+    antwort VARCHAR(300),
+    PRIMARY KEY (id_optionen),
+    FOREIGN KEY (feedbackkategorie_id)
+        REFERENCES FEEDBACKKATEGORIE(id_feedbackkategorie)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE FEEDBACKBOGEN(
