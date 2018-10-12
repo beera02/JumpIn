@@ -3,7 +3,7 @@
 
     if($_POST['submit_btn'] == "Zurück"){
         deleteUser($benutzerid);
-        header('Location: user_add');
+        oneStackBack();
     }
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['group'])){
@@ -12,6 +12,6 @@
                 insertUserGroup($resultatstring, $benutzerid);
             }
         }
+        header('Location: user');
     }
-    header('Location: user');
 ?>
