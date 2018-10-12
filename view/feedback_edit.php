@@ -12,6 +12,7 @@
         $datensatz = getFeedbackCategoryByID($feedbackkategorie_id);
 
         echo '
+        <div class="div_form">
             <form action="validate_feedback_edit" method="post">
                 <p class="p_form_title">
                     Feedbackkategorie bearbeiten
@@ -25,6 +26,7 @@
                 <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
                 <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
             </form>
+        <div class="div_form">
         ';
         $_SESSION['feedbackkategorie_edit'] = $feedbackkategorie_id;
         $_SESSION['feedbackkategorie_oldoptions'] = $datensatz['anzahloptionen'];

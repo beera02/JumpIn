@@ -12,6 +12,7 @@
         $datensatz = getEmergencyCategoryByID($notfallkategorieid);
 
         echo '
+        <div class="div_form">
             <form action="validate_notfallkarte_edit" method="post">
                 <p class="p_form_title">
                     Notfallkartenkategorie bearbeiten
@@ -25,6 +26,7 @@
                 <input class="button_weiter" type="submit" name="submit_btn" value="Ändern"/>
                 <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
             </form>
+        </div>
         ';
         $_SESSION['notfallkategorie_edit'] = $notfallkategorieid;
     ?>

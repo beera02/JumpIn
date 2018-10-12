@@ -22,8 +22,8 @@
 		            <br>
                     <input class="button_weiter" type="submit" name="submit_btn" value="Ändern"/>
                     <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
-            </form>
-        </div>
+                </form>
+            </div>
         ';
         $_SESSION['group_edit'] = $groupid;
     ?>

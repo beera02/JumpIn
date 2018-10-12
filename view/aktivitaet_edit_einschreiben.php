@@ -6,6 +6,7 @@
         $datensatz = getActivityByID($activityid);
 
         echo '
+        <div class="div_form">
             <form action="validate_aktivitaet_edit_einschreiben" method="post">
                 <p class="p_form_title">
                     Einschreibeinfos der Aktivität bearbeiten
@@ -19,6 +20,7 @@
                 <br>
                 <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
             </form>
+        <div>
         ';
 
         function validateReturnDate($einschreibezeit){

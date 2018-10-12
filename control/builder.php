@@ -57,66 +57,12 @@
 					$finalstackarray = array();
 					foreach($stackarray as $value){
 						if($i <= $number){
-							if(strpos($stackarray[count($stackarray) - 2], 'stack') !== false){
-								if(strpos($stackarray[count($stackarray) - 3], 'validate') !== false){
-									if(strpos($stackarray[count($stackarray) - 5], 'validate') !== false){
-										if($i == count($stackarray) - 6){
-											$finalstackarray[$i] = ''.$value.'/';
-										}
-										else{
-											$finalstackarray[$i] = $value;
-										}
-									}
-									else{
-										if($i == count($stackarray) - 5){
-											$finalstackarray[$i] = ''.$value.'/';
-										}
-										else{
-											$finalstackarray[$i] = $value;
-										}
-									}
-								}
-								else{
-									if($i == count($stackarray) - 4){
-										$finalstackarray[$i] = ''.$value.'/';
-									}
-									else{
-										$finalstackarray[$i] = $value;
-									}
-								}
-							}
-							else{
-								if(strpos($stackarray[count($stackarray) - 2], 'validate') !== false){
-									if(strpos($stackarray[count($stackarray) - 4], 'validate') !== false){
-										if($i == count($stackarray) - 5){
-											$finalstackarray[$i] = ''.$value.'/';
-										}
-										else{
-											$finalstackarray[$i] = $value;
-										}
-									}
-									else{
-										if($i == count($stackarray) - 4){
-											$finalstackarray[$i] = ''.$value.'/';
-										}
-										else{
-											$finalstackarray[$i] = $value;
-										}
-									}
-								}
-								else{
-									if($i == count($stackarray) - 3){
-										$finalstackarray[$i] = ''.$value.'/';
-									}
-									else{
-										$finalstackarray[$i] = $value;
-									}
-								}
-							}
+							$finalstackarray[$i] = $value;
 							$i++;
 						}
 					}
 					$finalstring = implode("/", $finalstackarray);
+					$finalstring = ''.$finalstring.'/';
 					$_SESSION['stack'] = $finalstring;
 				}
 			}
