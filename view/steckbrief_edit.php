@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $idsteckbrief = intval($_POST['id_steckbriefkategorie']);
-        if($idsteckbrief > 0){
-            $steckbriefid = $idsteckbrief;
-        }
-        else{
-            $steckbriefid = $_SESSION['steckbrief_edit'];
-        }
-        $datensatz = getCharacteristicsCategoryByID($steckbriefid);
+        $idsteckbrief = intval($_SESSION['id_steckbriefkategorie']);
+        $datensatz = getCharacteristicsCategoryByID($idsteckbrief);
 
         echo '
             <div class="div_form">
@@ -31,7 +25,6 @@
                 </form>
             </div>
         ';
-        $_SESSION['steckbrief_edit'] = $steckbriefid;
 
         function getObligation($obligation){
             if($obligation == 1){

@@ -18,7 +18,7 @@
                     if($row['name'] == "admin"){
                         echo '
                             <tr>
-                                <form action="group_edit" method="post">
+                                <form action="validate_group_edit_choice" method="post">
                                     <th>
                                         '.$row['id_gruppe'].'
                                     </th>
@@ -27,6 +27,7 @@
                                     </th>
                                     <th>
                                         <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten" disabled/>
+                                        <input class="button_delete" type="submit" name="submit_btn" value="Löschen" disabled/>
                                     </th>
                                 </form>  
                             </tr>     
@@ -35,7 +36,7 @@
                     else{
                         echo '
                             <tr>
-                                <form action="group_edit" method="post">
+                                <form action="validate_group_edit_choice" method="post">
                                     <th>
                                         '.$row['id_gruppe'].'
                                     </th>
@@ -45,6 +46,7 @@
                                     <th>
                                         <input type="hidden" name="id_gruppe" value="'.$row['id_gruppe'].'"/>
                                         <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                        <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                     </th>
                                 </form>  
                             </tr>     

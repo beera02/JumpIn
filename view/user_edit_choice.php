@@ -19,7 +19,7 @@
                 while($row = mysqli_fetch_assoc($allusers)){
                     echo '
                         <tr>
-                            <form action="user_edit" method="post">
+                            <form action="validate_user_edit_choice" method="post">
                                 <th>
                                     '.$row['id_benutzer'].'
                                 </th>
@@ -35,6 +35,7 @@
                                 <th>
                                     <input type="hidden" name="id_benutzer" value="'.$row['id_benutzer'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
                         </tr>  

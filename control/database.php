@@ -331,6 +331,48 @@
             mysqli_query($db,$sql);
             $db->close();
         }
+
+        function deleteSteckbriefkategorieByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM STECKBRIEFKATEGORIE WHERE id_steckbriefkategorie = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
+
+        function deleteEmergencyCategoryByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM NOTFALLKATEGORIE WHERE id_notfallkategorie = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
+
+        function deleteGroupByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM GRUPPE WHERE id_gruppe = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
+
+        function deleteFeedbackCategoryByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM FEEDBACKKATEGORIE WHERE id_feedbackkategorie = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
+
+        function deleteArtByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM ART WHERE id_art = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
+
+        function deleteActivityByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM AKTIVITAET WHERE id_aktivitaet = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
     
         function updateUserByID($userid, $password, $username, $name, $prename){
             $db = getDatabase();

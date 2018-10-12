@@ -13,9 +13,9 @@
         }
     }
     if($invalid == count($validated)){
-        deleteAllOptionsByFeedbackID($_SESSION['feedbackkategorie_edit']);
+        deleteAllOptionsByFeedbackID($_SESSION['id_feedbackkategorie']);
         foreach($validated as $row){
-            insertOption($_SESSION['feedbackkategorie_edit'], $row);
+            insertOption($_SESSION['id_feedbackkategorie'], $row);
         }
         header('Location: feedback');
     }

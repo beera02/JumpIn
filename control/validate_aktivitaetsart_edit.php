@@ -4,7 +4,7 @@
     if($_POST['submit_btn'] == "Ändern"){
         if(!empty($_POST['aktivitaetsartname'])){
             if(strlen($_POST['aktivitaetsartname']) <= 30){
-                $result = getArtByID($_SESSION['aktivitaetsart_edit']);
+                $result = getArtByID($_SESSION['id_art']);
                 
                 if($result['name'] != $_POST['aktivitaetsartname']){
                     $resultatstring = getArtnameByArtname($_POST['aktivitaetsartname']);
@@ -18,7 +18,7 @@
             } 
         }
         if($invalid == true){
-            updateArtByID($_SESSION['aktivitaetsart_edit'], $_POST['aktivitaetsartname']);
+            updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname']);
             header('Location: aktivitaetsart_edit_choice');
         }
         else{

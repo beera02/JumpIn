@@ -27,10 +27,10 @@
             else{
                 $validatedarray = validateActivity($_POST['aktivitaetsart'], $_POST['startdate'], $_POST['starttime'], $_POST['enddate'], $_POST['endtime'], NULL, NULL);
                 if(empty($_POST['info'])){
-                    updateActivity($_SESSION['aktivitaet_edit'], $_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], NULL);
+                    updateActivity($_SESSION['id_aktivitaet'], $_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], NULL);
                 }
                 else{
-                    updateActivity($_SESSION['aktivitaet_edit'], $_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], $_POST['info']);
+                    updateActivity($_SESSION['id_aktivitaet'], $_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], $_POST['info']);
                 }
                 header('Location: aktivitaet_edit_group');
             }

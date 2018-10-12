@@ -18,7 +18,7 @@
                 while($row = mysqli_fetch_assoc($allcategories)){
                     echo '
                         <tr>
-                            <form action="notfallkarte_edit" method="post">
+                            <form action="validate_notfallkarte_edit_choice" method="post">
                                 <th>
                                     '.$row['id_notfallkategorie'].'
                                 </th>
@@ -31,6 +31,7 @@
                                 <th>
                                     <input type="hidden" name="id_notfallkategorie" value="'.$row['id_notfallkategorie'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
                         </tr>  

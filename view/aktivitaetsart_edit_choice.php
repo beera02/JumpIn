@@ -17,7 +17,7 @@
                 while($row = mysqli_fetch_assoc($allarts)){
                     echo '
                         <tr>
-                            <form action="aktivitaetsart_edit" method="post">
+                            <form action="validate_aktivitaetsart_edit_choice" method="post">
                                 <th>
                                     '.$row['id_art'].'
                                 </th>
@@ -27,6 +27,7 @@
                                 <th>
                                     <input type="hidden" name="id_art" value="'.$row['id_art'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
                         </tr>     

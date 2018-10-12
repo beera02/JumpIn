@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $id_feedbackkategorie = intval($_POST['id_feedbackkategorie']);
-        if($id_feedbackkategorie > 0){
-            $feedbackkategorie_id = $id_feedbackkategorie;
-        }
-        else{
-            $feedbackkategorie_id = $_SESSION['feedbackkategorie_edit'];
-        }
-        $datensatz = getFeedbackCategoryByID($feedbackkategorie_id);
+        $idfeedbackkategorie = intval($_SESSION['id_feedbackkategorie']);
+        $datensatz = getFeedbackCategoryByID($idfeedbackkategorie);
 
         echo '
         <div class="div_form">
@@ -28,7 +22,6 @@
             </form>
         <div class="div_form">
         ';
-        $_SESSION['feedbackkategorie_edit'] = $feedbackkategorie_id;
         $_SESSION['feedbackkategorie_oldoptions'] = $datensatz['anzahloptionen'];
     ?>
 </div>

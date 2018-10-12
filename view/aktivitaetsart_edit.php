@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $idart = intval($_POST['id_art']);
-        if($idart > 0){
-            $artid = $idart;
-        }
-        else{
-            $artid = $_SESSION['aktivitaetsart_edit'];
-        }
-        $datensatz = getArtByID($artid);
+        $idart = intval($_SESSION['id_art']);
+        $datensatz = getArtByID($idart);
 
         echo '
             <div class="div_form">
@@ -25,6 +19,5 @@
                 </form>
             </div>
         ';
-        $_SESSION['aktivitaetsart_edit'] = $artid;
     ?>
 </div>

@@ -2,7 +2,7 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $activityid = $_SESSION['aktivitaet_edit'];
+        $activityid = $_SESSION['id_aktivitaet'];
         $datensatz = getActivityByID($activityid);
 
         echo '

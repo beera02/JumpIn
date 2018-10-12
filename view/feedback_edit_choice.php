@@ -18,7 +18,7 @@
                 while($row = mysqli_fetch_assoc($allfeedbackcategories)){
                     echo '
                         <tr>
-                            <form action="feedback_edit" method="post">
+                            <form action="validate_feedback_edit_choice" method="post">
                                 <th>
                                     '.$row['id_feedbackkategorie'].'
                                 </th>
@@ -31,6 +31,7 @@
                                 <th>
                                     <input type="hidden" name="id_feedbackkategorie" value="'.$row['id_feedbackkategorie'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
                         </tr>  

@@ -19,7 +19,7 @@
                 while($row = mysqli_fetch_assoc($allcategories)){
                     echo '
                         <tr>
-                            <form action="steckbrief_edit" method="post">
+                            <form action="validate_steckbrief_edit_choice" method="post">
                                 <th>
                                     '.$row['id_steckbriefkategorie'].'
                                 </th>
@@ -35,6 +35,7 @@
                                 <th>
                                     <input type="hidden" name="id_steckbriefkategorie" value="'.$row['id_steckbriefkategorie'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
                         </tr>  

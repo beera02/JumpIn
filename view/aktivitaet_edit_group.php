@@ -11,7 +11,7 @@
                 <?php
                     $gruppenabfrage = getAllGroups();
 
-                    $id = $_SESSION['aktivitaet_edit'];
+                    $id = $_SESSION['id_aktivitaet'];
                     $gruppenaktivitaetabfrage = getAllActivityGroupsByActivityID($id);
 
                     $gruppen = array();

@@ -278,6 +278,25 @@ label{
     opacity: 0.6;
 }
 
+.button_delete{
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #ebe4d1;
+    color: #584125; 
+    border: 1px solid #584125;
+}
+
+.button_delete:hover{
+    background-color: red;
+    color: #584125; 
+}
+
+.button_delete:disabled{
+    opacity: 0.6;
+}
+
 .button_zurück{
     float: left;
     margin: 20px;

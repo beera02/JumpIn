@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $idgroup = intval($_POST['id_gruppe']);
-        if($idgroup > 0){
-            $groupid = $idgroup;
-        }
-        else{
-            $groupid = $_SESSION['group_edit'];
-        }
-        $datensatz = getGroupByID($groupid);
+        $idgroup = intval($_SESSION['id_gruppe']);
+        $datensatz = getGroupByID($idgroup);
 
         echo '
             <div class="div_form">
@@ -25,6 +19,5 @@
                 </form>
             </div>
         ';
-        $_SESSION['group_edit'] = $groupid;
     ?>
 </div>

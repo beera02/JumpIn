@@ -1,5 +1,5 @@
 <?php
-    $benutzerid = (int)$_SESSION['user_edit'];
+    $benutzerid = (int)$_SESSION['id_benutzer'];
 
     $iterated = array();
     if(!empty($_POST['group'])){

@@ -9,8 +9,8 @@
         <form action="validate_feedback_edit_optionen" method="post">
             <div class="div_forms_checkbox">
                 <?php
-                    $feedbackcategory = getFeedbackCategoryByID($_SESSION['feedbackkategorie_edit']);
-                    $options= getAllOptionsByFeedbackID($_SESSION['feedbackkategorie_edit']);
+                    $feedbackcategory = getFeedbackCategoryByID($_SESSION['id_feedbackkategorie']);
+                    $options= getAllOptionsByFeedbackID($_SESSION['id_feedbackkategorie']);
                     $x = 1;
                     if($feedbackcategory['anzahloptionen'] < $_SESSION['feedbackkategorie_oldoptions']){
                         while($row = mysqli_fetch_assoc($options)){

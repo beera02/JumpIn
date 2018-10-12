@@ -1,5 +1,5 @@
 <?php
-    $activityid = (int)$_SESSION['aktivitaet_edit'];
+    $activityid = (int)$_SESSION['id_aktivitaet'];
 
     $iterated = array();
     if(!empty($_POST['group'])){

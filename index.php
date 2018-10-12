@@ -43,6 +43,9 @@
 			case 'validate_aktivitaetsart_edit':
 				build('validate_aktivitaetsart_edit.php');
 				break;
+			case 'validate_aktivitaetsart_edit_choice':
+				build('validate_aktivitaetsart_edit_choice.php');
+				break;
 
 			case 'aktivitaet':
 				build('./view/aktivitaet.php');
@@ -72,6 +75,9 @@
 			case 'validate_aktivitaet_add_group':
 				build('validate_aktivitaet_add_group.php');
 				break;
+			case 'validate_aktivitaet_edit_choice':
+				build('validate_aktivitaet_edit_choice.php');
+				break;
 			case 'validate_aktivitaet_edit':
 				build('validate_aktivitaet_edit.php');
 				break;
@@ -100,6 +106,9 @@
 			case 'steckbrief_edit':
 				build('./view/steckbrief_edit.php');
 				break;
+			case 'validate_steckbrief_edit_choice':
+				build('validate_steckbrief_edit_choice.php');
+				break;
 			case 'validate_steckbrief_add':
 				build('validate_steckbrief_add.php');
 				break;
@@ -118,6 +127,9 @@
 				break;
 			case 'notfallkarte_edit':
 				build('./view/notfallkarte_edit.php');
+				break;
+			case 'validate_notfallkarte_edit_choice':
+				build('validate_notfallkarte_edit_choice.php');
 				break;
 			case 'validate_notfallkarte_add':
 				build('validate_notfallkarte_add.php');
@@ -143,6 +155,9 @@
 				break;
 			case 'feedback_edit_optionen':
 				build('./view/feedback_edit_optionen.php');
+				break;
+			case 'validate_feedback_edit_choice':
+				build('validate_feedback_edit_choice.php');
 				break;
 			case 'validate_feedback_add':
 				build('validate_feedback_add.php');
@@ -178,6 +193,9 @@
 			case 'validate_user_edit_choice':
 				build('validate_user_edit_choice.php');
 				break;
+			case 'validate_user_edit_choice':
+				build('validate_user_edit_choice.php');
+				break;
 			case 'user_edit':
 				build('./view/user_edit.php');
 				break;
@@ -202,6 +220,9 @@
 				break;
 			case 'group_edit':
 				build('./view/group_edit.php');
+				break;
+			case 'validate_group_edit_choice':
+				build('validate_group_edit_choice.php');
 				break;
 			case 'validate_group_add':
 				build('validate_group_add.php');

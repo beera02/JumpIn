@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $idnotfallkategorie = intval($_POST['id_notfallkategorie']);
-        if($idnotfallkategorie > 0){
-            $notfallkategorieid = $idnotfallkategorie;
-        }
-        else{
-            $notfallkategorieid = $_SESSION['notfallkategorie_edit'];
-        }
-        $datensatz = getEmergencyCategoryByID($notfallkategorieid);
+        $idnotfallkategorie = intval($_SESSION['id_notfallkategorie']);
+        $datensatz = getEmergencyCategoryByID($idnotfallkategorie);
 
         echo '
         <div class="div_form">
@@ -28,6 +22,5 @@
             </form>
         </div>
         ';
-        $_SESSION['notfallkategorie_edit'] = $notfallkategorieid;
     ?>
 </div>

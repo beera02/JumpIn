@@ -2,14 +2,8 @@
     <?php
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
-        $idbenutzer = intval($_POST['id_benutzer']);
-        if($idbenutzer > 0){
-            $benutzerid = $idbenutzer;
-        }
-        else{
-            $benutzerid = $_SESSION['user_edit'];
-        }
-        $datensatz = getUserByID($benutzerid);
+        $idbenutzer = intval($_SESSION['id_benutzer']);
+        $datensatz = getUserByID($idbenutzer);
 
         echo '
             <div class="div_form">
@@ -37,6 +31,5 @@
             </form>
         </div>
         ';
-        $_SESSION['user_edit'] = $benutzerid;
     ?>
 </div>
