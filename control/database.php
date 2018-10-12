@@ -206,6 +206,20 @@
             $db->close();
             return $resultarray;
         }
+
+        function getAllFeedbackCategories(){
+            $db = getDatabase();
+            $abfrage = $db->query("SELECT * FROM FEEDBACKKATEGORIE");
+            $db->close();
+            return $abfrage;
+        }
+
+        function getAllOptionsByFeedbackID($id){
+            $db = getDatabase();
+            $abfrage = $db->query("SELECT * FROM OPTIONEN WHERE feedbackkategorie_id = '$id'");
+            $db->close();
+            return $abfrage;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -310,6 +324,13 @@
             mysqli_query($db,$sql);
             $db->close();
         }
+
+        function deleteAllOptionsByFeedbackID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM OPTIONEN WHERE feedbackkategorie_id = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
     
         function updateUserByID($userid, $password, $username, $name, $prename){
             $db = getDatabase();
@@ -360,6 +381,14 @@
             $db->close();
         }
 
+        function updateFeedbackCategory($id, $question, $options){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE FEEDBACKKATEGORIE SET frage = ?, anzahloptionen = ? WHERE id_feedbackkategorie = '$id'");
+            $preparedquery->bind_param("si", $question, $options);
+            $preparedquery->execute();
+            $db->close();
+        }
+        
         function resetJumpin(){
             $db = getDatabase();
             $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('admin','coach')";
