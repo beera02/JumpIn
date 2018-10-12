@@ -53,5 +53,8 @@
                 }
             ?>
         </table>
+        <form action="stack" method="post">
+            <input class="button_zurück_choice" type="submit" name="submit_btn" value="Zurück">
+        </form>
     </div>
 </div>

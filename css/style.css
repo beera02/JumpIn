@@ -290,9 +290,37 @@ label{
     border: 1px solid #584125;
 }
 
-.button_zurück:hover{
+.button_zurück:hover, .button_zurück_choice:hover{
     background-color: #584125;
     color: #ebe4d1;
+}
+
+.button_zurück_stack{
+    float: left;
+    margin: 0 0 20px 90px;
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+
+.button_zurück_stack:hover{
+    background-color: #FFCC00;
+    color: #584125; 
+}
+
+.button_zurück_choice{
+    margin: 20px;
+    height: 40px;
+    width: 130px;
+    font-size: 18pt;
+    border-radius: 5px;
+    background-color: #ebe4d1;
+    color: #584125; 
+    border: 1px solid #584125;
 }
 
 .div_forms_checkbox{

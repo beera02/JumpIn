@@ -20,4 +20,7 @@
             </div>
         </a>
     </div>
+    <form action="stack" method="post">
+        <input class="button_zurück_stack" type="submit" name="submit_btn" value="Zurück">
+    </form>
 </div>

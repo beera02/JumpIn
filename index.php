@@ -15,6 +15,9 @@
 			case 'home':
 				build('./view/home.php');
 				break;
+			case 'stack':
+				build('stack.php');
+				break;
 			case 'logout':
 				build('logout.php');
 				break;

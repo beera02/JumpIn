@@ -16,7 +16,6 @@
         if($invalid == true){
             insertUser($_POST['benutzername'], $_POST['passwort'], $_POST['name'], $_POST['vorname']);
             $userid = getUserIDByUsername($_POST['benutzername']);
-
             $_SESSION['user_add'] = $userid;
             header('Location: user_group_add');
         }

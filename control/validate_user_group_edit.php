@@ -16,5 +16,5 @@
             deleteUserGroup($gruppeid, $benutzerid);
         }
     }  
-    header('Location: user_edit_choice');
+    header('Location: user');
 ?>
