@@ -14,11 +14,6 @@ else{
     echo '
     <header>
         <img id="img_postlogo" src="./image/postlogo.png" alt="postlogo">
-        <span class="div_headertitle">
-            <p class="p_headertitle">
-                Jump-In Konfiguration
-            </p>
-        </span>
     </header>';
 }
 ?>
