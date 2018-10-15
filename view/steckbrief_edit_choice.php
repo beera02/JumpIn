@@ -8,7 +8,6 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Steckbriefkategoriename</th>
                 <th>Obligation</th>
                 <th>Einzeiler</th>
@@ -20,9 +19,6 @@
                     echo '
                         <tr>
                             <form action="validate_steckbrief_edit_choice" method="post">
-                                <th>
-                                    '.$row['id_steckbriefkategorie'].'
-                                </th>
                                 <th>
                                     '.$row['name'].'
                                 </th>

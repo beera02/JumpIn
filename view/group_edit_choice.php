@@ -8,7 +8,6 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Gruppenname</th>
                 <th></th>
             </tr>
@@ -19,9 +18,6 @@
                         echo '
                             <tr>
                                 <form action="validate_group_edit_choice" method="post">
-                                    <th>
-                                        '.$row['id_gruppe'].'
-                                    </th>
                                     <th>
                                         '.$row['name'].'
                                     </th>
@@ -37,9 +33,6 @@
                         echo '
                             <tr>
                                 <form action="validate_group_edit_choice" method="post">
-                                    <th>
-                                        '.$row['id_gruppe'].'
-                                    </th>
                                     <th>
                                         '.$row['name'].'
                                     </th>

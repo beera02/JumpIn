@@ -8,7 +8,6 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Aktivitätsartname</th>
                 <th></th>
             </tr>
@@ -18,9 +17,6 @@
                     echo '
                         <tr>
                             <form action="validate_aktivitaetsart_edit_choice" method="post">
-                                <th>
-                                    '.$row['id_art'].'
-                                </th>
                                 <th>
                                     '.$row['name'].'
                                 </th>

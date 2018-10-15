@@ -8,7 +8,6 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Notfallname</th>
                 <th>Notfallinfo</th>
                 <th></th>
@@ -19,9 +18,6 @@
                     echo '
                         <tr>
                             <form action="validate_notfallkarte_edit_choice" method="post">
-                                <th>
-                                    '.$row['id_notfallkategorie'].'
-                                </th>
                                 <th>
                                     '.$row['name'].'
                                 </th>

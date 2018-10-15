@@ -8,7 +8,6 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Benutzername</th>
                 <th>Vorname</th>
                 <th>Nachname</th>
@@ -21,9 +20,6 @@
                         echo '
                         <tr>
                             <form action="validate_user_edit_choice" method="post">
-                                <th>
-                                    '.$row['id_benutzer'].'
-                                </th>
                                 <th>
                                     '.$row['benutzername'].'
                                 </th>
@@ -46,9 +42,6 @@
                         echo '
                         <tr>
                             <form action="validate_user_edit_choice" method="post">
-                                <th>
-                                    '.$row['id_benutzer'].'
-                                </th>
                                 <th>
                                     '.$row['benutzername'].'
                                 </th>

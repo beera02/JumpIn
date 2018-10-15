@@ -8,10 +8,8 @@
         </p>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Aktivitätsname</th>
                 <th>Aktivitätsart</th>
-                <th>Einschreiben</th>
                 <th>Startzeit</th>
                 <th></th>
             </tr>
@@ -22,16 +20,10 @@
                         <tr>
                             <form action="validate_aktivitaet_edit_choice" method="post">
                                 <th>
-                                    '.$row['id_aktivitaet'].'
-                                </th>
-                                <th>
                                     '.$row['aktivitaetsname'].'
                                 </th>
                                 <th>
                                     '.getArtNameByID($row['art_id']).'
-                                </th>
-                                <th>
-                                    '.getJaNein($row['einschreiben']).'
                                 </th>
                                 <th>
                                     '.getDaysHours($row['startzeit']).'

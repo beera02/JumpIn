@@ -366,7 +366,7 @@ table{
     width: 95%;
     margin: 20px;
     font-size: 18pt;
-    font-weight: initial;
+    font-weight: unset;
     color: #584125;
 }
 
@@ -376,3 +376,337 @@ td, th {
     padding: 8px;
 }
 
+@media screen and (max-width: 1250px){
+    table{
+        font-size: 14pt;
+    }
+
+    .button_weiter_table, .button_delete{
+        height: 30px;
+        width: 85px;
+        font-size: 11pt;
+    }
+
+    #p_stack{
+        font-size: 25pt;
+    }
+
+    .p_form{
+        font-size: 20pt;
+    }
+
+    .p_form_title{
+        font-size: 25pt;
+    }
+
+    .p_content, li{
+        font-size: 15pt;
+    }
+}
+
+@media screen and (max-width: 950px){
+    table{
+        font-size: 11pt;
+    }
+
+    .button_weiter_table, .button_delete{
+        height: 25px;
+        width: 75px;
+        font-size: 9pt;
+    }
+}
+
+@media screen and (max-width: 950px){
+    table{
+        font-size: 9pt;
+    }
+
+    .button_weiter_table, .button_delete{
+        height: 20px;
+        width: 65px;
+        font-size: 8pt;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .div_flex{
+        justify-content: center;
+    }
+
+    input[type=checkbox] {
+        transform: scale(1);
+    }
+    
+    input[type='radio'] {
+        transform: scale(1);
+    }
+
+    .forms_dropdown, .forms_textfield{
+        height: 27px;
+        width: 334px;
+        font-size: 12pt;
+    }
+
+    .div_forms_checkbox{
+        margin: 20px 0 0 20px;
+        font-size: 20pt;
+    }
+
+    .forms_date, .forms_time{
+        height: 27px;
+        width: 167px;
+        font-size: 12pt;
+    }
+
+    label{
+        font-size: 14pt;
+    }
+
+    .forms_textarea{
+        height: 134px;
+        width: 334px;
+        font-size: 12pt;
+    }
+
+    .button_weiter{
+        margin-left: 70px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+    th{
+        padding: 4px;
+    }
+     
+    table{
+        font-size: 7pt;
+    }
+
+    .button_weiter_table, .button_delete{
+        height: 15px;
+        width: 55px;
+        font-size: 6pt;
+    }
+ 
+    #p_stack{
+        font-size: 20pt;
+    }
+
+    .p_form_title{
+        font-size: 20pt;
+    }
+
+    .p_form{
+        font-size: 15pt;
+        margin: 10px 0 0 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .forms_dropdown, .forms_textfield{
+        height: 20px;
+        width: 250px;
+        font-size: 9pt;
+    }
+
+    .div_forms_checkbox{
+        margin: 20px 0 0 20px;
+        font-size: 17.5pt;
+    }
+
+    .forms_date, .forms_time{
+        height: 20px;
+        width: 125px;
+        font-size: 9pt;
+    }
+
+    label{
+        font-size: 11pt;
+    }
+
+    .forms_textarea{
+        height: 100px;
+        width: 250px;
+        font-size: 9pt;
+    }
+
+    table{
+        font-size: 5pt;
+    }
+
+    .button_weiter_table, .button_delete{
+        height: 10px;
+        width: 45px;
+        font-size: 5pt;
+    }
+
+    .button_zurück, .button_zurück_stack, .button_weiter, .button_zurück_choice{
+        height: 25px;
+        width: 75px;
+        font-size: 9pt;
+        margin: 20px 0 20px 20px;
+    }
+
+    .button_weiter{
+        margin-left: 40px;
+    }
+
+}
+
+@media screen and (max-width: 450px) {  
+    .forms_dropdown, .forms_textfield{
+        height: 16px;
+        width: 200px;
+        font-size: 7pt;
+    }
+
+    .div_forms_checkbox{
+        margin: 20px 0 0 20px;
+        font-size: 15pt;
+    }
+
+    .forms_date, .forms_time{
+        height: 16px;
+        width: 100px;
+        font-size: 7pt;
+    }
+
+    label{
+        font-size: 9pt;
+    }
+
+    .forms_textarea{
+        height: 80px;
+        width: 200px;
+        font-size: 7pt;
+    }
+    
+    #p_stack{
+        font-size: 17.5pt;
+    }
+
+    .p_form_title{
+        font-size: 17.5pt;
+    }
+
+    .p_content, li{
+        font-size: 12.5pt;
+    }
+
+    ul{
+        padding-left: 20px;
+    }
+
+    .p_form{
+        font-size: 12.5pt;
+    }
+    
+    #img_postlogo{
+        height: 80px;
+        margin-top: 15px;
+    }
+
+    .div_flex{
+        justify-content: auto;
+    }
+
+    #a_headertitle{
+        font-size: 20pt;
+    }
+
+    .span_headertitle{
+        height: 50px;
+        margin: 35px 20px 0 0;
+    }
+
+    .einstellungsbox{
+        width: 120px;
+        height: 120px;
+        margin: 12.5px;
+    }
+
+    .p_einstellungsbox{
+        font-size: 11pt;
+    }
+
+    .img_einstellungsbox{
+        height: 60px;
+    }
+}
+@media screen and (max-width: 380px) {  
+    th{
+        padding: 2px;
+    }
+
+    #p_stack{
+        font-size: 15pt;
+    }
+
+    .p_form_title{
+        font-size: 15pt;
+    }
+
+    .p_content, li{
+        font-size: 10pt;
+    }
+
+    .p_form{
+        font-size: 10pt;
+    }
+
+    .button_weiter, .button_zurück{
+        margin-left: 20px;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    .forms_dropdown, .forms_textfield{
+        height: 14px;
+        width: 160px;
+        font-size: 6pt;
+    }
+
+    .div_forms_checkbox{
+        margin: 20px 0 0 20px;
+        font-size: 12.5pt;
+    }
+
+    .forms_date, .forms_time{
+        height: 14px;
+        width: 80px;
+        font-size: 6pt;
+    }
+
+    label{
+        font-size: 8pt;
+    }
+
+    .forms_textarea{
+        height: 80px;
+        width: 160px;
+        font-size: 6pt;
+    }
+    
+    header{
+        height: 80px;
+    }
+
+    th{
+        padding: 0.5px;
+    }
+
+    #img_postlogo{
+        height: 60px;
+        margin-top: 15px;
+    }
+
+    #a_headertitle{
+        font-size: 15pt;
+    }
+
+    .span_headertitle{
+        margin: 32px 20px 0 0;
+    }
+}

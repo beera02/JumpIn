@@ -447,6 +447,8 @@
             mysqli_query($db,$sql2);
             $sql3 = "DELETE FROM AKTIVITAET";
             mysqli_query($db,$sql3);
+            $sql4 = "DELETE FROM STECKBRIEFKATEGORIE WHERE obligation != 1";
+            mysqli_query($db,$sql4);
             $db->close();
         }
         
