@@ -4,10 +4,12 @@
 
     if($_POST['submit_btn'] == "Weiter"){
         if(!empty($_POST['aktivitaetsname']) & !empty($_POST['treffpunkt']) & !empty($_POST['startdate']) & !empty($_POST['starttime']) & !empty($_POST['enddate']) & !empty($_POST['endtime'])){
-            $invalid = true;
-            if($_POST['einschreiben'] == "true"){
-                $einschreiben = true;
-            }
+            if(strlen($_POST['aktivitaetsname']) <= 30 & strlen($_POST['treffpunkt']) <= 30){
+                $invalid = true;
+                if($_POST['einschreiben'] == "true"){
+                    $einschreiben = true;
+                }
+            }    
         }
         if($invalid){
             if($einschreiben){
@@ -20,9 +22,17 @@
                 $_SESSION['enddate'] = $_POST['enddate'];
                 $_SESSION['endtime'] = $_POST['endtime'];
                 if(!empty($_POST['info'])){
-                    $_SESSION['info'] = $_POST['info'];
+                    if(strlen($_POST['info']) <= 500){
+                        $_SESSION['info'] = $_POST['info'];
+                        header('Location: aktivitaet_edit_einschreiben');
+                    }
+                    else{
+                        header('Location: aktivitaet_edit');
+                    }
                 }
-                header('Location: aktivitaet_edit_einschreiben');
+                else{
+                    header('Location: aktivitaet_edit_einschreiben');
+                }
             }
             else{
                 $validatedarray = validateActivity($_POST['aktivitaetsart'], $_POST['startdate'], $_POST['starttime'], $_POST['enddate'], $_POST['endtime'], NULL, NULL);

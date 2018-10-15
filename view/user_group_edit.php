@@ -11,7 +11,7 @@
                 <?php
                     $gruppenabfrage = getAllGroups();
 
-                    $id = $_SESSION['user_edit'];
+                    $id = $_SESSION['id_benutzer'];
                     $gruppenbenutzerabfrage = getAllUserGroupsByUserID($id);
 
                     $gruppen = array();

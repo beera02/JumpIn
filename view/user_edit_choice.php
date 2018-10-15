@@ -17,7 +17,33 @@
             <?php
                 $allusers = getAllUser();
                 while($row = mysqli_fetch_assoc($allusers)){
-                    echo '
+                    if($row['benutzername'] == "admin"){
+                        echo '
+                        <tr>
+                            <form action="validate_user_edit_choice" method="post">
+                                <th>
+                                    '.$row['id_benutzer'].'
+                                </th>
+                                <th>
+                                    '.$row['benutzername'].'
+                                </th>
+                                <th>
+                                    '.$row['vorname'].'
+                                </th>
+                                <th>
+                                    '.$row['name'].'
+                                </th>
+                                <th>
+                                    <input type="hidden" name="id_benutzer" value="'.$row['id_benutzer'].'"/>
+                                    <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten" disabled/>
+                                    <input class="button_delete" type="submit" name="submit_btn" value="Löschen" disabled/>
+                                </th>
+                            </form>  
+                        </tr>  
+                    ';
+                    }
+                    else{
+                        echo '
                         <tr>
                             <form action="validate_user_edit_choice" method="post">
                                 <th>
@@ -39,7 +65,8 @@
                                 </th>
                             </form>  
                         </tr>  
-                    ';
+                        ';
+                    }
                 }
             ?>
         </table>
