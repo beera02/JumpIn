@@ -6,9 +6,9 @@
 	session_start();
 
 
-	if(!empty($url[1])){
-		$url[1] = strtolower($url[1]);
-		switch($url[1]){
+	if(!empty($url[2])){
+		$url[2] = strtolower($url[2]);
+		switch($url[2]){
 			case 'validate_anmelden':
 				build('validate_anmelden.php');
 				break;

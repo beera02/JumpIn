@@ -34,7 +34,7 @@
             $db = getDatabase();
             $sql = ("SELECT * FROM BENUTZER WHERE id_benutzer = '$id'");
             $result = $db->query($sql);
-            $resultarray = mysqli_fetch_assoc($userbyid);
+            $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray;
         }
@@ -113,7 +113,7 @@
         function getAllArts(){
             $db = getDatabase();
             $sql = ("SELECT * FROM ART");
-            $result = $db->query();
+            $result = $db->query($sql);
             $db->close();
             return $result;
         }
