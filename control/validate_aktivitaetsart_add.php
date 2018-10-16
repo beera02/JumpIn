@@ -11,7 +11,7 @@
 	            }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertArt($_POST['aktivitaetsartname']);
             header('Location: aktivitaetsart');
         }

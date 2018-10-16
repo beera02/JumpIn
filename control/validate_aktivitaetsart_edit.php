@@ -17,7 +17,7 @@
                 }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname']);
             header('Location: aktivitaetsart_edit_choice');
         }

@@ -17,7 +17,7 @@
                 }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateGroupByID($_SESSION['id_gruppe'], $_POST['gruppenname']);
             header('Location: group_edit_choice');
         }

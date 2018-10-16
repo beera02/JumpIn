@@ -16,7 +16,7 @@
             <?php
                 $allusers = getAllUser();
                 while($row = mysqli_fetch_assoc($allusers)){
-                    if($row['benutzername'] == "admin"){
+                    if(strtolower($row['benutzername']) == "admin"){
                         echo '
                         <tr>
                             <form action="validate_user_edit_choice" method="post">

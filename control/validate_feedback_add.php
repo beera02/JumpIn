@@ -9,7 +9,7 @@
                 }              
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertFeedbackCategory($_POST['frage'], $_POST['anzahloptionen']);
             header('Location: feedback_add_optionen');
         }

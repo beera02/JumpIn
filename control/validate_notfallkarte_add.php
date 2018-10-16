@@ -7,7 +7,7 @@
                 $invalid = true;
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertEmergencyCategory($_POST['name'], $_POST['info']);
             header('Location: notfallkarte');
         }

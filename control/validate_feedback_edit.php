@@ -9,7 +9,7 @@
                 }              
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateFeedbackCategory($_SESSION['id_feedbackkategorie'], $_POST['frage'], $_POST['anzahloptionen']);
             header('Location: feedback_edit_optionen');
         }

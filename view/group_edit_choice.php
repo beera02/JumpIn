@@ -14,7 +14,7 @@
             <?php
                 $allgroups = getAllGroups();
                 while($row = mysqli_fetch_assoc($allgroups)){
-                    if($row['name'] == "admin" | $row['name'] == "coach"){
+                    if(strtolower($row['name']) == "admin" | strtolower($row['name']) == "coach"){
                         echo '
                             <tr>
                                 <form action="validate_group_edit_choice" method="post">

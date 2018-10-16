@@ -16,7 +16,7 @@
                 }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateCharacteristicsCategory($_SESSION['id_steckbriefkategorie'], $_POST['name'], $obligation, $einzeiler);
             header('Location: steckbrief');
         }

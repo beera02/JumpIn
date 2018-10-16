@@ -1,7 +1,7 @@
 <?php
 	/*funktion für einen bestimmten main part zu laden
-	$file ist der pfad des files welches geladen werden soll*/
-    function build($file){
+	$path ist der pfad des files welches geladen werden soll*/
+    function build($path){
 ?>
         <!DOCTYPE html>
 		<html>
@@ -20,28 +20,28 @@
 						/*wenn der benutzer eine session bestehen hat
 						und auf die login seite kommen will,
 						kommt er stattdessen auf die home seite */
-						if ($file == './view/login.php') {
+						if ($path == './view/login.php') {
 							if($_SESSION['benutzer']){
-								$file = './view/home.php';
-								setStack($file);
+								$path = './view/home.php';
+								setStack($path);
 							}
 						}
 						/*wenn der benutzer auf die validiere anmelden seite kommen will
 						geschieht stattdessen nichts*/
-						elseif ($file == 'validate_anmelden.php') {}
+						elseif ($path == 'validate_anmelden.php') {}
 						else {
 							/*wenn der benutzer keine session hat
 							kommt er in jedem fall auf die login seite*/
 							if(!$_SESSION['benutzer']){
-								$file = './view/login.php';
+								$path = './view/login.php';
 							}
 							//ansonsten wird das vorgesehene file in den stack geschrieben
 							else{
-								setStack($file);
+								setStack($path);
 							}
 						}
 						//lädt das file hinein
-						require_once $file; 
+						require_once $path; 
 					?> 
 				</main>
 			</body>
@@ -50,7 +50,7 @@
 	}
 
 	//funktion für das geladene file in den stack zu schreiben
-    function setStack($target){
+    function setStack($path){
 		//holt den vorherigen stack aus der sessionvariable
         $stackstring = $_SESSION['stack'];
 		$stackarray = explode("/",$stackstring);
@@ -58,10 +58,10 @@
 
 		/*teilt den pfad des geladenen files
 		nur noch auf das benötigte zu*/
-		$targetarray = explode(".",$target);
-		$targetstring = $targetarray[count($targetarray) - 2];
-		$targetarray2 = explode("/",$targetstring);
-		$finalstring = $targetarray2[count($targetarray2) - 1];
+		$patharray = explode(".",$path);
+		$pathstring = $patharray[count($patharray) - 2];
+		$patharray2 = explode("/",$pathstring);
+		$finalstring = $patharray2[count($patharray2) - 1];
 
 		//wenn zuvor schon etwas im stack war
 		if($finalstringbefore != NULL){
@@ -145,7 +145,7 @@
 
 		//aus den herausgelesenen daten ein neues datum erstellen
 		$newdate = mktime($hours,$minutes,0,$month,$day,$year);
-		//dieses datum neu formatieren und zurückgeben
+		//dieses datum formatieren und zurückgeben
 		return date("Y-m-d H:i:s", $newdate);
 	}
 

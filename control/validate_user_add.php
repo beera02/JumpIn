@@ -13,7 +13,7 @@
 	            }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertUser($_POST['benutzername'], $_POST['passwort'], $_POST['name'], $_POST['vorname']);
             $userid = getUserIDByUsername($_POST['benutzername']);
             $_SESSION['user_add'] = $userid;

@@ -22,7 +22,7 @@
 
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateUserByID($_SESSION['id_benutzer'], $_POST['passwort'], $_POST['benutzername'], $_POST['name'], $_POST['vorname']);
             header('Location: user_group_edit');
         }

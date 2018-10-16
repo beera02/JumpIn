@@ -16,7 +16,7 @@
                 }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertCharacteristicsCategory($_POST['name'], $obligation, $einzeiler);
             header('Location: steckbrief');
         }

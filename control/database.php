@@ -15,45 +15,46 @@
         function getUserIDByUsername($username){
             $db = getDatabase();
             $sql = ("SELECT id_benutzer FROM BENUTZER WHERE benutzername = '$username' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
             $db->close();
-            return $resultatarray['id_benutzer'];
+            return $resultarray['id_benutzer'];
         }
     
         function getPasswordByUsername($username){
             $db = getDatabase();
-            $passwortabfrage = $db->query("SELECT passwort FROM BENUTZER
-                WHERE benutzername = '$username' LIMIT 1");
-            $passwortabfragearray = mysqli_fetch_assoc($passwortabfrage);
+            $sql = ("SELECT passwort FROM BENUTZER WHERE benutzername = '$username' LIMIT 1");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
             $db->close();
-            return $passwortabfragearray['passwort'];
+            return $resultarray['passwort'];
         }
     
         function getUserByID($id){
             $db = getDatabase();
             $sql = ("SELECT * FROM BENUTZER WHERE id_benutzer = '$id'");
-            $userbyid = $db->query($sql);
-            $datensatz = mysqli_fetch_assoc($userbyid);
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($userbyid);
             $db->close();
-            return $datensatz;
+            return $resultarray;
         }
     
         function getUsernameByUsername($username){
             $db = getDatabase();
             $sql = ("SELECT benutzername FROM BENUTZER WHERE benutzername = '$username' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
-            $resultatstring = $resultatarray['benutzername'];
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $resultstring = $resultarray['benutzername'];
             $db->close();
-            return $resultatstring;
+            return $resultstring;
         }
     
         function getAllGroups(){
             $db = getDatabase();
-            $gruppenabfrage = $db->query("SELECT * FROM GRUPPE");
+            $sql = ("SELECT * FROM GRUPPE");
+            $result = $db->query($sql);
             $db->close();
-            return $gruppenabfrage;
+            return $result;
         }
 
         function getGroupByID($id){
@@ -68,53 +69,53 @@
         function getGroupnameByGroupname($groupname){
             $db = getDatabase();
             $sql = ("SELECT name FROM GRUPPE WHERE name = '$groupname' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
-            $resultatstring = $resultatarray['name'];
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $resultstring = $resultarray['name'];
             $db->close();
-            return $resultatstring;
+            return $resultstring;
         }
 
         function getGroupnameByUsername($username){
             $db = getDatabase();
-            return $db->query("SELECT g.name AS gruppenname FROM gruppe AS g
-                INNER JOIN benutzer_gruppe AS bg ON g.id_gruppe=bg.gruppe_id
-                INNER JOIN benutzer AS b ON bg.benutzer_id=b.id_benutzer
-                WHERE b.benutzername = '" . $username . "'");
+            $sql = ("SELECT g.name AS gruppenname FROM gruppe AS g INNER JOIN benutzer_gruppe AS bg ON g.id_gruppe=bg.gruppe_id INNER JOIN benutzer AS b ON bg.benutzer_id=b.id_benutzer WHERE b.benutzername = '" . $username . "'");
+            return $db->query($sql);
             $db->close();
         }
     
         function getGroupIDByName($name){
             $db = getDatabase();
             $sql = ("SELECT id_gruppe FROM GRUPPE WHERE name = '$name' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
             $db->close();
-            return $resultatarray['id_gruppe'];
+            return $resultarray['id_gruppe'];
         }
     
         function getAllUserGroupsByUserID($userid){
             $db = getDatabase();
-            $gruppenbenutzerabfrage = $db->query("SELECT * FROM BENUTZER_GRUPPE WHERE benutzer_id = '$userid'");
+            $sql = ("SELECT * FROM BENUTZER_GRUPPE WHERE benutzer_id = '$userid'");
+            $result = $db->query($sql);
             $db->close();
-            return $gruppenbenutzerabfrage;
+            return $result;
         }
 
         function getArtnameByArtname($artname){
             $db = getDatabase();
             $sql = ("SELECT name FROM ART WHERE name = '$artname' LIMIT 1");
-            $resultat = $db->query($sql);
-            $resultatarray = mysqli_fetch_assoc($resultat);
-            $resultatstring = $resultatarray['name'];
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $resultstring = $resultarray['name'];
             $db->close();
-            return $resultatstring;
+            return $resultstring;
         }
 
         function getAllArts(){
             $db = getDatabase();
-            $artabfrage = $db->query("SELECT * FROM ART");
+            $sql = ("SELECT * FROM ART");
+            $result = $db->query();
             $db->close();
-            return $artabfrage;
+            return $result;
         }
 
         function getArtByID($id){
@@ -146,31 +147,35 @@
 
         function getAllActivitiesOrdered(){
             $db = getDatabase();
-            $activityquery = $db->query("SELECT * FROM AKTIVITAET ORDER BY startzeit");
+            $sql = ("SELECT * FROM AKTIVITAET ORDER BY startzeit");
+            $result = $db->query($sql);
             $db->close();
-            return $activityquery;
+            return $result;
         }
 
         function getActivityByID($id){
             $db = getDatabase();
-            $activityquery = $db->query("SELECT * FROM AKTIVITAET WHERE id_aktivitaet = '$id'");
-            $resultarray = mysqli_fetch_assoc($activityquery);
+            $sql = ("SELECT * FROM AKTIVITAET WHERE id_aktivitaet = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray;
         }
 
         function getAllActivityGroupsByActivityID($id){
             $db = getDatabase();
-            $abfrage = $db->query("SELECT * FROM AKTIVITAET_GRUPPE WHERE aktivitaet_id = '$id'");
+            $sql = ("SELECT * FROM AKTIVITAET_GRUPPE WHERE aktivitaet_id = '$id'");
+            $result = $db->query($sql);
             $db->close();
-            return $abfrage;
+            return $result;
         }
 
         function getAllCharacteristicsCategories(){
             $db = getDatabase();
-            $abfrage = $db->query("SELECT * FROM STECKBRIEFKATEGORIE");
+            $sql = ("SELECT * FROM STECKBRIEFKATEGORIE");
+            $result = $db->query($sql);
             $db->close();
-            return $abfrage;
+            return $result;
         }
 
         function getCharacteristicsCategoryByID($id){
@@ -184,9 +189,10 @@
 
         function getAllEmergencyCategories(){
             $db = getDatabase();
-            $abfrage = $db->query("SELECT * FROM NOTFALLKATEGORIE");
+            $sql = ("SELECT * FROM NOTFALLKATEGORIE");
+            $result = $db->query($sql);
             $db->close();
-            return $abfrage;
+            return $result;
         }
 
         function getEmergencyCategoryByID($id){
@@ -209,16 +215,18 @@
 
         function getAllFeedbackCategories(){
             $db = getDatabase();
-            $abfrage = $db->query("SELECT * FROM FEEDBACKKATEGORIE");
+            $sql = ("SELECT * FROM FEEDBACKKATEGORIE");
+            $result = $db->query($sql);
             $db->close();
-            return $abfrage;
+            return $result;
         }
 
         function getAllOptionsByFeedbackID($id){
             $db = getDatabase();
-            $abfrage = $db->query("SELECT * FROM OPTIONEN WHERE feedbackkategorie_id = '$id'");
+            $sql = ("SELECT * FROM OPTIONEN WHERE feedbackkategorie_id = '$id'");
+            $result = $db->query($sql);
             $db->close();
-            return $abfrage;
+            return $result;
         }
     
         function insertUser($username, $password, $name, $prename){

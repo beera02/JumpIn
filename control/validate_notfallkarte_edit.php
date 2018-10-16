@@ -7,7 +7,7 @@
                 $invalid = true;
             } 
         }
-        if($invalid == true){
+        if($invalid){
             updateEmergencyCategory($_SESSION['id_notfallkategorie'], $_POST['name'], $_POST['info']);
             header('Location: notfallkarte');
         }

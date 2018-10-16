@@ -11,7 +11,7 @@
 	            }
             } 
         }
-        if($invalid == true){
+        if($invalid){
             insertGroup($_POST['gruppenname']);
             header('Location: group');
         }
