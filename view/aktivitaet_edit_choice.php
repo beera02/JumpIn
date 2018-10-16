@@ -9,7 +9,6 @@
         <table>
             <tr>
                 <th>Aktivitätsname</th>
-                <th>Aktivitätsart</th>
                 <th>Startzeit</th>
                 <th></th>
             </tr>
@@ -21,9 +20,6 @@
                             <form action="validate_aktivitaet_edit_choice" method="post">
                                 <th>
                                     '.$row['aktivitaetsname'].'
-                                </th>
-                                <th>
-                                    '.getArtNameByID($row['art_id']).'
                                 </th>
                                 <th>
                                     '.getDaysHours($row['startzeit']).'

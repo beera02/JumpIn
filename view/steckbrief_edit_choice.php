@@ -8,7 +8,7 @@
         </p>
         <table>
             <tr>
-                <th>Steckbriefkategoriename</th>
+                <th>Name</th>
                 <th>Obligation</th>
                 <th>Einzeiler</th>
                 <th></th>
