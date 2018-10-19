@@ -9,7 +9,13 @@
             </p>
             <p class="p_form">Aktivitätsartname</p>
             <input class="forms_textfield" type="text" name="aktivitaetsartname"/>
-		    <br>
+            <br>
+            <p class="p_form">Einschreiben</p>
+            <input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true">
+            <label for="true">Ja</label>
+            <input class="forms_radio" type="radio" name="einschreiben" value="false" checked>
+            <label for="false">Nein</label>
+            <br>
             <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen"/>
             <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
         </form>

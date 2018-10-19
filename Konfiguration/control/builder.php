@@ -107,6 +107,20 @@
 	//alle datenbankmethoden aus dem file database.php laden
 	require_once 'database.php';
 
+	function getArt($id){
+		$allarts = getAllArts();
+		$result = '';
+		while($row = mysqli_fetch_assoc($allarts)){
+			if($row['id_art'] == $id){
+				$result .= '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
+			}
+			else{
+				$result .= '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+			}
+		}
+		return $result;
+	}
+
 	//funktion um alle benötigten attribute von einer aktivität zu validieren
 	function validateActivity($artofactivity, $startdate, $starttime, $enddate, $endtime, $writeindate, $writeintime){
 		//das format des datums und der zeit durch funktion validateDateTime ändern

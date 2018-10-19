@@ -9,36 +9,36 @@
         <div class="div_form">
             <form action="validate_aktivitaet_edit_einschreiben" method="post">
                 <p class="p_form_title">
-                    Einschreibeinfos der Aktivität bearbeiten
+                    Weitere Informationen für das Einschreiben bearbeiten
                 </p>
+                <p class="p_form">Aktivitätsblock</p>
+                <select class="forms_dropdown" name="aktivitaetblock">
+                    <option value="null">-</option>
+                    '.getActivityentities($datensatz['aktivitaetsname']).'
+                </select>
                 <p class="p_form">Anzahl Teilnehmer</p>
                 <input class="forms_textfield" type="text" name="anzahlteilnehmer" value="'.$datensatz['anzahlteilnehmer'].'"/>
-                <br>
-                <p class="p_form">Aufschaltzeit zum einschreiben</p>
-                <input class="forms_date" type="date" name="writeindate" value="'.validateReturnDate($datensatz['einschreibezeit']).'"/>
-                <input class="forms_time" type="time" name="writeintime" value="'.validateReturnTime($datensatz['einschreibezeit']).'"/>
                 <br>
                 <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
             </form>
         <div>
         ';
+        
+        function getActivityentities($id){
+            $allarts = getAllActivityEntities();
+            $result = '';
+            while($row = mysqli_fetch_assoc($allarts)){
+                if(getArtIDByName($_SESSION['aktivitaetsart']) == $row['art_id']){
+                    if($id == $row['art_id']){
+                        $result .= '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
+                    }
+                    else{
+                        $result .= '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                    }
 
-        function validateReturnDate($einschreibezeit){
-            if(returnDate($einschreibezeit) == "1970-01-01"){
-                return "";
+                }
             }
-            else{
-                return returnDate($einschreibezeit);
-            }
-        }
-
-        function validateReturnTime($einschreibezeit){
-            if(returnTime($einschreibezeit) == "01:00"){
-                return "";
-            }
-            else{
-                return returnTime($einschreibezeit);
-            }
+            return $result;
         }
     ?>
 </div>

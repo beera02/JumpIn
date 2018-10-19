@@ -20,5 +20,7 @@
 			</body>
 		</html>
 		<?php	 
-	}
+    }
+    
+    require_once '../Konfiguration/control/database.php'; 
 ?>

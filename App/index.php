@@ -13,6 +13,12 @@
 			case 'login':
 				build('./view/login.php');
 				break;
+			case 'validate_login':
+				build('validate_login.php');
+				break;
+			case 'validate_logout':
+				build('validate_logout.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

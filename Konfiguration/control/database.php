@@ -38,6 +38,15 @@
             $db->close();
             return $resultarray;
         }
+
+        function getUserprenameByUsername($username){
+            $db = getDatabase();
+            $sql = ("SELECT vorname FROM BENUTZER WHERE benutzername = '$username'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray['vorname'];
+        }
     
         function getUsernameByUsername($username){
             $db = getDatabase();
@@ -145,6 +154,15 @@
             return $resultarray['name'];
         }
 
+        function getArtByName($name){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM ART WHERE name = '$name'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
         function getAllActivitiesOrdered(){
             $db = getDatabase();
             $sql = ("SELECT * FROM AKTIVITAET ORDER BY startzeit");
@@ -228,6 +246,42 @@
             $db->close();
             return $result;
         }
+
+        function getAllActivityEntities(){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getActivityentityByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK WHERE id_aktivitaetblock = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getActivityentityIDByName($name){
+            $db = getDatabase();
+            $sql = ("SELECT id_aktivitaetblock FROM AKTIVITAETBLOCK WHERE name = '$name'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray['id_aktivitaetblock'];
+        }
+
+        function getActivityentitynameByName($name){
+            $db = getDatabase();
+            $sql = ("SELECT name FROM AKTIVITAETBLOCK WHERE name = '$name' LIMIT 1");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $resultstring = $resultarray['name'];
+            $db->close();
+            return $resultstring;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -254,18 +308,18 @@
             $db->close();
         }
 
-        function insertArt($artname){
+        function insertArt($artname, $writein){
             $db = getDatabase();
-            $preparedquery = $db->prepare("INSERT INTO ART (id_art, name) VALUES (NULL,?)");
-            $preparedquery->bind_param("s", $artname);
+            $preparedquery = $db->prepare("INSERT INTO ART (id_art, name, einschreiben) VALUES (NULL,?,?)");
+            $preparedquery->bind_param("si", $artname, $writein);
             $preparedquery->execute();
             $db->close();
         }
 
-        function insertActivity($activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info){
+        function insertActivity($activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info){
             $db = getDatabase();
-            $preparedquery = $db->prepare("INSERT INTO aktivitaet (id_aktivitaet, aktivitaetsname, art_id, treffpunkt, einschreiben, anzahlteilnehmer, einschreibezeit, startzeit, endzeit, info) VALUES (NULL,?,?,?,?,?,?,?,?,?)");
-            $preparedquery->bind_param("sisiissss", $activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info);
+            $preparedquery = $db->prepare("INSERT INTO aktivitaet (id_aktivitaet, aktivitaetsname, aktivitaetblock_id, art_id, treffpunkt, anzahlteilnehmer, startzeit, endzeit, info) VALUES (NULL,?,?,?,?,?,?,?,?)");
+            $preparedquery->bind_param("siisisss", $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info);
             $preparedquery->execute();
             $_SESSION['activity_add'] = $db->insert_id;
             $db->close();
@@ -308,6 +362,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO OPTIONEN (id_optionen, feedbackkategorie_id, antwort) VALUES (NULL,?,?)");
             $preparedquery->bind_param("is", $id, $answer);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertActivityentity($name, $artid, $writeintime){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO AKTIVITAETBLOCK (id_aktivitaetblock, name, art_id, einschreibezeit) VALUES (NULL,?,?,?)");
+            $preparedquery->bind_param("sis", $name, $artid, $writeintime);
             $preparedquery->execute();
             $db->close();
         }
@@ -381,6 +443,13 @@
             mysqli_query($db,$sql);
             $db->close();
         }
+
+        function deleteActivityentityByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM AKTIVITAETBLOCK WHERE id_aktivitaetblock = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
     
         function updateUserByID($userid, $password, $username, $name, $prename){
             $db = getDatabase();
@@ -399,18 +468,18 @@
             $db->close();
         }
 
-        function updateArtByID($artid, $artname){
+        function updateArtByID($artid, $artname, $writein){
             $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE ART SET name = ? WHERE id_art = '$artid'");
-            $preparedquery->bind_param("s", $artname);
+            $preparedquery = $db->prepare("UPDATE ART SET name = ?, einschreiben = ? WHERE id_art = '$artid'");
+            $preparedquery->bind_param("si", $artname, $writein);
             $preparedquery->execute();
             $db->close();
         }
 
-        function updateActivity($activityid, $activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info){
+        function updateActivity($activityid, $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info){
             $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE aktivitaet SET aktivitaetsname = ?, art_id = ?, treffpunkt = ?, einschreiben = ?, anzahlteilnehmer = ?, einschreibezeit = ?, startzeit = ?, endzeit = ?, info = ? WHERE id_aktivitaet = '$activityid'");
-            $preparedquery->bind_param("sisiissss", $activityname, $artid, $meetpoint, $writein, $participants, $writetime, $starttime, $endtime, $info);
+            $preparedquery = $db->prepare("UPDATE aktivitaet SET aktivitaetsname = ?, aktivitaetblock_id = ?, art_id = ?, treffpunkt = ?, anzahlteilnehmer = ?, startzeit = ?, endzeit = ?, info = ? WHERE id_aktivitaet = '$activityid'");
+            $preparedquery->bind_param("siisisss", $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info);
             $preparedquery->execute();
             $db->close();
         }
@@ -435,6 +504,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE FEEDBACKKATEGORIE SET frage = ?, anzahloptionen = ? WHERE id_feedbackkategorie = '$id'");
             $preparedquery->bind_param("si", $question, $options);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateActivityentity($id, $name, $artid, $writeintime){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE AKTIVITAETBLOCK SET name = ?, art_id = ?, einschreibezeit = ? WHERE id_aktivitaetblock = '$id'");
+            $preparedquery->bind_param("sis", $name, $artid, $writeintime);
             $preparedquery->execute();
             $db->close();
         }

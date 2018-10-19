@@ -24,6 +24,31 @@
 			case 'allgemein':
 				build('./view/allgemein.php');
 				break;
+			case 'aktivitaeten':
+				build('./view/aktivitaeten.php');
+				break;
+
+			case 'aktivitaetblock':
+				build('./view/aktivitaetblock.php');
+				break;
+			case 'aktivitaetblock_add':
+				build('./view/aktivitaetblock_add.php');
+				break;
+			case 'validate_aktivitaetblock_add':
+				build('validate_aktivitaetblock_add.php');
+				break;
+			case 'aktivitaetblock_edit_choice':
+				build('./view/aktivitaetblock_edit_choice.php');
+				break;
+			case 'validate_aktivitaetblock_edit_choice':
+				build('validate_aktivitaetblock_edit_choice.php');
+				break;
+			case 'aktivitaetblock_edit':
+				build('./view/aktivitaetblock_edit.php');
+				break;
+			case 'validate_aktivitaetblock_edit':
+				build('validate_aktivitaetblock_edit.php');
+				break;
 
 			case 'aktivitaetsart':
 				build('./view/aktivitaetsart.php');

@@ -16,7 +16,7 @@
                 <br>
                 <p class="p_form">Aktivitätsart</p>
                 <select class="forms_dropdown" name="aktivitaetsart">
-                    '.getArt().'
+                    '.getArt($datensatz['art_id']).'
                 </select>
                 <br>
                 <p class="p_form">Treffpunkt</p>
@@ -24,9 +24,6 @@
                 <br>
                 <p class="p_form">Info</p>
                 <textarea class="forms_textarea" name="info" maxlength="500">'.$datensatz['info'].'</textarea>
-                <br>
-                <p class="p_form">Einschreiben</p>
-                '.getEinschreiben($datensatz['einschreiben']).'
                 <br>
                 <p class="p_form">Startzeit</p>
                 <input class="forms_date" type="date" name="startdate" value="'.returnDate($datensatz['startzeit']).'"/>
@@ -42,17 +39,6 @@
         <div>
         ';
 
-        function getArt(){
-            $allarts = getAllArts();
-            while($row = mysqli_fetch_assoc($allarts)){
-                if($row['id_art'] == $datensatz['art_id']){
-                    return '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
-                }
-                else{
-                    return '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-                }
-            }
-        }
 
         function getEinschreiben($einschreiben){
             if($einschreiben == '1'){

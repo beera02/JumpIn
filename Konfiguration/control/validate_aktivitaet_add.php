@@ -7,15 +7,21 @@
             if(strlen($_POST['aktivitaetsname']) <= 30 & strlen($_POST['treffpunkt']) <= 30){
                 if($_POST['aktivitaetsart'] != "null"){
                     $invalid = true;
-                    if($_POST['einschreiben'] == "true"){
+
+                    if(!empty($_POST['info'])){
+                        if(strlen($_POST['info']) <= 500){
+                            $_SESSION['info'] = $_POST['info'];
+                        }
+                    }
+                    $resultarray = getArtByName($_POST['aktivitaetsart']);
+                    if($resultarray['einschreiben'] == "1"){
                         $einschreiben = true;
                     }
                 }
             }
         }
         if($invalid){
-            if($einschreiben){
-                $_SESSION['info'] = "";
+            if($einschreiben == true){
                 $_SESSION['aktivitaetsname'] = $_POST['aktivitaetsname'];
                 $_SESSION['aktivitaetsart'] = $_POST['aktivitaetsart'];
                 $_SESSION['treffpunkt'] = $_POST['treffpunkt'];
@@ -23,26 +29,14 @@
                 $_SESSION['starttime'] = $_POST['starttime'];
                 $_SESSION['enddate'] = $_POST['enddate'];
                 $_SESSION['endtime'] = $_POST['endtime'];
-                if(!empty($_POST['info'])){
-                    if(strlen($_POST['info']) <= 500){
-                        $_SESSION['info'] = $_POST['info'];
-                        header('Location: aktivitaet_add_einschreiben');
-                    }
-                    else{
-                        header('Location: aktivitaet_add');
-                    }
-                }
-                else{
-                    header('Location: aktivitaet_add_einschreiben');
-                }
+                header('Location: aktivitaet_add_einschreiben');
             }
             else{
-                $validatedarray = validateActivity($_POST['aktivitaetsart'], $_POST['startdate'], $_POST['starttime'], $_POST['enddate'], $_POST['endtime'], NULL, NULL);
-                if(empty($_POST['info'])){
-                    insertActivity($_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], NULL);
+                if(isset($_SESSION['info'])){
+                    insertActivity($_POST['aktivitaetsname'], NULL, getArtIDByName($_POST['aktivitaetsart']), $_POST['treffpunkt'], NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), $_SESSION['info']);
                 }
                 else{
-                    insertActivity($_POST['aktivitaetsname'], $validatedarray['art_id'], $_POST['treffpunkt'], 0, NULL, NULL, $validatedarray['startzeit'], $validatedarray['endzeit'], $_POST['info']);
+                    insertActivity($_POST['aktivitaetsname'], NULL, getArtIDByName($_POST['aktivitaetsart']), $_POST['treffpunkt'], NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), NULL);
                 }
                 header('Location: aktivitaet_add_group');
             }

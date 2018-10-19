@@ -81,6 +81,12 @@ h2{
     height: 50px;
 }
 
+#p_header_login{
+    display: inline;
+    margin-right: 10px;
+    float: right;
+}
+
 .p_untertitel{
     margin: 10px 0;
     font-weight: 400;

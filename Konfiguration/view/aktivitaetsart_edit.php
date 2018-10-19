@@ -12,12 +12,31 @@
                         Aktivitätsart bearbeiten
                     </p>
                     <p class="p_form">Aktivitätsartname</p>
-                    <input class="forms_textfield" type="text" name="aktivitaetsartname" value="'.$datensatz['name'].'"/>
-		            <br>
+                    <input class="forms_textfield" type="text" name="aktivitaetsartname"  value="'.$datensatz['name'].'"/>
+                    <br>
+                    <p class="p_form">Einschreiben</p>
+                    '.getEinschreiben($datensatz['einschreiben']).'
+                    <br>
                     <input class="button_weiter" type="submit" name="submit_btn" value="Ändern"/>
                     <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
                 </form>
             </div>
         ';
+
+        function getEinschreiben($einschreiben){
+            if($einschreiben == '1'){
+                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true" checked>
+                    <label for="true">Ja</label>
+                    <input class="forms_radio" type="radio" name="einschreiben" value="false">
+                    <label for="false">Nein</label>';
+            }
+            else{
+                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true">
+                    <label for="true">Ja</label>
+                    <input class="forms_radio" type="radio" name="einschreiben" value="false" checked>
+                    <label for="false">Nein</label>';
+            }
+
+        }
     ?>
 </div>

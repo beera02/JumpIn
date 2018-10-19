@@ -29,12 +29,6 @@
             <p class="p_form">Info</p>
 		    <textarea class="forms_textarea" name="info" maxlength="500"></textarea>
             <br>
-            <p class="p_form">Einschreiben</p>
-            <input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true">
-            <label for="true">Ja</label>
-            <input class="forms_radio" type="radio" name="einschreiben" value="false" checked>
-            <label for="false">Nein</label>
-            <br>
             <p class="p_form">Startzeit</p>
             <input class="forms_date" type="date" name="startdate"/>
             <input class="forms_time" type="time" name="starttime"/>

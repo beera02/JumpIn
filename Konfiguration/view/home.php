@@ -11,19 +11,11 @@
                 </p>
             </div>
         </a>
-        <a href="aktivitaetsart">
+        <a href="aktivitaeten">
             <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./image/aktivitaetsart.png" alt="wandermensch">
+                <img class="img_einstellungsbox" src="./image/aktivitaetblock.png" alt="fussball">
                 <p class="p_einstellungsbox">
-                    Aktivitätsart
-                </p>
-            </div>
-        </a>
-        <a href="aktivitaet">
-            <div class="einstellungsbox">
-                <img class="img_einstellungsbox" src="./image/aktivitaet.png" alt="kalender">
-                <p class="p_einstellungsbox">
-                    Aktivität
+                    Aktivitäten
                 </p>
             </div>
         </a>

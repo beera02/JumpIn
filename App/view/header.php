@@ -17,6 +17,9 @@ if($_SESSION['benutzer']){
         <a href="home">
             <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
         </a>
+        <p id="p_header_login">
+            Hallo, '.getUserprenameByUsername($_SESSION['benutzer']).'!
+        </p>
     </div>';
 }
 else{

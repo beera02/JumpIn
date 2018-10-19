@@ -4,33 +4,33 @@
     ?>
     <div class="div_form">
         <p class="p_form_title">
-            Aktivitaetsart zum bearbeiten auswählen
+            Aktivitätsblock zum bearbeiten auswählen
         </p>
         <table>
             <tr>
-                <th>Aktivitätsartname</th>
-                <th>Einschreiben</th>
+                <th>Aktivitätsblockname</th>
+                <th>Aktivitätsart</th>
                 <th></th>
             </tr>
             <?php
-                $allarts = getAllArts();
-                while($row = mysqli_fetch_assoc($allarts)){
+                $allactivitiyentities = getAllActivityEntities();
+                while($row = mysqli_fetch_assoc($allactivitiyentities)){
                     echo '
                         <tr>
-                            <form action="validate_aktivitaetsart_edit_choice" method="post">
+                            <form action="validate_aktivitaetblock_edit_choice" method="post">
                                 <th>
                                     '.$row['name'].'
                                 </th>
                                 <th>
-                                    '.getJaNein($row['einschreiben']).'
+                                    '.getArtNameByID($row['art_id']).'
                                 </th>
                                 <th>
-                                    <input type="hidden" name="id_art" value="'.$row['id_art'].'"/>
+                                    <input type="hidden" name="id_aktivitaetblock" value="'.$row['id_aktivitaetblock'].'"/>
                                     <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten"/>
                                     <input class="button_delete" type="submit" name="submit_btn" value="Löschen"/>
                                 </th>
                             </form>  
-                        </tr>     
+                        </tr>  
                     ';
                 }
             ?>

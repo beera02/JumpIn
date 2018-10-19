@@ -34,21 +34,37 @@ CREATE TABLE BENUTZER_GRUPPE(
 CREATE TABLE ART(
     id_art INT AUTO_INCREMENT,
     name VARCHAR(30),
+    einschreiben TINYINT,
     PRIMARY KEY (id_art)
+);
+
+CREATE TABLE AKTIVITAETBLOCK(
+    id_aktivitaetblock INT AUTO_INCREMENT,
+    name VARCHAR(30),
+    art_id INT,
+    einschreibezeit DATETIME,
+    PRIMARY KEY (id_aktivitaetblock),
+    FOREIGN KEY (art_id)
+        REFERENCES ART(id_art)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE AKTIVITAET(
     id_aktivitaet INT AUTO_INCREMENT,
     aktivitaetsname VARCHAR(30),
+    aktivitaetblock_id INT,
     art_id INT,
     treffpunkt VARCHAR(30),
-    einschreiben TINYINT,
     anzahlteilnehmer INT,
-    einschreibezeit DATETIME,
     startzeit DATETIME,
     endzeit DATETIME,
     info VARCHAR(500),
     PRIMARY KEY (id_aktivitaet),
+    FOREIGN KEY (aktivitaetblock_id)
+        REFERENCES AKTIVITAETBLOCK(id_aktivitaetblock)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (art_id)
         REFERENCES ART(id_art)
         ON DELETE CASCADE

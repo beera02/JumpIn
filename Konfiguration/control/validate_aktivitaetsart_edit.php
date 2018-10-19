@@ -18,8 +18,17 @@
             } 
         }
         if($invalid){
-            updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname']);
-            header('Location: aktivitaetsart_edit_choice');
+            if($_POST['einschreiben'] == "true"){
+                updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname'], 1);
+                header('Location: aktivitaetsart_edit_choice');
+            }
+            else if($_POST['einschreiben'] == "false"){
+                updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname'], 0);
+                header('Location: aktivitaetsart_edit_choice');
+            }
+            else{
+                header('Location: aktivitaetsart_edit');
+            }
         }
         else{
             header('Location: aktivitaetsart_edit');
