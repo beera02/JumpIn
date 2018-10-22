@@ -14,7 +14,7 @@
                 <p class="p_form">Aktivitätsblock</p>
                 <select class="forms_dropdown" name="aktivitaetblock">
                     <option value="null">-</option>
-                    '.getActivityentities($datensatz['aktivitaetsname']).'
+                    '.getActivityentities($datensatz['aktivitaetblock_id'], getArtIDByName($_SESSION['aktivitaetsart'])).'
                 </select>
                 <p class="p_form">Anzahl Teilnehmer</p>
                 <input class="forms_textfield" type="text" name="anzahlteilnehmer" value="'.$datensatz['anzahlteilnehmer'].'"/>
@@ -24,18 +24,17 @@
         <div>
         ';
         
-        function getActivityentities($id){
+        function getActivityentities($activityentityid, $artid){
             $allarts = getAllActivityEntities();
             $result = '';
             while($row = mysqli_fetch_assoc($allarts)){
-                if(getArtIDByName($_SESSION['aktivitaetsart']) == $row['art_id']){
-                    if($id == $row['art_id']){
+                if($row['art_id'] == $artid){
+                    if($activityentityid == $row['id_aktivitaetblock']){
                         $result .= '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
                     }
                     else{
                         $result .= '<option value="'.$row['name'].'">'.$row['name'].'</option>';
                     }
-
                 }
             }
             return $result;
