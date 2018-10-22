@@ -4,12 +4,19 @@
 }
 html{
     font-family: Frutiger;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 body{
     margin: 0;
+    height: 100%;
+    width: 100%;
 }
 main{
-    margin: 10px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 header{
     position: relative;
@@ -19,7 +26,9 @@ header{
 }
 h2{
     font-weight: 900;
+    font-size: 18pt;
     margin: 15px 0;
+    margin-left: 15px;
 }
 .div_nav_open{
     text-align: center;
@@ -80,6 +89,9 @@ h2{
 .img_header_two{
     height: 50px;
 }
+#div_form{
+    margin-left: 15px;
+}
 
 #p_header_login{
     display: inline;
@@ -88,7 +100,7 @@ h2{
 }
 
 .p_untertitel{
-    margin: 10px 0;
+    margin: 10px 0 10px 15px;;
     font-weight: 400;
 }
 .p_form{
@@ -137,4 +149,84 @@ h2{
 .div_buttons{
     float: right;
     margin-right: 10px; 
+}
+.a_section{
+    text-decoration: none;
+    height: 40%;
+    width: 100%;
+}
+.section{
+    position: relative;
+    height: 40%;
+    width: calc(100% - 4px);
+    left: 0;
+    background-color: #bcb1a3;
+    text-align: center;
+    border: 2px solid #584125;
+}
+.sectionWanderung{
+    background-image: url('../image/wanderung.JPG');
+    background-size: cover;
+    background-position: center center;
+}
+.sectionSport{
+    background-image: url('../image/sport.JPG');
+    background-size: cover;
+}
+.sectionWochenplan{
+    background-image: url('../image/wochenplan.jpg');
+    background-size: cover;
+}
+.sectionSteckbrief{
+    background-image: url('../image/steckbrief.png');
+    background-size: cover;
+}
+.sectionFeedback{
+    background-image: url('../image/feedback.jpg');
+    background-size: cover;
+}
+.sectionNotfall{
+    background-image: url('../image/notfall.png');
+    background-size: cover;
+}
+.p_section{
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 5%;
+    font-size: 18pt;
+    font-weight: 900;
+    color: #584125;
+    width: 160px;
+    margin: 0;
+    padding: 10px 0;
+    background-color: #FFCC00;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    word-break:break-all;
+    word-wrap: break-word;
+    width: 85%;
+    margin: 20px;
+    font-size: 12pt;
+    color: #584125;
+}
+td, th {
+    border: 2px solid #ebe4d1;
+    text-align: left;
+    font-weight: 500;
+    padding: 10px;
+}
+
+tr:nth-child(even){
+    background-color: #bcb1a3;
+}
+tr:nth-child(even):hover{
+    background-color: #806f60;
+    color: black;
+}
+tr:hover {
+    background-color: #bcb1a3;
 }

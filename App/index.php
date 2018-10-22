@@ -19,6 +19,18 @@
 			case 'validate_logout':
 				build('validate_logout.php');
 				break;
+			case 'notfall':
+				build('./view/notfall.php');
+				break;
+			case 'steckbrief':
+				build('./view/steckbrief.php');
+				break;
+			case 'validation_steckbrief_choice':
+				build('validation_steckbrief_choice.php');
+				break;
+			case 'steckbrief_add':
+				build('./view/steckbrief_add.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

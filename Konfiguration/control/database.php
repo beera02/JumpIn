@@ -180,6 +180,14 @@
             return $resultarray;
         }
 
+        function getActivityByActivityentityID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET WHERE aktivitaetblock_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
         function getAllActivityGroupsByActivityID($id){
             $db = getDatabase();
             $sql = ("SELECT * FROM AKTIVITAET_GRUPPE WHERE aktivitaet_id = '$id'");
@@ -203,6 +211,14 @@
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray;
+        }
+
+        function getCharacteristicsByUserID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM STECKBRIEF WHERE benutzer_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
         }
 
         function getAllEmergencyCategories(){
@@ -281,6 +297,14 @@
             $resultstring = $resultarray['name'];
             $db->close();
             return $resultstring;
+        }
+
+        function getActivityentitiesByArtID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK WHERE art_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
         }
     
         function insertUser($username, $password, $name, $prename){

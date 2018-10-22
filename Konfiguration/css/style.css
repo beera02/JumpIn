@@ -318,15 +318,18 @@ input[type='radio'] {
 table{
     border-collapse: collapse;
     border-spacing: 0;
+    table-layout: fixed;
+    word-break:break-all;
+    word-wrap: break-word;
     width: 95%;
     margin: 20px;
     font-size: 18pt;
-    font-weight: unset;
     color: #584125;
 }
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
+    font-weight: 500;
     padding: 8px;
 }
 
