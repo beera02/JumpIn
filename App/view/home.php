@@ -34,7 +34,7 @@
         ';
         $i++;
         echo '
-            <a class="a_section" href="validation_steckbrief_choice">
+            <a class="a_section" href="steckbrief_choice">
                 <section class="section sectionSteckbrief" id="section'.$i.'">
                     <p class="p_section">Steckbrief</p>
                 </section>
@@ -57,5 +57,8 @@
             </a>
         ';
         $i++;
+    }
+    else{
+        $_SESSION['validfiles'] = array("home", "login", "validate_login");
     }
 ?>

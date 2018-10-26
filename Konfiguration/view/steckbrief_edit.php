@@ -3,7 +3,7 @@
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
         $idsteckbrief = intval($_SESSION['id_steckbriefkategorie']);
-        $datensatz = getCharacteristicsCategoryByID($idsteckbrief);
+        $datensatz = getCharacteristicsCategoriesByID($idsteckbrief);
 
         echo '
             <div class="div_form">

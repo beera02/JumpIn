@@ -9,9 +9,7 @@
 		<input class="forms_login" type="password" name="passwort" required/>
         <br>
         <div class="separation_line"></div>
-        <div class="div_buttons">
-            <input id="button_abbrechen" type="submit" value="Abbrechen"/>
-		    <input id="button_login" type="submit" value="Login"/>
-        </div>
+        <input class="button_zurück" type="submit" value="Abbrechen"/>
+		<input class="button_weiter" type="submit" value="Login"/>
 	</div>
 </form>

@@ -204,7 +204,15 @@
             return $result;
         }
 
-        function getCharacteristicsCategoryByID($id){
+        function getCharacteristicsCategoryByObligation(){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM STECKBRIEFKATEGORIE WHERE obligation = 1");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getCharacteristicsCategoriesByID($id){
             $db = getDatabase();
             $sql = ("SELECT * FROM STECKBRIEFKATEGORIE WHERE id_steckbriefkategorie = '$id'");
             $result = $db->query($sql);
@@ -306,6 +314,14 @@
             $db->close();
             return $result;
         }
+
+        function getCharacteristicsByObligationAndID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM steckbrief AS s JOIN steckbriefkategorie AS sk ON s.steckbriefkategorie_id = sk.id_steckbriefkategorie WHERE sk.obligation = '0' AND s.benutzer_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();
@@ -362,6 +378,7 @@
             $preparedquery = $db->prepare("INSERT INTO STECKBRIEFKATEGORIE (id_steckbriefkategorie, name, obligation, einzeiler) VALUES (NULL,?,?,?)");
             $preparedquery->bind_param("sii", $name, $obligate, $oneliner);
             $preparedquery->execute();
+            return $db->insert_id;
             $db->close();
         }
 
@@ -394,6 +411,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO AKTIVITAETBLOCK (id_aktivitaetblock, name, art_id, einschreibezeit) VALUES (NULL,?,?,?)");
             $preparedquery->bind_param("sis", $name, $artid, $writeintime);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertCharacteristics($characteristicsid, $userid, $answer){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO STECKBRIEF (steckbriefkategorie_id, benutzer_id, antwort) VALUES (?,?,?)");
+            $preparedquery->bind_param("iis", $characteristicsid, $userid, $answer);
             $preparedquery->execute();
             $db->close();
         }
@@ -536,6 +561,16 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE AKTIVITAETBLOCK SET name = ?, art_id = ?, einschreibezeit = ? WHERE id_aktivitaetblock = '$id'");
             $preparedquery->bind_param("sis", $name, $artid, $writeintime);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateUserPictureByID($id, $image){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE BENUTZER SET bild = ? WHERE id_benutzer = '$id'");
+            $null = NULL;
+            $preparedquery->bind_param("b", $null);
+            $preparedquery->send_long_data(0, $image);
             $preparedquery->execute();
             $db->close();
         }

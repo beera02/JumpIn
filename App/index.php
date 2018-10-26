@@ -25,11 +25,20 @@
 			case 'steckbrief':
 				build('./view/steckbrief.php');
 				break;
-			case 'validation_steckbrief_choice':
-				build('validation_steckbrief_choice.php');
+			case 'steckbrief_choice':
+				build('./view/steckbrief_choice.php');
 				break;
 			case 'steckbrief_add':
 				build('./view/steckbrief_add.php');
+				break;
+			case 'validate_steckbrief_add':
+				build('validate_steckbrief_add.php');
+				break;
+			case 'steckbrief_kategorie_add':
+				build('./view/steckbrief_kategorie_add.php');
+				break;
+			case 'validate_steckbrief_kategorie_add':
+				build('validate_steckbrief_kategorie_add.php');
 				break;
 			default:
 				build('./view/home.php');

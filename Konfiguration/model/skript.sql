@@ -14,6 +14,7 @@ CREATE TABLE BENUTZER(
     passwort VARCHAR(250),
     name VARCHAR(50),
     vorname VARCHAR(50),
+    bild MEDIUMBLOB,
     PRIMARY KEY (id_benutzer)
 );
 
@@ -164,7 +165,7 @@ CREATE TABLE FEEDBACKBOGEN(
 );
 
 INSERT INTO BENUTZER VALUES
-(NULL, "admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus");
+(NULL, "admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus", NULL);
 
 INSERT INTO GRUPPE VALUES
 (NULL, "admin");
