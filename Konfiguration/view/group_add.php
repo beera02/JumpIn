@@ -9,6 +9,9 @@
             </p>
             <p class="p_form">Gruppenname</p>
             <input class="forms_textfield" type="text" name="gruppenname"/>
+            <br>
+            <p class="p_form">Level</p>
+            <input class="forms_textfield" type="text" name="level"/>
 		    <br>
             <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen"/>
             <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>

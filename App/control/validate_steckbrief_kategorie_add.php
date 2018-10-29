@@ -13,7 +13,7 @@
         }
         if($validated == true){
             $id = insertCharacteristicsCategory($_POST['steckbriefkategoriename'], 0, $einzeiler);
-            insertCharacteristics($id, getUserIDByUsername($_SESSION['benutzer']), $_POST['antwort']);
+            insertCharacteristics($id, getUserIDByUsername($_SESSION['benutzer_app']), $_POST['antwort']);
             header('Location: steckbrief');
         }
         else{

@@ -2,8 +2,8 @@
     $invalid = false;
 
     if($_POST['submit_btn'] == "Ändern"){
-        if(!empty($_POST['gruppenname'])){
-            if(strlen($_POST['gruppenname']) <= 30){
+        if(!empty($_POST['gruppenname']) & !empty($_POST['level'])){
+            if(strlen($_POST['gruppenname']) <= 30 & ctype_digit($_POST['level'])){
                 $result = getGroupByID($_SESSION['id_gruppe']);
                 
                 if($result['name'] != $_POST['gruppenname']){
@@ -18,7 +18,7 @@
             } 
         }
         if($invalid){
-            updateGroupByID($_SESSION['id_gruppe'], $_POST['gruppenname']);
+            updateGroupByID($_SESSION['id_gruppe'], $_POST['gruppenname'], $_POST['level']);
             header('Location: group_edit_choice');
         }
         else{

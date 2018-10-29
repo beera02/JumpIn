@@ -1,5 +1,5 @@
 <?php
-if($_SESSION['benutzer']){
+if($_SESSION['benutzer_app']){
     echo '
     <header>
         <nav>
@@ -18,7 +18,7 @@ if($_SESSION['benutzer']){
             <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
         </a>
         <p id="p_header_login">
-            Hallo, '.getUserprenameByUsername($_SESSION['benutzer']).'!
+            Hallo, '.getUserprenameByUsername($_SESSION['benutzer_app']).'!
         </p>
     </div>';
 }

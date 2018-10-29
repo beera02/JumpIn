@@ -1,5 +1,5 @@
 <?php
-    if($_SESSION['benutzer']){
+    if($_SESSION['benutzer_app']){
         $arts = getAllArts();
         $i = 1;
         while($row1 = mysqli_fetch_assoc($arts)){

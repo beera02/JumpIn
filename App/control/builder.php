@@ -14,7 +14,7 @@
 				?> 
 				<main>
 					<?php
-						if($_SESSION['benutzer']){
+						/*if($_SESSION['benutzer_app']){
 							if(inSessionInvalid($path)){
 								header('Location: home');
 							}
@@ -23,7 +23,7 @@
 							if(!inSessionValid($path)){
 								header('Location: home');
 							}
-						}
+						}*/
 						require_once $path; 
 					?> 
 				</main>

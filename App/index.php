@@ -40,6 +40,9 @@
 			case 'validate_steckbrief_kategorie_add':
 				build('validate_steckbrief_kategorie_add.php');
 				break;
+			case 'steckbrief_view':
+				build('./view/steckbrief_view.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

@@ -135,6 +135,8 @@ h2{
     background-color: #bcb1a3;
     text-align: center;
     border: 2px solid #584125;
+    background-image: url('../image/aktivität_default.jpg');
+    background-size: cover;
 }
 .sectionWanderung{
     background-image: url('../image/wanderung.JPG') !important;
@@ -248,4 +250,98 @@ tr:hover {
 .button_zurück:hover{
     background-color: #584125;
     color: #ebe4d1
+}
+.button_steckbrief{
+    height: 130px;
+    border-bottom: 1px solid #ebe4d1;
+    border-top: 1px solid #ebe4d1;
+    border-right: none;
+    background-color: white;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: -1px;
+    float: left;
+    cursor: pointer;
+}
+.button_steckbrief:hover{
+    background-color: #ebe4d1;
+}
+.div_steckbrief_left{
+    width: 140px;
+    text-align: center;
+    float: left;
+}
+.div_steckbrief_right{
+    height: 130px;
+    margin-left: 140px;
+    overflow: auto;
+}
+.p_steckbrief_name{
+    font-size: 16pt;
+    margin: 35px 0 5px 20px;
+    text-align: left;
+}
+.p_steckbrief_gruppe{
+    font-size: 12pt;
+    margin: 0 0 0 20px;
+    text-align: left;
+}
+.img_steckbrief{
+    height: 120px;
+    width: 120px;
+    margin-top: 5px;
+    border-radius: 50%;
+    line-height: 130px;
+    text-align: center;
+}
+.img_steckbrief_details{
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    margin: 5px 0 0 20px;
+}
+.forms_file_details{
+    position: absolute;
+    width: calc(80% - 80px);
+    height: 30px;
+    font-size: 8pt;
+    border-radius: 3px;
+    border: 2px solid #806f60;
+    margin: 28px 0 0 5px;
+}
+.button_hinzufügen{
+    margin: 0 calc(100% - 210px) 20px 0;
+    height: 30px;
+    width: 90px;
+    font-size: 9pt;
+    border-radius: 5px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+.button_hinzufügen:hover{
+    background-color: #FFCC00;
+    color: #584125; 
+}
+.p_kategorien{
+    width: 100px;
+    float: left;
+    margin: 5px 0 20px 20px;;
+    font-weight: 400;
+}
+.p_details{
+    font-size: 15pt;
+    margin: 0 calc(100% - 80% - 20px) 10px 20px;;
+    font-weight: 400;
+}
+.img_steckbrief_details_dontknow{
+    position: absolute;
+    left: 50%;
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    margin: 5px 0 0 -90px;
+}
+.space_blocker{
+    padding-top: 200px;
 }

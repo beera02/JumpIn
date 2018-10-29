@@ -11,6 +11,14 @@
             $db->close();
             return $result; 
         }
+
+        function getAllUserOrdered(){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM BENUTZER ORDER BY vorname");
+            $result = $db->query($sql);
+            $db->close();
+            return $result; 
+        }
     
         function getUserIDByUsername($username){
             $db = getDatabase();
@@ -99,6 +107,18 @@
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray['id_gruppe'];
+        }
+
+        function getGroupByUsernameAndLevel($name){
+            $db = getDatabase();
+            $sql = ("SELECT g.name AS name FROM GRUPPE AS g
+                JOIN benutzer_gruppe AS bg ON bg.gruppe_id = g.id_gruppe
+                JOIN benutzer AS b ON b.id_benutzer = bg.benutzer_id
+                WHERE b.benutzername = '$name' ORDER BY g.level DESC LIMIT 1");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
         }
     
         function getAllUserGroupsByUserID($userid){
@@ -228,6 +248,25 @@
             $db->close();
             return $result;
         }
+ 
+        function getCharacteristicsByUserIDAndCharacteristicsID($userid, $characteristicsid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM STECKBRIEF WHERE benutzer_id = '$userid' AND steckbriefkategorie_id = '$characteristicsid'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getCharacteristicsByUserIDAndObligation($id){
+            $db = getDatabase();
+            $sql = ("SELECT sk.id_steckbriefkategorie AS id_steckbriefkategorie, sk.name AS name, sk.obligation AS obligation, sk.einzeiler AS einzeiler, s.antwort AS antwort FROM STECKBRIEFKATEGORIE AS sk 
+                JOIN STECKBRIEF AS s ON s.steckbriefkategorie_id=sk.id_steckbriefkategorie 
+                WHERE s.benutzer_id = '$id' AND sk.obligation = 0");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
 
         function getAllEmergencyCategories(){
             $db = getDatabase();
@@ -332,10 +371,10 @@
             $db->close();
         }
 
-        function insertGroup($groupname){
+        function insertGroup($groupname, $level){
             $db = getDatabase();
-            $preparedquery = $db->prepare("INSERT INTO GRUPPE (id_gruppe, name) VALUES (NULL,?)");
-            $preparedquery->bind_param("s", $groupname);
+            $preparedquery = $db->prepare("INSERT INTO GRUPPE (id_gruppe, name, level) VALUES (NULL,?,?)");
+            $preparedquery->bind_param("si", $groupname, $level);
             $preparedquery->execute();
             $db->close();
         }
@@ -509,10 +548,10 @@
             $db->close();
         }
 
-        function updateGroupByID($groupid, $groupname){
+        function updateGroupByID($groupid, $groupname, $level){
             $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE GRUPPE SET name = ? WHERE id_gruppe = '$groupid'");
-            $preparedquery->bind_param("s", $groupname);
+            $preparedquery = $db->prepare("UPDATE GRUPPE SET name = ?, level = ? WHERE id_gruppe = '$groupid'");
+            $preparedquery->bind_param("si", $groupname, $level);
             $preparedquery->execute();
             $db->close();
         }
@@ -577,14 +616,14 @@
         
         function resetJumpin(){
             $db = getDatabase();
-            $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('admin','coach')";
+            $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('Admin','Coach','Informatiker','Mediamatiker','Informatiker EFZ','Informatiker PiBS','Informatiker WayUp','Hilfscoach')";
             mysqli_query($db,$sql1);
             $sql2 = "DELETE FROM BENUTZER
                 WHERE id_benutzer NOT IN(
                     SELECT benutzer_id from BENUTZER_GRUPPE
                     WHERE gruppe_id IN(
                         SELECT id_gruppe FROM GRUPPE
-                        WHERE name IN ('coach','admin')
+                        WHERE name IN ('Coach','Admin')
                     )
                 )
             ;";

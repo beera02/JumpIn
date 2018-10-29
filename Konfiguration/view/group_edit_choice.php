@@ -9,6 +9,7 @@
         <table>
             <tr>
                 <th>Gruppenname</th>
+                <th>Level</th>
                 <th></th>
             </tr>
             <?php
@@ -20,6 +21,9 @@
                                 <form action="validate_group_edit_choice" method="post">
                                     <th>
                                         '.$row['name'].'
+                                    </th>
+                                    <th>
+                                        '.$row['level'].'
                                     </th>
                                     <th>
                                         <input class="button_weiter_table" type="submit" name="submit_btn" value="Bearbeiten" disabled/>
@@ -35,6 +39,9 @@
                                 <form action="validate_group_edit_choice" method="post">
                                     <th>
                                         '.$row['name'].'
+                                    </th>
+                                    <th>
+                                        '.$row['level'].'
                                     </th>
                                     <th>
                                         <input type="hidden" name="id_gruppe" value="'.$row['id_gruppe'].'"/>

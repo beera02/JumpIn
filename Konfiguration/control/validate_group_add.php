@@ -2,8 +2,8 @@
     $invalid = false;
 
     if($_POST['submit_btn'] == "Erstellen"){
-        if(!empty($_POST['gruppenname'])){
-            if(strlen($_POST['gruppenname']) <= 30){              
+        if(!empty($_POST['gruppenname']) & !empty($_POST['level'])){
+            if(strlen($_POST['gruppenname']) <= 30 & ctype_digit($_POST['level'])){            
                 $dbgroupname = getGroupnameByGroupname($_POST['gruppenname']);
     
 	            if ($dbgroupname != $_POST['gruppenname']){
@@ -12,7 +12,7 @@
             } 
         }
         if($invalid){
-            insertGroup($_POST['gruppenname']);
+            insertGroup($_POST['gruppenname'], $_POST['level']);
             header('Location: group');
         }
         else{

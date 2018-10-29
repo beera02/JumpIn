@@ -24,9 +24,6 @@
                         if(filesize($_FILES['bild']['tmp_name']) < 8388608){
                             $validated = true;
                         }
-                        else{
-                            var_dump($_FILES['bild']['tmp_name']);
-                        }
                     }
                 }
             }
@@ -35,7 +32,7 @@
             var_dump($_FILES['bild']['name']);
             var_dump($_FILES['bild']['tmp_name']);
             $content = file_get_contents($_FILES['bild']['tmp_name']);
-            $userid = getUserIDByUsername($_SESSION['benutzer']);
+            $userid = getUserIDByUsername($_SESSION['benutzer_app']);
             updateUserPictureByID($userid, $content);
             foreach($_POST['steckbrief'] as $validate){
                 $validatedarray = explode(' ',$validate);

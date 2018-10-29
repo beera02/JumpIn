@@ -8,7 +8,7 @@
         if($row['einzeiler'] == "1"){
             echo '
                 <p class="p_form">'.$row['name'].'</p>
-                <input class="forms_login" type="text" name="'.$row['id_steckbriefkategorie'].'" required/>
+                <input class="forms_login" type="text" name="'.$row['id_steckbriefkategorie'].'"/>
                 <input type="hidden" name="steckbrief[]" value="'.$row['name'].' '.$row['id_steckbriefkategorie'].'"/>
                 <br>
             ';

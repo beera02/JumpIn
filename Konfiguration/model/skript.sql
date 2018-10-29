@@ -5,6 +5,7 @@ USE JumpIN;
 CREATE TABLE GRUPPE(
     id_gruppe INT AUTO_INCREMENT,
     name VARCHAR(30),
+    level INT,
     PRIMARY KEY (id_gruppe)
 );
 
@@ -165,13 +166,17 @@ CREATE TABLE FEEDBACKBOGEN(
 );
 
 INSERT INTO BENUTZER VALUES
-(NULL, "admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus", NULL);
+(NULL, "Admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus", NULL);
 
 INSERT INTO GRUPPE VALUES
-(NULL, "admin");
-
-INSERT INTO GRUPPE VALUES
-(NULL, "coach");
+(NULL, "Admin", 0),
+(NULL, "Coach", 1),
+(NULL, "Informatiker", 1),
+(NULL, "Mediamatiker", 1),
+(NULL, "Informatiker EFZ", 2),
+(NULL, "Informatiker PiBS", 2),
+(NULL, "Informatiker WayUp", 2),
+(NULL, "Hilfscoach", 1);
 
 INSERT INTO BENUTZER_GRUPPE VALUES
 (1,1);

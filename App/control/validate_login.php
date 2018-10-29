@@ -11,8 +11,10 @@
     }
     
     if($invalid){
-        $_SESSION['benutzer'] = $_POST['benutzername'];
+        $_SESSION['benutzer_app'] = $_POST['benutzername'];
         $_SESSION['invalidfiles'] = array("steckbrief_add", "validate_steckbrief_add", "steckbrief_kategorie_add", "validate_steckbrief_kategorie_add", "steckbrief");
+        $_SESSION['notUserUsers'] = array("admin");
+        $_SESSION['notGroupGroups'] = array("admin", "coach");
         header('Location: home');
     }
     else{

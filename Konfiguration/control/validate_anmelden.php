@@ -9,7 +9,7 @@
             $gruppenabfrage = getGroupnameByUsername($_POST['benutzername']);
             
             while ($gruppenabfragearray = mysqli_fetch_assoc($gruppenabfrage)) {
-                if($gruppenabfragearray["gruppenname"] == "admin"){
+                if(strtolower($gruppenabfragearray["gruppenname"]) == "admin"){
                     $invalid = true;
                 }
             }
