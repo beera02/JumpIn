@@ -249,7 +249,7 @@ tr:hover {
 }
 .button_zurück:hover{
     background-color: #584125;
-    color: #ebe4d1
+    color: #ebe4d1;
 }
 .button_steckbrief{
     height: 130px;
@@ -310,18 +310,18 @@ tr:hover {
     margin: 28px 0 0 5px;
 }
 .button_hinzufügen{
-    margin: 0 calc(100% - 210px) 20px 0;
+    margin: 0 calc(100% - 210px) 20px 20px;
     height: 30px;
-    width: 90px;
+    width: 150px;
     font-size: 9pt;
     border-radius: 5px;
-    background-color: #584125;
-    color: #ebe4d1; 
+    background-color: #ebe4d1;
+    color: #584125; 
     border: 1px solid #584125;
 }
 .button_hinzufügen:hover{
-    background-color: #FFCC00;
-    color: #584125; 
+    background-color: #584125;
+    color: #ebe4d1;
 }
 .p_kategorien{
     width: 100px;
@@ -331,8 +331,9 @@ tr:hover {
 }
 .p_details{
     font-size: 15pt;
-    margin: 0 calc(100% - 80% - 20px) 10px 20px;;
+    margin: 0 calc(100% - 80% - 20px) -20px 20px;
     font-weight: 400;
+    word-wrap:break-word;
 }
 .img_steckbrief_details_dontknow{
     position: absolute;
@@ -341,7 +342,71 @@ tr:hover {
     width: 180px;
     border-radius: 50%;
     margin: 5px 0 0 -90px;
+    line-height: 180px;
+    text-align: center;
+    font-size: 15pt;
 }
 .space_blocker{
     padding-top: 200px;
+}
+.button_löschen{
+    margin: 0 calc(100% - 80% - 30px) 0 0;
+    height: 35px;
+    width: 30%;
+    font-size: 9pt;
+    border-radius: 5px;
+    background-color: #ebe4d1;
+    color: #584125; 
+    border: 1px solid #584125;
+    float: right;
+}
+.button_löschen:hover{
+    background-color: red;
+    color: #584125; 
+}
+.forms_login_löschen{
+    height: 30px;
+    width: 50%;
+    margin: 0 0 10px 20px;
+    font-size: 12pt;
+    background: #f5f1e8;
+    border: 2px solid #806f60;
+}
+.forms_textarea_löschen{
+    height: 100px;
+    width: 50%;
+    margin: 0 0 10px 20px;
+    font-size: 12pt;
+    background: #f5f1e8;
+    border: 2px solid #806f60;
+    resize: none;
+    font-family: Frutiger;
+}
+
+.steckbrief_dropdown{
+    width: 50%;
+    margin: 0 10px 10px 20px;
+    font-size: 14pt;
+    background: #f5f1e8;
+    border: 2px solid #806f60;
+    font-weight: 400;
+}
+#p_steckbrief_filter{
+    margin: 5px 0 0 20px;
+    font-size: 12pt;
+}
+#button_filter{
+    float: right;
+    margin: 0 calc(45% - 110px) 0 0;
+    height: 30px;
+    width: 90px;
+    font-size: 9pt;
+    border-radius: 5px;
+    background-color: #584125;
+    color: #ebe4d1; 
+    border: 1px solid #584125;
+}
+#button_filter:hover{
+    background-color: #FFCC00;
+    color: #584125; 
 }

@@ -109,6 +109,16 @@
             return $resultarray['id_gruppe'];
         }
 
+        function getUserByGroupID($id){
+            $db = getDatabase();
+            $sql = ("SELECT b.id_benutzer AS id_benutzer, b.benutzername AS benutzername, b.name AS name, b.vorname AS vorname, b.bild AS bild FROM BENUTZER AS b
+                JOIN BENUTZER_GRUPPE AS bg ON bg.benutzer_id=b.id_benutzer
+                WHERE bg.gruppe_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
         function getGroupByUsernameAndLevel($name){
             $db = getDatabase();
             $sql = ("SELECT g.name AS name FROM GRUPPE AS g
@@ -538,6 +548,13 @@
             mysqli_query($db,$sql);
             $db->close();
         }
+
+        function deleteCharacteristicsCategoryByID($id){
+            $db = getDatabase();
+            $sql = "DELETE FROM STECKBRIEFKATEGORIE WHERE id_steckbriefkategorie = '$id'";
+            mysqli_query($db,$sql);
+            $db->close();
+        }
     
         function updateUserByID($userid, $password, $username, $name, $prename){
             $db = getDatabase();
@@ -610,6 +627,14 @@
             $null = NULL;
             $preparedquery->bind_param("b", $null);
             $preparedquery->send_long_data(0, $image);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function updateCharacteristics($characteristicsid, $userid, $answer){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("UPDATE STECKBRIEF SET antwort = ? WHERE steckbriefkategorie_id = '$characteristicsid' AND benutzer_id = '$userid'");
+            $preparedquery->bind_param("s", $answer);
             $preparedquery->execute();
             $db->close();
         }

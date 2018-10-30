@@ -1,8 +1,8 @@
 <h2>Erzähle noch mehr über dich!</h2>
-<p class="p_untertitel">Erstelle deine persönliche Steckbriefkategorie und nutze die Chance noch mehr über dich zu erzählen.</p>
+<p class="p_untertitel">Erstelle eine persönliche Steckbriefkategorie und nutze die Chance noch mehr über dich zu erzählen.</p>
 <form action="validate_steckbrief_kategorie_add" method="post">
     <p class="p_form">Steckbriefkategoriename</p>
-    <input class="forms_login" type="text" name="steckbriefkategoriename" placeholder="Wohnort" required/>
+    <input class="forms_login" type="text" name="steckbriefkategoriename" placeholder="Wohnort" pattern="[a-zA-ZäöüÄÖÜß]{1-30}" required/>
     <br>
     <p class="p_form">Einzeilige Antwort</p>
     <div class="div_margin-left">

@@ -8,10 +8,8 @@
                 $y = 0;
                 foreach($_POST['steckbrief'] as $validate){
                     $x++;
-                    $validatedarray = explode(' ',$validate);
-                    $id = $validatedarray[1];
-                    if(!empty($_POST[''.$id.''])){
-                        if(strlen($_POST[''.$id.'']) <= 300){
+                    if(!empty($_POST[''.$validate.''])){
+                        if(strlen($_POST[''.$validate.'']) <= 300){
                             $y++;
                         }
                     }
@@ -35,9 +33,7 @@
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
             updateUserPictureByID($userid, $content);
             foreach($_POST['steckbrief'] as $validate){
-                $validatedarray = explode(' ',$validate);
-                $id = $validatedarray[1];
-                insertCharacteristics($id, $userid, $_POST[''.$id.'']);
+                insertCharacteristics($validate, $userid, $_POST[''.$validate.'']);
             }
             header('Location: steckbrief_kategorie_add');
         }

@@ -8,7 +8,7 @@
                 Neue Steckbriefkategorie erstellen
             </p>
             <p class="p_form">Steckbriefkategoriename</p>
-            <input class="forms_textfield" type="text" name="name"/>
+            <input class="forms_textfield" type="text" name="name" pattern="[a-zA-ZäöüÄÖÜß]{30}"/>
 		    <br>
             <p class="p_form">Obligatorisch</p>
             <input id="froms_radio_left" class="forms_radio" type="radio" name="obligation" value="true" checked>

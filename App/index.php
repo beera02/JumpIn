@@ -43,6 +43,15 @@
 			case 'steckbrief_view':
 				build('./view/steckbrief_view.php');
 				break;
+			case 'validate_steckbrief_view':
+				build('validate_steckbrief_view.php');
+				break;
+			case 'validate_steckbrief_loeschen':
+				build('validate_steckbrief_loeschen.php');
+				break;
+			case 'validate_steckbrief_order':
+				build('validate_steckbrief_order.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

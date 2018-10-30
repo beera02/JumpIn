@@ -9,7 +9,7 @@
             echo '
                 <p class="p_form">'.$row['name'].'</p>
                 <input class="forms_login" type="text" name="'.$row['id_steckbriefkategorie'].'"/>
-                <input type="hidden" name="steckbrief[]" value="'.$row['name'].' '.$row['id_steckbriefkategorie'].'"/>
+                <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'"/>
                 <br>
             ';
         }
@@ -17,7 +17,7 @@
             echo '
                 <p class="p_form">'.$row['name'].'</p>
                 <textarea class="forms_textarea" name="'.$row['id_steckbriefkategorie'].'" maxlength="300"></textarea>
-                <input type="hidden" name="steckbrief[]" value="'.$row['name'].' '.$row['id_steckbriefkategorie'].'"/>
+                <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'"/>
                 <br>
             ';
         }
