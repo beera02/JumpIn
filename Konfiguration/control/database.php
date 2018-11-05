@@ -217,6 +217,18 @@
             $db->close();
             return $result;
         }
+        
+        function getActivityByUserID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$id' ORDER BY a.startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
 
         function getAllActivityGroupsByActivityID($id){
             $db = getDatabase();
@@ -370,6 +382,15 @@
             $result = $db->query($sql);
             $db->close();
             return $result;
+        }
+
+        function getWrittenIn($userid, $activityid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM EINSCHREIBEN WHERE aktivitaet_id = '$activityid' AND benutzer_id = '$userid'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
         }
     
         function insertUser($username, $password, $name, $prename){

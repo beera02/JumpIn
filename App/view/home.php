@@ -26,7 +26,7 @@
             }
         }
         echo '
-            <a class="a_section" href="">
+            <a class="a_section" href="wochenplan">
                 <section class="section sectionWochenplan" id="section'.$i.'">
                     <p class="p_section">Wochenplan</p>
                 </section>

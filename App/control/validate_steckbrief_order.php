@@ -3,6 +3,9 @@
         if($_POST['gruppe'] != "null"){
             $_SESSION['groupselected'] = $_POST['gruppe'];
         }
+        else{
+            $_SESSION['groupselected'] = 0;
+        }
         header('Location: steckbrief');
     }
     else{

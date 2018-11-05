@@ -52,6 +52,9 @@
 			case 'validate_steckbrief_order':
 				build('validate_steckbrief_order.php');
 				break;
+			case 'wochenplan':
+				build('./view/wochenplan.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

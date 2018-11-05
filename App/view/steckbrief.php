@@ -40,10 +40,12 @@
     else{
         $user = getUserByGroupID($groupselected);
     }
+    $anzahleintraege = 0;
     $notUserUsers = $_SESSION['notUserUsers'];
     while($row = mysqli_fetch_assoc($user)){
         if(!in_array(strtolower($row['benutzername']), $notUserUsers)){
             $resultarray = getGroupByUsernameAndLevel($row['benutzername']);
+            $anzahleintraege++;
             echo '
                 <form action="steckbrief_view" method="post">
                     <button class="button_steckbrief">
@@ -63,5 +65,14 @@
                 </form>
             ';
         }
+    }
+    if($anzahleintraege == 0){
+        echo '
+            <div id="no_characteristics">
+                <p id="p_no_characteristics">
+                    Keine Steckbriefe
+                </p>
+            </div>
+        ';
     }
 ?>

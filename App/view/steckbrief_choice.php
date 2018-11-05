@@ -8,8 +8,8 @@
     }
 
     if(!$characteristics > 0){
-        //array_push($array, "steckbrief_add", "validate_steckbrief_add");
-        //removeSessionInvalid($array);
+        array_push($array, "steckbrief_add", "validate_steckbrief_add");
+        removeSessionInvalid($array);
         header('Location: steckbrief_add');
     }
     else{
@@ -19,13 +19,13 @@
             $characteristics++;
         }
         if(!$characteristics > 0){
-            //array_push($array, "steckbrief_add", "validate_steckbrief_add", "steckbrief_kategorie_add", "validate_steckbrief_kategorie_add");
-            //removeSessionInvalid($array);
+            array_push($array, "steckbrief_add", "validate_steckbrief_add", "steckbrief_kategorie_add", "validate_steckbrief_kategorie_add");
+            removeSessionInvalid($array);
             header('Location: steckbrief_kategorie_add');
         }
         else{
-            //array_push($array, "steckbrief_add", "validate_steckbrief_add", "steckbrief_kategorie_add", "validate_steckbrief_kategorie_add", "steckbrief");
-            //removeSessionInvalid($array);
+            array_push($array, "steckbrief_add", "validate_steckbrief_add", "steckbrief_kategorie_add", "validate_steckbrief_kategorie_add", "steckbrief", "steckbrief_view", "validate_steckbrief_order", "validate_steckbrief_loeschen");
+            removeSessionInvalid($array);
             header('Location: steckbrief');
         }
     }

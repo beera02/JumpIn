@@ -14,16 +14,16 @@
 				?> 
 				<main>
 					<?php
-						/*if($_SESSION['benutzer_app']){
+						if($_SESSION['benutzer_app']){
 							if(inSessionInvalid($path)){
-								header('Location: home');
+								$path = "./view/home.php";
 							}
 						}
 						else{
 							if(!inSessionValid($path)){
-								header('Location: home');
+								$path = "./view/home.php";
 							}
-						}*/
+						}
 						require_once $path; 
 					?> 
 				</main>
@@ -42,8 +42,8 @@
 
 	function removeSessionInvalid($files){
 		$invalidfiles = $_SESSION['invalidfiles'];
-		array_diff($invalidfiles, $files);
-		$_SESSION['invalidfiles'] = $invalidfiles;
+		$difference = array_diff($invalidfiles, $files);
+		$_SESSION['invalidfiles'] = $difference;
 	}
 
 	function inSessionInvalid($file){
@@ -65,8 +65,8 @@
 
 	function removeSessionValid($files){
 		$validfiles = $_SESSION['validfiles'];
-		array_diff($validfiles, $files);
-		$_SESSION['validfiles'] = $validfiles;
+		$difference = array_diff($validfiles, $files);
+		$_SESSION['validfiles'] = $difference;
 	}
 
 	function inSessionValid($file){
