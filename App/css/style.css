@@ -452,8 +452,9 @@ tr:hover {
     border: none;
     text-align: left;
     cursor: pointer;
-    border-radius: 1px;
+    border-radius: 1.5px;
     z-index: 1;
+    overflow: hidden;
 }
 .button_wochenplan:hover{
     opacity: 0.5;

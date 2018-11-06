@@ -392,6 +392,15 @@
             $db->close();
             return $resultarray;
         }
+
+        function getNextActivity($starttime, $activityid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET WHERE startzeit >= '$starttime' AND id_aktivitaet != '$activityid' ORDER BY startzeit LIMIT 1");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();

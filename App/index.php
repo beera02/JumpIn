@@ -55,6 +55,9 @@
 			case 'wochenplan':
 				build('./view/wochenplan.php');
 				break;
+			case 'wochenplan_view':
+				build('./view/wochenplan_view.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

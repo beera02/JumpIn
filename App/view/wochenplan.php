@@ -1,48 +1,96 @@
 <?php
+    global $faktor;
+    global $nextcount;
+    $faktor = 0;
+    $nextcount = TRUE;
     $activitybefore = NULL;
     $margintopnow = 100;
+    $margintopnext = 10;
+    $orientation = 0;
+    $next = FALSE;
     $datenow = date('Y-m-d H:i:s');
+
     $userid = getUserIDByUsername($_SESSION['benutzer_app']);
     $activities = getActivityByUserID($userid);
+    $activityarray = mysqli_fetch_array($activities);
     while($row1 = mysqli_fetch_assoc($activities)){
-        $height = calculateHeight($row1['startzeit'], $row1['endzeit']);
+        $height = calculateHeight($row1['startzeit'], $row1['endzeit'], $orientation);
         $cssheight = 'height: '.$height.'px;';
+
         if(strtotime(date("Y-m-d", strtotime($datenow))) != strtotime(date("Y-m-d", strtotime($row1['startzeit'])))){
             $cssday = 'color: grey;';
         }
         else if(date("Y-m-d", strtotime($datenow)) == date("Y-m-d", strtotime($row1['startzeit']))){
             $cssday = 'color: #584125;';
         }
-        if(!empty($row1['aktivitaetblock_id'])){
-            $writtenin = getWrittenIn($userid, $row1['id_aktivitaet']);
-            if($writtenin['aktivitaet_id'] == $row1['id_aktivitaet']){
-                $margintopnow += calculateHeightNow($row1['startzeit'], $row1['endzeit'], $datenow);
+
+        if($next == TRUE){
+            $margintop = $margintopnext; 
+            $margintopnext = 10;
+        }
+        else{
+            $margintop = 10;
+            $width = 'calc(100% - 30px)';
+        }
+
+        $nextactivity = getNextActivity($row1['startzeit'], $row1['id_aktivitaet']);
+        if($nextactivity != NULL){
+            if(strtotime($row1['endzeit']) - strtotime($nextactivity['startzeit']) > 0){
                 if($activitybefore != NULL){
-                    if(getDay($activitybefore['startzeit']) == getDay($row1['startzeit'])){
-                        echoActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssheight);
+                    if(strtotime($activitybefore['endzeit']) - strtotime($row1['startzeit']) > 0){
+                        $orientation = 0;
                     }
                     else{
-                        echoDayActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight);
+                        $orientation = 1;
                     }
                 }
                 else{
-                    echoFirstActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight);
+                    $orientation = 1;
+                }
+            }
+            else{
+                $orientation = 0;
+            }
+            if($orientation >= 1){
+                $width = 'calc((100% - 30px) / ('.$orientation.' + 1) - 8px); float: left';
+                $margintopnext += calculateHeight($row1['startzeit'], $nextactivity['startzeit'], $orientation);
+                $next = TRUE;
+            }
+            else{
+                $next = FALSE;
+            }
+        }
+
+        if(!empty($row1['aktivitaetblock_id'])){
+            $writtenin = getWrittenIn($userid, $row1['id_aktivitaet']);
+            if($writtenin['aktivitaet_id'] == $row1['id_aktivitaet']){
+                $margintopnow += calculateHeightNow($row1['startzeit'], $row1['endzeit'], $datenow, $orientation, $nextactivity);
+                if($activitybefore != NULL){
+                    if(getDay($activitybefore['startzeit']) == getDay($row1['startzeit'])){
+                        echoActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssheight, $width, $margintop);
+                    }
+                    else{
+                        echoDayActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight, $width, $margintop);
+                    }
+                }
+                else{
+                    echoFirstActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight, $width, $margintop);
                 }
                 $activitybefore = $row1;
             }
         }
         else{
-            $margintopnow += calculateHeightNow($row1['startzeit'], $row1['endzeit'], $datenow);
+            $margintopnow += calculateHeightNow($row1['startzeit'], $row1['endzeit'], $datenow, $orientation, $nextactivity);
             if($activitybefore != NULL){
                 if(getDay($activitybefore['startzeit']) == getDay($row1['startzeit'])){
-                    echoActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssheight);
+                    echoActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssheight, $width, $margintop);
                 }
                 else{
-                    echoDayActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight);
+                    echoDayActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight, $width, $margintop);
                 }
             }
             else{
-                echoFirstActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight);
+                echoFirstActivity($row1['startzeit'], $row1['endzeit'], $row1['id_aktivitaet'], $row1['aktivitaetsname'], $cssday, $cssheight, $width, $margintop);
             }
             $activitybefore = $row1;
         }
@@ -52,7 +100,7 @@
         <div class="nowpoint" style="top: '.$margintopnow.'px;"></div>
     ';
 
-    function echoFirstActivity($starttime, $endtime, $activityid, $activityname, $cssday, $cssheight){
+    function echoFirstActivity($starttime, $endtime, $activityid, $activityname, $cssday, $cssheight, $width, $margintop){
         echo '
             <div class="div_wochenplan_day">
                 <div class="div_wochenplan_day_left" style="'.$cssday.'">
@@ -65,13 +113,13 @@
                 </div>
                 <div class="div_wochenplan_day_right">
                     <form action="wochenplan_view" method="post">
-                        <button class="button_wochenplan" style="'.$cssheight.'">
+                        <button class="button_wochenplan" style="'.$cssheight.' width: '.$width.'; margin-top: '.$margintop.'px ;">
                             <div class="div_wochenplan_aktivitaet">
                                 <p class="p_wochenplan_aktivitaet_title">
                                     '.$activityname.'
                                 </p>
                                 <p class="p_wochenplan_aktivitaet_time">
-                                    '.getHours($starttime).' bis '.getHours($endtime).'
+                                    '.getHours($starttime).' - '.getHours($endtime).'
                                 </p>
                             </div>
                         </button>
@@ -80,16 +128,16 @@
         ';
     }
 
-    function echoActivity($starttime, $endtime, $activityid, $activityname, $cssheight){
+    function echoActivity($starttime, $endtime, $activityid, $activityname, $cssheight, $width, $margintop){
         echo '
             <form action="wochenplan_view" method="post">
-                <button class="button_wochenplan" style="'.$cssheight.'">
+                <button class="button_wochenplan" style="'.$cssheight.' width: '.$width.'; margin-top: '.$margintop.'px ;">
                     <div class="div_wochenplan_aktivitaet">
                         <p class="p_wochenplan_aktivitaet_title">
                             '.$activityname.'
                         </p>
                         <p class="p_wochenplan_aktivitaet_time">
-                            '.getHours($starttime).' bis '.getHours($endtime).'
+                            '.getHours($starttime).' - '.getHours($endtime).'
                         </p>
                     </div>
                 </button>
@@ -98,7 +146,7 @@
         ';
     }
 
-    function echoDayActivity($starttime, $endtime, $activityid, $activityname, $cssday, $cssheight){
+    function echoDayActivity($starttime, $endtime, $activityid, $activityname, $cssday, $cssheight, $width, $margintop){
         echo '
                 </div>
             </div>  
@@ -113,13 +161,13 @@
                 </div>
                 <div class="div_wochenplan_day_right">
                     <form action="wochenplan_view" method="post">
-                        <button class="button_wochenplan" style="'.$cssheight.'">
+                        <button class="button_wochenplan" style="'.$cssheight.' width: '.$width.'; margin-top: '.$margintop.'px ;">
                             <div class="div_wochenplan_aktivitaet">
                                 <p class="p_wochenplan_aktivitaet_title">
                                     '.$activityname.'
                                 </p>
                                 <p class="p_wochenplan_aktivitaet_time">
-                                    '.getHours($starttime).' bis '.getHours($endtime).'
+                                    '.getHours($starttime).' - '.getHours($endtime).'
                                 </p>
                             </div>
                         </button>
@@ -203,35 +251,92 @@
         return date("H:i", strtotime($time));
     }
 
-    function calculateHeight($starttime, $endtime){
+    function calculateHeight($starttime, $endtime, $orientation){
         $minutes = round((strtotime($endtime) - strtotime($starttime)) / 60,0);
         $height = $minutes * 2;
-        return shortenHeight($height);
+        return shortenHeight($height, $orientation);
     }
 
-    function shortenHeight($height){
-        if($height > 360){
+    function shortenHeight($height, $orientation){
+        global $faktor;
+        if($faktor > 0){
+            return $height / $faktor;
+        }
+        else if($height > 360){
+            if($orientation >= 1){
+                $faktor = 3.5;
+            }
             return $height / 3.5;
         }
         else if($height > 240){
+            if($orientation >= 1){
+                $faktor = 3;
+            }
             return $height / 3;
         }
         else if($height > 120){
+            if($orientation >= 1){
+                $faktor = 2.5;
+            }
             return $height / 2.5;
         }
         else{
+            if($orientation >= 1){
+                $faktor = 1.5;
+            }            
             return $height / 1.5;
         }
     }
 
-    function calculateHeightNow($starttime, $endtime, $datenow){
-        if(strtotime($endtime) - strtotime($datenow) > 0){
-            if(strtotime($starttime) - strtotime($datenow) < 0){
-                return calculateHeight($starttime, $datenow) + 10;
+    function calculateHeightNow($starttime, $endtime, $datenow, $orientation, $nextactivity){
+        global $nextcount;
+        global $faktor;
+        if($orientation >= 1){
+            if($nextcount == TRUE){
+                $nextcount = FALSE;
+                if(strtotime($endtime) - strtotime($nextactivity['endzeit']) > 0){
+                    if(strtotime($endtime) - strtotime($datenow) > 0){
+                        if(strtotime($starttime) - strtotime($datenow) < 0){
+                            return calculateHeight($starttime, $datenow, $orientation) + 10;
+                        }
+                    }
+                    else if(strtotime($datenow) - strtotime($endtime) > 0){
+                        return calculateHeight($starttime, $endtime, $orientation) + 20;
+                    }
+                }
+                else{
+                    if(strtotime($nextactivity['endzeit']) - strtotime($datenow) > 0){
+                        if(strtotime($starttime) - strtotime($datenow) < 0){
+                            return calculateHeight($starttime, $datenow, $orientation) + 10;
+                        }
+                    }
+                    else if(strtotime($datenow) - strtotime($nextactivity['endzeit']) > 0){
+                        return calculateHeight($starttime, $nextactivity['endzeit'], $orientation) + 20;
+                    }
+                }
+            }
+            else{
+                $nextcount = TRUE;
+                return 0;
             }
         }
-        else if(strtotime($datenow) - strtotime($endtime) > 0){
-            return calculateHeight($starttime, $endtime) + 20;
+        else{
+            if($nextcount == TRUE){
+                $nextcount = TRUE;
+                if(strtotime($endtime) - strtotime($datenow) > 0){
+                    if(strtotime($starttime) - strtotime($datenow) < 0){
+                        return calculateHeight($starttime, $datenow, $orientation) + 10;
+                    }
+                }
+                else if(strtotime($datenow) - strtotime($endtime) > 0){
+                    return calculateHeight($starttime, $endtime, $orientation) + 20;
+                }
+            }
+            else{
+                $nextcount = TRUE;
+                return 0;
+            }
         }
+        $faktor = 0;
     }
 ?>
