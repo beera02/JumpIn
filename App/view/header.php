@@ -1,6 +1,15 @@
 <?php
 if($_SESSION['benutzer_app']){
     echo '
+    <div id="div_navigation" class="div_navigation_overlay">
+        <div class="div_navigation_overlay_content">
+            '.getWriteinPossebilities('header').'
+            <a href="wochenplan">Wochenplan </a>
+            <a href="steckbrief_choice">Steckbrief</a>
+            <a href="feedback">Feedback</a>
+            <a href="notfall">Notfall</a>
+        </div>
+    </div>
     <header>
         <nav>
             <div id="div_header_logout">
@@ -9,7 +18,7 @@ if($_SESSION['benutzer_app']){
                 </a>
             </div>
             <div class="div_nav_open">
-                <span id="span_nav_logout_open">☰</span>
+                <span id="navigation_button" onclick="openNav()"></span>
             </div>
         </nav>
     </header>
@@ -24,6 +33,12 @@ if($_SESSION['benutzer_app']){
 }
 else{
     echo '
+    <div id="div_navigation" class="div_navigation_overlay">
+        <div class="div_navigation_overlay_content">
+            <a href="home">Home</a>
+            <a href="login">Login</a>
+        </div>
+    </div>
     <header>
         <nav>
             <div id="div_header_login">
@@ -32,7 +47,7 @@ else{
                 </a>
             </div>
             <div class="div_nav_open">
-                <span id="span_nav_login_open">☰</span>
+                <span id="navigation_button" onclick="openNav()"></span>
             </div>
         </nav>
     </header>
@@ -43,3 +58,23 @@ else{
     </div>';
 }
 ?>
+<script>
+    document.getElementById('navigation_button').addEventListener('click', function () {
+        if (this.classList.contains('clicked')) {
+            this.classList.remove('clicked');
+            closeNav();
+        }
+        else {
+            this.classList.add('clicked');
+            openNav();
+        }
+    });
+    function openNav() {
+        document.getElementById("div_navigation").style.width = "100%";
+        document.getElementsByTagName("body")[0].style = 'overflow-y: hidden;'
+    }
+    function closeNav() {
+        document.getElementById("div_navigation").style.width = "0%";
+        document.getElementsByTagName("body")[0].style = 'overflow-y: visible;'
+    } 
+</script>

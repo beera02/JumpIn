@@ -4,7 +4,7 @@
     $faktor = 0;
     $nextcount = TRUE;
     $activitybefore = NULL;
-    $margintopnow = 100;
+    $margintopnow = 105;
     $margintopnext = 10;
     $orientation = 0;
     $next = FALSE;
@@ -174,81 +174,6 @@
                         <input type="hidden" name="id" value="'.$activityid.'">
                     </form>
         ';
-    }
-
-    function getDay($date){
-        $numericday = date("w", strtotime($date));
-
-        if($numericday == 1){
-            return 'Mon';
-        }
-        else if($numericday == 2){
-            return 'Die';
-        }
-        else if($numericday == 3){
-            return 'Mit';
-        }
-        else if($numericday == 4){
-            return 'Don';
-        }
-        else if($numericday == 5){
-            return 'Fre';
-        }
-        else if($numericday == 6){
-            return 'Sam';
-        }
-        else{
-            return 'Son';
-        }
-    }
-
-    function getDateString($date){
-        $day = date("j", strtotime($date));
-        $numericmonth = date("n", strtotime($date));
-        $month = "";
-
-        if($numericmonth == 1){
-            $month = 'Jan';
-        }
-        else if($numericmonth == 2){
-            $month = 'Feb';
-        }
-        else if($numericmonth == 3){
-            $month = 'Mär';
-        }
-        else if($numericmonth == 4){
-            $month = 'Apr';
-        }
-        else if($numericmonth == 5){
-            $month = 'Mai';
-        }
-        else if($numericmonth == 6){
-            $month = 'Jun';
-        }
-        else if($numericmonth == 7){
-            $month = 'Jul';
-        }
-        else if($numericmonth == 8){
-            $month = 'Aug';
-        }
-        else if($numericmonth == 9){
-            $month = 'Sep';
-        }
-        else if($numericmonth == 10){
-            $month = 'Okt';
-        }
-        else if($numericmonth == 11){
-            $month = 'Nov';
-        }
-        else{
-            $month = 'Dez';
-        }
-
-        return ''.$day.'. '.$month.'';
-    }
-
-    function getHours($time){
-        return date("H:i", strtotime($time));
     }
 
     function calculateHeight($starttime, $endtime, $orientation){

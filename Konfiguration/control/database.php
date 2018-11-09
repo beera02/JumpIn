@@ -217,6 +217,18 @@
             $db->close();
             return $result;
         }
+
+        function getActivityByActivityentityIDAndUserID($aeid, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.aktivitaetblock_id = '$aeid' ORDER BY a.startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
         
         function getActivityByUserID($id){
             $db = getDatabase();
@@ -358,14 +370,30 @@
             return $resultarray['id_aktivitaetblock'];
         }
 
+        function getActivityentityNameByID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK WHERE id_aktivitaetblock = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray['name'];
+        }
+
         function getActivityentitynameByName($name){
             $db = getDatabase();
             $sql = ("SELECT name FROM AKTIVITAETBLOCK WHERE name = '$name' LIMIT 1");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
-            $resultstring = $resultarray['name'];
             $db->close();
-            return $resultstring;
+            return $resultarray['name'];
+        }
+
+        function getActivityentityByArtID($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK WHERE art_id = '$id'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
         }
 
         function getActivityentitiesByArtID($id){
@@ -391,6 +419,14 @@
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray;
+        }
+
+        function getWrittenInByActivityID($activityid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM EINSCHREIBEN WHERE aktivitaet_id = '$activityid'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
         }
 
         function getNextActivity($starttime, $activityid){

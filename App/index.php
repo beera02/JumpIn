@@ -58,6 +58,15 @@
 			case 'wochenplan_view':
 				build('./view/wochenplan_view.php');
 				break;
+			case 'validate_wochenplan_view':
+				build('validate_wochenplan_view.php');
+				break;
+			case 'einschreiben_choice':
+				build('./view/einschreiben_choice.php');
+				break;
+			case 'einschreiben_choice_aktivitaeten':
+				build('./view/einschreiben_choice_aktivitaeten.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

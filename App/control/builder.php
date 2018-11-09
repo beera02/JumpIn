@@ -84,4 +84,127 @@
 		$stringarray2 = explode(".", $stringarray[(count($stringarray) - 1)]);
 		return $stringarray2[0];
 	}
+
+	function getDay($date){
+        $numericday = date("w", strtotime($date));
+
+        if($numericday == 1){
+            return 'Mon';
+        }
+        else if($numericday == 2){
+            return 'Die';
+        }
+        else if($numericday == 3){
+            return 'Mit';
+        }
+        else if($numericday == 4){
+            return 'Don';
+        }
+        else if($numericday == 5){
+            return 'Fre';
+        }
+        else if($numericday == 6){
+            return 'Sam';
+        }
+        else{
+            return 'Son';
+        }
+    }
+
+    function getDateString($date){
+        $day = date("j", strtotime($date));
+        $numericmonth = date("n", strtotime($date));
+        $month = "";
+
+        if($numericmonth == 1){
+            $month = 'Jan';
+        }
+        else if($numericmonth == 2){
+            $month = 'Feb';
+        }
+        else if($numericmonth == 3){
+            $month = 'Mär';
+        }
+        else if($numericmonth == 4){
+            $month = 'Apr';
+        }
+        else if($numericmonth == 5){
+            $month = 'Mai';
+        }
+        else if($numericmonth == 6){
+            $month = 'Jun';
+        }
+        else if($numericmonth == 7){
+            $month = 'Jul';
+        }
+        else if($numericmonth == 8){
+            $month = 'Aug';
+        }
+        else if($numericmonth == 9){
+            $month = 'Sep';
+        }
+        else if($numericmonth == 10){
+            $month = 'Okt';
+        }
+        else if($numericmonth == 11){
+            $month = 'Nov';
+        }
+        else{
+            $month = 'Dez';
+        }
+
+        return ''.$day.'. '.$month.'';
+    }
+
+    function getHours($time){
+        return date("H:i", strtotime($time));
+	}
+	
+	function getWriteinPossebilities($source){
+		$arts = getAllArts();
+		$i = 1;
+		$return = [];
+        while($row1 = mysqli_fetch_assoc($arts)){
+            if($row1['einschreiben'] == "1"){
+                $activityentities = getActivityentitiesByArtID($row1['id_art']);
+                while($row2 = mysqli_fetch_assoc($activityentities)){
+                    if(strtotime(date("Y-m-d H:i:s")) - strtotime($row2['einschreibezeit']) >= 0){
+						$userid = getUserIDByUsername($_SESSION['benutzer_app']);
+                        $activities = getActivityByActivityentityIDAndUserID($row2['id_aktivitaetblock'], $userid);
+                        while($row3 = mysqli_fetch_assoc($activities)){
+                            if(strtotime($row3['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0){
+								if($source == 'home'){
+									echo '
+										<form class="form_home" action="einschreiben_choice" method="post">
+											<button class="button_home section'.$row1['name'].'">
+												<p class="p_section">'.$row1['name'].'</p>
+											</button>
+											<input type="hidden" name="id" value="'.$row1['id_art'].'">
+										</form>
+									';
+								}
+								else if($source == 'header'){
+									$return = '
+										<form action="einschreiben_choice" method="post">
+											<button class="button_navigation">
+												<a class="a_header_special" href="">
+													'.$row1['name'].'
+												</a>
+											</button>
+											<input type="hidden" name="id" value="'.$row1['id_art'].'">
+										</form>
+									';
+								}
+                                $i++;
+                                break 2;
+                            }
+                        }
+                    }
+                }
+            }
+		}
+		if(!empty($return)){
+			return $return;
+		}
+	}
 ?>
