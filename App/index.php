@@ -67,6 +67,15 @@
 			case 'einschreiben_choice_aktivitaeten':
 				build('./view/einschreiben_choice_aktivitaeten.php');
 				break;
+			case 'validate_einschreiben_choice_aktivitaeten':
+				build('validate_einschreiben_choice_aktivitaeten.php');
+				break;
+			case 'einschreiben':
+				build('./view/einschreiben.php');
+				break;
+			case 'validate_einschreiben':
+				build('validate_einschreiben.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;

@@ -172,7 +172,8 @@
 						$userid = getUserIDByUsername($_SESSION['benutzer_app']);
                         $activities = getActivityByActivityentityIDAndUserID($row2['id_aktivitaetblock'], $userid);
                         while($row3 = mysqli_fetch_assoc($activities)){
-                            if(strtotime($row3['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0){
+							$writtenin = getWrittenIn($userid, $row3['id_aktivitaet']);
+                            if(strtotime($row3['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0 & empty($writtenin['aktivitaet_id'])){
 								if($source == 'home'){
 									echo '
 										<form class="form_home" action="einschreiben_choice" method="post">

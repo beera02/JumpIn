@@ -1,13 +1,22 @@
 <?php
-    if(!empty($_POST['id'])){
+    if(empty($_POST['id'])){
+        $id = intval($_SESSION['aktivitaetblockid']);
+        $_SESSION['aktivitaetblockid'] = $id;
+    }
+    else{
+        $id = $_POST['id'];
+        $_SESSION['aktivitaetblockid'] = $id;
+    }
+    if(!empty($id)){
         echo '
             <h2>Aktivitäten zum einschreiben</h2>
             <p class="p_untertitel">Hier kannst du dich in eine Aktivität des Aktivitätblockes <b>'.getActivityentityNameByID($_POST['id']).'</b> einschreiben.</p>
         ';
-
-        $activities = getActivityByActivityentityID($_POST['id']);
+        $activities = getActivityByActivityentityID($id);
+        $userid = getUserIDByUsername($_SESSION['benutzer_app']);
         while($row = mysqli_fetch_assoc($activities)){
-            if(strtotime($row['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0){
+            $writtenin = getWrittenIn($userid, $row['id_aktivitaet']);
+            if(strtotime($row['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0 & empty($writtenin['aktivitaet_id'])){
                 echo '
                     <form action="einschreiben" method="post">
                         <button class="button_steckbrief">
@@ -16,7 +25,7 @@
                                         '.$row['aktivitaetsname'].'   
                                 </p>
                                 <p class="p_steckbrief_gruppe">
-                                    '.getDateString($row['startzeit']).' '.getHours($row['startzeit']).' - '.getHours($row['endzeit']).'
+                                    '.getDateString($row['startzeit']).' '.getHours($row['startzeit']).' - '.getHours($row['endzeit']).' Uhr
                                 </p>
                             </div>
                         </button>
@@ -25,6 +34,11 @@
                 ';
             }
         }
+        echo '
+            <form action="validate_einschreiben_choice_aktivitaeten" method="post">
+                <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
+            </form>
+        ';
     }
     else{
         header('Location: home');

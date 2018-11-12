@@ -537,6 +537,14 @@
             $preparedquery->execute();
             $db->close();
         }
+
+        function insertWritein($userid, $activityid){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO EINSCHREIBEN (aktivitaet_id, benutzer_id) VALUES (?,?)");
+            $preparedquery->bind_param("ii", $activityid, $userid);
+            $preparedquery->execute();
+            $db->close();
+        }
     
         function deleteUserGroup($groupid, $userid){
             $db = getDatabase();
