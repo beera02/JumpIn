@@ -24,6 +24,11 @@
             ';
         }
         echo '
+            <p class="p_form">Anzahl Teilnehmer</p>
+            <p class="p_details">
+                '.$activity['anzahlteilnehmer'].'
+            </p>
+            <br>
             <p class="p_form">Zeit</p>
             <p class="p_details">
                 '.getDay($activity['startzeit']).' '.getDateString($activity['startzeit']).'
@@ -63,6 +68,7 @@
                 ';
             }
         }
+        $maxteilnehmer = $activity['anzahlteilnehmer'];
         echo ' 
         <div id="modal_einschreiben" class="modal">
             <div class="modal_einschreiben_content">
@@ -80,8 +86,17 @@
         <form action="validate_einschreiben" method="post">
             <input class="button_zurück_einschreiben" type="submit" name="submit_btn" value="Zurück"/>
         </form>
-        <button id="modal_einschreiben_button" class="button_weiter_modal">Einschreiben</button>
         ';
+        if($anzahlteilnehmer < $maxteilnehmer){
+            echo '
+                <button id="modal_einschreiben_button" class="button_weiter_modal">Einschreiben</button>
+            ';
+        }
+        else{
+            echo '
+                <p id="p_einschreiben_voll">Aktivität voll</p>
+            ';
+        }
     }
     else{
         header('Location: home');

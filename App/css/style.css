@@ -703,3 +703,8 @@ tr:hover {
     background-color: #FFCC00;
     color: #584125; 
 }
+#p_einschreiben_voll{
+    margin: 5px 0 30px 0;
+    font-weight: 800;
+    color: #584125;
+}

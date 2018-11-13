@@ -429,13 +429,52 @@
             return $result;
         }
 
-        function getNextActivity($starttime, $activityid){
+        function getNextActivity($starttime, $activityid, $userid){
             $db = getDatabase();
-            $sql = ("SELECT * FROM AKTIVITAET WHERE startzeit >= '$starttime' AND id_aktivitaet != '$activityid' ORDER BY startzeit LIMIT 1");
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.startzeit >= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit LIMIT 1");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
             return $resultarray;
+        }
+
+        function getActivityBefore($starttime, $activityid, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.startzeit <= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit DESC LIMIT 1");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getActivitiesBefore($starttime, $activityid, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.startzeit <= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getWrittenInByActivityentityID($activityentityid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAETBLOCK AS ab
+            JOIN AKTIVITAET AS a ON aktivit
+            WHERE startzeit <= '$starttime' AND id_aktivitaet != '$activityid' ORDER BY startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
         }
     
         function insertUser($username, $password, $name, $prename){

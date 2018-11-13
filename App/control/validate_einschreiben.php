@@ -7,9 +7,26 @@
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
             $writtenin = getWrittenIn($userid, $_POST['aktivitaetid']);
             if(empty($writtenin['aktivitaet_id'])){
-                insertWritein($userid, $_POST['aktivitaetid']);
+                $writtenins = getWrittenInByActivityID($_POST['aktivitaetid']);
+                $participants = 0;
+                while($row = mysqli_fetch_assoc($writtenins)){
+                    $participants++;
+                }
+                $aktivitaet = getActivityByID($_POST['aktivitaetid']);
+                if($participants < $aktivitaet['anzahlteilnehmer']){
+                    insertWritein($userid, $_POST['aktivitaetid']);
+                    header('Location: home');
+                }
+                else{
+                    header('Location: einschreiben');
+                }
+            }
+            else{
+                header('Location: home');
             }
         }
-        header('Location: home');
+        else{
+            header('Location: home');
+        }
     }
 ?>
