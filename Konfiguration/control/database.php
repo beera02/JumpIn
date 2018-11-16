@@ -455,7 +455,7 @@
             return $resultarray;
         }
 
-        function getActivitiesBefore($starttime, $activityid, $userid){
+        function getActivitiesBeforeASC($starttime, $activityid, $userid){
             $db = getDatabase();
             $sql = ("SELECT * FROM AKTIVITAET AS a
                 JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
@@ -467,11 +467,38 @@
             return $result;
         }
 
-        function getWrittenInByActivityentityID($activityentityid){
+        function getActivitiesBeforeDESC($starttime, $activityid, $userid){
             $db = getDatabase();
-            $sql = ("SELECT * FROM AKTIVITAETBLOCK AS ab
-            JOIN AKTIVITAET AS a ON aktivit
-            WHERE startzeit <= '$starttime' AND id_aktivitaet != '$activityid' ORDER BY startzeit");
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.startzeit <= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit DESC");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getNextActivities($starttime, $activityid, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
+                WHERE bg.benutzer_id = '$userid' AND a.startzeit >= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getActivityAndWrittenInByActivityentityIDAndUserID($aeid, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET AS a
+                JOIN EINSCHREIBEN AS e ON e.aktivitaet_id = a.id_aktivitaet 
+                JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
+                JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe            
+                WHERE bg.benutzer_id = '$userid' AND a.aktivitaetblock_id = '$aeid' AND (e.benutzer_id = '$userid' OR e.benutzer_id IS NULL)");
             $result = $db->query($sql);
             $db->close();
             return $result;

@@ -164,48 +164,68 @@
 		$arts = getAllArts();
 		$i = 1;
 		$return = [];
+		$userid = getUserIDByUsername($_SESSION['benutzer_app']);
         while($row1 = mysqli_fetch_assoc($arts)){
             if($row1['einschreiben'] == "1"){
                 $activityentities = getActivityentitiesByArtID($row1['id_art']);
                 while($row2 = mysqli_fetch_assoc($activityentities)){
                     if(strtotime(date("Y-m-d H:i:s")) - strtotime($row2['einschreibezeit']) >= 0){
-						$userid = getUserIDByUsername($_SESSION['benutzer_app']);
-                        $activities = getActivityByActivityentityIDAndUserID($row2['id_aktivitaetblock'], $userid);
-                        while($row3 = mysqli_fetch_assoc($activities)){
-							$writtenin = getWrittenIn($userid, $row3['id_aktivitaet']);
-                            if(strtotime($row3['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0 & empty($writtenin['aktivitaet_id'])){
-								if($source == 'home'){
-									echo '
-										<form class="form_home" action="einschreiben_choice" method="post">
-											<button class="button_home section'.$row1['name'].'">
-												<p class="p_section">'.$row1['name'].'</p>
-											</button>
-											<input type="hidden" name="id" value="'.$row1['id_art'].'">
-										</form>
-									';
+						if(getValidActivityentities($row2['id_aktivitaetblock'], $userid)){
+							$activities = getActivityByActivityentityIDAndUserID($row2['id_aktivitaetblock'], $userid);
+							while($row3 = mysqli_fetch_assoc($activities)){
+								$writtenin = getWrittenIn($userid, $row3['id_aktivitaet']);
+								if(strtotime($row3['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0 & empty($writtenin['aktivitaet_id'])){
+									if($source == 'home'){
+										echo '
+											<form class="form_home" action="einschreiben_choice" method="post">
+												<button class="button_home section'.$row1['name'].'">
+													<p class="p_section">'.$row1['name'].'</p>
+												</button>
+												<input type="hidden" name="id" value="'.$row1['id_art'].'">
+											</form>
+										';
+									}
+									else if($source == 'header'){
+										$return = '
+											<form action="einschreiben_choice" method="post">
+												<button class="button_navigation">
+													<a class="a_header_special" href="">
+														'.$row1['name'].'
+													</a>
+												</button>
+												<input type="hidden" name="id" value="'.$row1['id_art'].'">
+											</form>
+										';
+									}
+									$i++;
+									break 2;
 								}
-								else if($source == 'header'){
-									$return = '
-										<form action="einschreiben_choice" method="post">
-											<button class="button_navigation">
-												<a class="a_header_special" href="">
-													'.$row1['name'].'
-												</a>
-											</button>
-											<input type="hidden" name="id" value="'.$row1['id_art'].'">
-										</form>
-									';
-								}
-                                $i++;
-                                break 2;
-                            }
-                        }
+							}
+						}
                     }
                 }
             }
 		}
 		if(!empty($return)){
 			return $return;
+		}
+	}
+
+	function getValidActivityentities($activityentityid, $userid){
+		$counter = 0;
+		$activities = getActivityAndWrittenInByActivityentityIDAndUserID($activityentityid, $userid);
+		while($row = mysqli_fetch_assoc($activities)){
+			if(strtotime($row['startzeit']) - strtotime(date("Y-m-d H:i:s")) >= 0){
+				if($row['aktivitaet_id'] != NULL){
+					$counter++;
+				}
+			}
+		}
+		if($counter > 0){
+			return FALSE;
+		}
+		else{
+			return TRUE;
 		}
 	}
 ?>
