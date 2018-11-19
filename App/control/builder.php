@@ -229,7 +229,7 @@
 		}
 	}
 
-	function getFeedback(){
+	function getFeedback($source){
 		$feedbackcategory = getLowestFeedbackCategory();
 		$feedbackcategories = getAllFeedbackCategories();
 		if(!empty($feedbackcategory) & !empty($feedbackcategories)){
@@ -252,15 +252,26 @@
 			}
 			if(strtotime($feedbackcategory['MIN(aufschaltszeit)']) - strtotime(date("Y-m-d H:i:s")) <= 0){
 				if($counterdata != $counteruser){
-					echo '
-						<a class="a_section" href="feedback">
-							<section class="section sectionFeedback">
-								<p class="p_section">Feedback</p>
-							</section>
-						</a>
-					';
+					if($source == 'home'){
+						echo '
+							<a class="a_section" href="feedback">
+								<section class="section sectionFeedback">
+									<p class="p_section">Feedback</p>
+								</section>
+							</a>
+						';
+					}
+					else if($source == 'header'){
+						$return = '
+							<a href="feedback">Feedback</a>
+						';
+					}
+
 				}
 			}
+		}
+		if(!empty($return)){
+			return $return;
 		}
 	}
 ?>

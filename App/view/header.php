@@ -6,7 +6,7 @@ if($_SESSION['benutzer_app']){
             '.getWriteinPossebilities('header').'
             <a href="wochenplan">Wochenplan </a>
             <a href="steckbrief_choice">Steckbrief</a>
-            <a href="feedback">Feedback</a>
+            '.getFeedback('header').'
             <a href="notfall">Notfall</a>
         </div>
     </div>

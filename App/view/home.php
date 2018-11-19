@@ -15,7 +15,7 @@
                 </section>
             </a>
         ';
-        getFeedback();
+        getFeedback('home');
         echo '
             <a class="a_section" href="notfall">
                 <section class="section sectionNotfall">
