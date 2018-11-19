@@ -12,6 +12,9 @@
             echo '
                 <h2>Dein Steckbrief</h2>
                 <p class="p_untertitel">Gefällt dir etwas an deinem Steckbrief nicht mehr? Kein Problem, verändere ihn hier.</p>
+            ';
+            require_once('error.php');
+            echo '
                 <form id="editForm" action="validate_steckbrief_view" method="post" enctype="multipart/form-data"></form>
                 <form id="deleteForm" action="validate_steckbrief_loeschen" method="post"></form>
                 <p class="p_form">Bild ändern</p>

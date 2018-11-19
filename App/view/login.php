@@ -1,5 +1,8 @@
 <h2>Einloggen</h2>
 <p class="p_untertitel">Melden Sie sich mit Ihren erhaltenen Benutzerdaten an.</p>
+<?php
+    require_once('error.php');
+?>
 <form action="validate_login" method="post">
 	<div id="div_form">
 		<p class="p_form">Benutzername</p>

@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     if($_POST['submit_btn'] == "Ändern"){
         if($_POST['gruppe'] != "null"){
             $_SESSION['groupselected'] = $_POST['gruppe'];

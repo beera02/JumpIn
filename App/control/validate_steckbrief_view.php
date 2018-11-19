@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $validated = false;
     $bild = false;
 
@@ -24,11 +25,20 @@
                         if(filesize($_FILES['bild']['tmp_name']) < 8388608){
                             $validated = true;
                         }
+                        else{
+                            $_SESSION['error'] = "Zu grosses Bild eingelesen!";
+                        }
+                    }
+                    else{
+                        $_SESSION['error'] = "Das eingelesene File ist kein Bild!";
                     }
                 }
                 else{
                     $validated = true;
                 }
+            }
+            else{
+                $_SESSION['error'] = "Nicht alle Kategorien im Steckbrief wurden richtig ausgefüllt!";
             }
         }
         if($validated){

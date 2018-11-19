@@ -775,4 +775,9 @@ tr:hover {
 input[type='radio'] { 
     transform: scale(1.2);
 }
-
+.p_error{
+    margin: 10px calc(100% - 80% - 20px) 10px 20px;
+    word-wrap:break-word;
+    color: #a51728;
+    font-weight: 800;
+}

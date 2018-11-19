@@ -1,4 +1,7 @@
 <h2>Erstelle jetzt deinen Steckbrief!</h2>
+<?php
+    require_once('error.php');
+?>
 <form action="validate_steckbrief_add" method="POST" enctype="multipart/form-data">
     <p class="p_form">Bild von dir (PNG, JPG)</p>
     <input class="forms_file" type="file" accept=".jpg, .jpeg, .png" name="bild"/>

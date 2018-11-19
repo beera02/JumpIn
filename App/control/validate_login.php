@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $invalid = false;
 
     if(!(empty($_POST['passwort'])) & !(empty($_POST['benutzername']))){
@@ -18,6 +19,7 @@
         header('Location: home');
     }
     else{
+        $_SESSION['error'] = "Unbekannter Benutzername oder falsches Passwort!";
         header('Location: login');
     }
 ?>

@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     if($_POST['submit_btn'] == "Weiter" | $_POST['submit_btn'] == "Abschliessen"){
         if(!empty($_POST['options'])){
             if(!empty($_POST['bemerkung'])){
@@ -13,6 +14,7 @@
                     }
                 }
                 else{
+                    $_SESSION['error'] = "Die Bemerkung ist zu lang! Max. 500 Zeichen.";
                     $_SESSION['startid'] = (intval($_POST['startid']) - 1);
                     header('Location: feedback_categories');
                 }
@@ -29,6 +31,7 @@
             }
         }
         else{
+            $_SESSION['error'] = "Es wurde keine Antwort angegeben!";
             $_SESSION['startid'] = (intval($_POST['startid']) - 1);
             header('Location: feedback_categories'); 
         }

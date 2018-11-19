@@ -26,6 +26,7 @@
                     </div>
                     <h2>'.$feedbackcategory['frage'].'</h2>
             ';
+            require_once('error.php');
             $options = getAllOptionsByFeedbackID($feedbackcategory['id_feedbackkategorie']);
             while($row = mysqli_fetch_assoc($options)){
                 echo '

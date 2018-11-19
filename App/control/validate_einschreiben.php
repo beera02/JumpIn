@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     if($_POST['submit_btn'] == "Zurück"){
         header('Location: einschreiben_choice_aktivitaeten');
     }
@@ -18,6 +19,7 @@
                     header('Location: home');
                 }
                 else{
+                    $_SESSION['error'] = "Das maximale Teilnehmerzahl wurde bereits erreicht! Du musst dich in einer anderen Aktivität einschreiben!";
                     header('Location: einschreiben');
                 }
             }

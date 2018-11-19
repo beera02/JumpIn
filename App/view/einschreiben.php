@@ -3,6 +3,9 @@
         $activity = getActivityByID($_POST['id']);
         echo '
             <h2>In Aktivität einschreiben</h2>
+        ';
+        require_once('error.php');
+        echo '
             <p class="p_form">Aktivitätsname</p>
             <p class="p_details">
                 '.$activity['aktivitaetsname'].'
