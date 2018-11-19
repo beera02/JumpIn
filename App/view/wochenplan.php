@@ -31,21 +31,21 @@
     function getMarginTopNowPointer($activity, $nextactivity, $activitybefore){
         $height = 105;
         if(strtotime($activity['endzeit']) - strtotime($nextactivity['startzeit']) > 0){
-            echo '1/n';
+            /*echo '1/n';
             var_dump($activity['startzeit']);
-            var_dump($nextactivity);
+            var_dump($nextactivity);*/
             $height += calculateHeight($activity['startzeit'], $nextactivity['startzeit']) + 20;
         }
         else if(strtotime($activitybefore['endzeit']) - strtotime($activity['startzeit']) > 0){
-            echo '1/n';
+            /*echo '1/n';
             var_dump($activity['startzeit']);
-            var_dump($activity['endzeit']);
+            var_dump($activity['endzeit']);*/
             $height += calculateHeight($activity['startzeit'], $activity['endzeit']) + 10;
         }
         else{
-            echo '1/n';
+            /*echo '1/n';
             var_dump($activity['startzeit']);
-            var_dump($activity['endzeit']);
+            var_dump($activity['endzeit']);*/
             $height += calculateHeight($activity['startzeit'], $activity['endzeit']) + 20;
         }
         return 'top: '.$height.'px;';
@@ -129,35 +129,34 @@
                 }
             }
         }
+        //var_dump($orientation % 2);
         return $orientation % 2;
     }
 
     function getNextValidActivity($activity, $userid){
         $return = FALSE;
         $validactivity;
-        while($return != TRUE){
-            if(!empty($activity)){
-                $nextactivities = getNextActivities($activity['startzeit'], $activity['id_aktivitaet'], $userid);
-                while($row = mysqli_fetch_assoc($nextactivities)){
-                    if($return != TRUE){
-                        if($row['aktivitaetblock_id'] == NULL){
+        if(!empty($activity)){
+            $nextactivities = getNextActivities($activity['startzeit'], $activity['id_aktivitaet'], $userid);
+            while($row = mysqli_fetch_assoc($nextactivities)){
+                if($return != TRUE){
+                    if($row['aktivitaetblock_id'] == NULL){
+                        $validactivity = $row;
+                        $return = TRUE;
+                    }
+                    else{
+                        $nextwrittenin = getWrittenIn($userid, $row['id_aktivitaet']);
+                        if($nextwrittenin['aktivitaet_id'] == $row['id_aktivitaet']){
                             $validactivity = $row;
                             $return = TRUE;
                         }
-                        else{
-                            $nextwrittenin = getWrittenIn($userid, $row['id_aktivitaet']);
-                            if($nextwrittenin['aktivitaet_id'] == $row['id_aktivitaet']){
-                                $validactivity = $row;
-                                $return = TRUE;
-                            }
-                        }
                     }
-                }   
-            }
-            else{
-                $validactivity = NULL;
-                $return = TRUE;
-            }
+                }
+            }   
+        }
+        else{
+            $validactivity = NULL;
+            $return = TRUE;
         }
         return $validactivity;
     }
@@ -165,29 +164,27 @@
     function getBeforeValidActivity($activity, $userid){
         $return = FALSE;
         $validactivity;
-        while($return != TRUE){
-            if(!empty($activity)){
-                $activitiesbefore = getActivitiesBeforeDESC($activity['startzeit'], $activity['id_aktivitaet'], $userid);
-                while($row = mysqli_fetch_assoc($activitiesbefore)){
-                    if($return != TRUE){
-                        if($row['aktivitaetblock_id'] == NULL){
+        if(!empty($activity)){
+            $activitiesbefore = getActivitiesBeforeDESC($activity['startzeit'], $activity['id_aktivitaet'], $userid);
+            while($row = mysqli_fetch_assoc($activitiesbefore)){
+                if($return != TRUE){
+                    if($row['aktivitaetblock_id'] == NULL){
+                        $validactivity = $row;
+                        $return = TRUE;
+                    }
+                    else{
+                        $nextwrittenin = getWrittenIn($userid, $row['id_aktivitaet']);
+                        if($nextwrittenin['aktivitaet_id'] == $row['id_aktivitaet']){
                             $validactivity = $row;
                             $return = TRUE;
                         }
-                        else{
-                            $nextwrittenin = getWrittenIn($userid, $row['id_aktivitaet']);
-                            if($nextwrittenin['aktivitaet_id'] == $row['id_aktivitaet']){
-                                $validactivity = $row;
-                                $return = TRUE;
-                            }
-                        }
                     }
-                }  
+                }
             }
-            else{
-                $validactivity = NULL;
-                $return = TRUE;
-            }
+        }  
+        else{
+            $validactivity = NULL;
+            $return = TRUE;
         }
         return $validactivity;
     }
@@ -243,12 +240,12 @@
         $width = '';
         if($schnittmenge){
             $width = 'width: calc(((100% - 30px) / 2) - 8px);';
+            if($orientation == 0){
+                $width .= 'float: left;';
+            }
         }
         else{
             $width = 'width: calc(100% - 30px);';
-        }
-        if($orientation){
-            $width .= 'float: left;';
         }
         return $width;
     }

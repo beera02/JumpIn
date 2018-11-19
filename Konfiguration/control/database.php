@@ -336,6 +336,15 @@
             return $result;
         }
 
+        function getLowestFeedbackCategory(){
+            $db = getDatabase();
+            $sql = ("SELECT MIN(aufschaltszeit) FROM FEEDBACKKATEGORIE");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
         function getAllOptionsByFeedbackID($id){
             $db = getDatabase();
             $sql = ("SELECT * FROM OPTIONEN WHERE feedbackkategorie_id = '$id'");
@@ -494,7 +503,7 @@
         function getActivityAndWrittenInByActivityentityIDAndUserID($aeid, $userid){
             $db = getDatabase();
             $sql = ("SELECT * FROM AKTIVITAET AS a
-                JOIN EINSCHREIBEN AS e ON e.aktivitaet_id = a.id_aktivitaet 
+                LEFT JOIN EINSCHREIBEN AS e ON e.aktivitaet_id = a.id_aktivitaet 
                 JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
                 JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
                 JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe            
@@ -571,10 +580,10 @@
             $db->close();
         }
 
-        function insertFeedbackCategory($question, $options){
+        function insertFeedbackCategory($question, $options, $time){
             $db = getDatabase();
-            $preparedquery = $db->prepare("INSERT INTO FEEDBACKKATEGORIE (id_feedbackkategorie, frage, anzahloptionen) VALUES (NULL,?,?)");
-            $preparedquery->bind_param("si", $question, $options);
+            $preparedquery = $db->prepare("INSERT INTO FEEDBACKKATEGORIE (id_feedbackkategorie, frage, anzahloptionen, aufschaltszeit) VALUES (NULL,?,?,?)");
+            $preparedquery->bind_param("sis", $question, $options, $time);
             $preparedquery->execute();
             $_SESSION['feedback_add'] = $db->insert_id;
             $db->close();
@@ -608,6 +617,14 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("INSERT INTO EINSCHREIBEN (aktivitaet_id, benutzer_id) VALUES (?,?)");
             $preparedquery->bind_param("ii", $activityid, $userid);
+            $preparedquery->execute();
+            $db->close();
+        }
+
+        function insertUserFeedback($userid, $feedbackid, $optionid, $comment){
+            $db = getDatabase();
+            $preparedquery = $db->prepare("INSERT INTO FEEDBACKBOGEN(benutzer_id, feedbackkategorie_id, optionen_id, bemerkung) VALUES (?,?,?,?)");
+            $preparedquery->bind_param("iiis", $userid, $feedbackid, $optionid, $comment);
             $preparedquery->execute();
             $db->close();
         }
@@ -745,10 +762,10 @@
             $db->close();
         }
 
-        function updateFeedbackCategory($id, $question, $options){
+        function updateFeedbackCategory($id, $question, $options, $time){
             $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE FEEDBACKKATEGORIE SET frage = ?, anzahloptionen = ? WHERE id_feedbackkategorie = '$id'");
-            $preparedquery->bind_param("si", $question, $options);
+            $preparedquery = $db->prepare("UPDATE FEEDBACKKATEGORIE SET frage = ?, anzahloptionen = ?, aufschaltszeit = ? WHERE id_feedbackkategorie = '$id'");
+            $preparedquery->bind_param("sis", $question, $options, $time);
             $preparedquery->execute();
             $db->close();
         }

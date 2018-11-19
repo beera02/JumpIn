@@ -135,6 +135,7 @@ CREATE TABLE FEEDBACKKATEGORIE(
     id_feedbackkategorie INT AUTO_INCREMENT,
     frage VARCHAR(300),
     anzahloptionen INT,
+    aufschaltszeit DATETIME,
     PRIMARY KEY (id_feedbackkategorie)
 );
 
@@ -152,9 +153,13 @@ CREATE TABLE OPTIONEN(
 CREATE TABLE FEEDBACKBOGEN(
     benutzer_id INT,
     feedbackkategorie_id INT,
-    buttonnummer INT,
+    optionen_id INT,
     bemerkung VARCHAR(500),
     PRIMARY KEY (benutzer_id, feedbackkategorie_id),
+    FOREIGN KEY (optionen_id)
+        REFERENCES OPTIONEN(id_optionen)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
     FOREIGN KEY (benutzer_id)
         REFERENCES BENUTZER(id_benutzer)
         ON DELETE CASCADE
@@ -167,6 +172,9 @@ CREATE TABLE FEEDBACKBOGEN(
 
 INSERT INTO BENUTZER VALUES
 (NULL, "Admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus", NULL);
+
+INSERT INTO BENUTZER VALUES
+(NULL, "beera", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "Aaron", "Beer", NULL);
 
 INSERT INTO GRUPPE VALUES
 (NULL, "Admin", 0),

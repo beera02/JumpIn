@@ -17,6 +17,11 @@
                 <p class="p_form">Anzahl Antwortoptionen</p>
                 <input class="forms_textfield" type="text" name="anzahloptionen" value="'.$datensatz['anzahloptionen'].'"/>
                 <br>
+                <p class="p_form">Aufschaltszeit</p>
+                <p class="p_form_comment">Es wird nur die kleinste Zeit aller Feedbackkategorien berücksichtigt</p>
+                <input class="forms_date" type="date" name="aufschaltsdate" value="'.returnDate($datensatz['aufschaltszeit']).'"/>
+                <input class="forms_time" type="time" name="aufschaltszeit" value="'.returnTime($datensatz['aufschaltszeit']).'"/>
+                <br>
                 <input class="button_weiter" type="submit" name="submit_btn" value="Weiter"/>
                 <input class="button_zurück" type="submit" name="submit_btn" value="Zurück"/>
             </form>

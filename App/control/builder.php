@@ -228,4 +228,17 @@
 			return TRUE;
 		}
 	}
+
+	function getFeedback(){
+		$feedbackcategory = getLowestFeedbackCategory();
+		if(strtotime($feedbackcategory['MIN(aufschaltszeit)']) - strtotime(date("Y-m-d H:i:s")) <= 0){
+			echo '
+				<a class="a_section" href="feedback">
+					<section class="section sectionFeedback">
+						<p class="p_section">Feedback</p>
+					</section>
+				</a>
+			';
+		}
+	}
 ?>

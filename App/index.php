@@ -76,6 +76,15 @@
 			case 'validate_einschreiben':
 				build('validate_einschreiben.php');
 				break;
+			case 'feedback':
+				build('./view/feedback.php');
+				break;
+			case 'feedback_categories':
+				build('./view/feedback_categories.php');
+				break;
+			case 'validate_feedback_categories':
+				build('validate_feedback_categories.php');
+				break;
 			default:
 				build('./view/home.php');
 				break;
