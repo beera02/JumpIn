@@ -231,14 +231,36 @@
 
 	function getFeedback(){
 		$feedbackcategory = getLowestFeedbackCategory();
-		if(strtotime($feedbackcategory['MIN(aufschaltszeit)']) - strtotime(date("Y-m-d H:i:s")) <= 0){
-			echo '
-				<a class="a_section" href="feedback">
-					<section class="section sectionFeedback">
-						<p class="p_section">Feedback</p>
-					</section>
-				</a>
-			';
+		$feedbackcategories = getAllFeedbackCategories();
+		if(!empty($feedbackcategory) & !empty($feedbackcategories)){
+			$counterdata = 0;
+			$counteruser = 0;
+			while($row = mysqli_fetch_assoc($feedbackcategories)){
+				$counterdata++;
+				$data = getUserFeedbackByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
+				if(!empty($data)){
+					if($data['feedbackkategorie_id'] == $row['id_feedbackkategorie']){
+						$counteruser++;
+					}
+					else{
+						break;
+					}
+				}
+				else{
+					break;
+				}
+			}
+			if(strtotime($feedbackcategory['MIN(aufschaltszeit)']) - strtotime(date("Y-m-d H:i:s")) <= 0){
+				if($counterdata != $counteruser){
+					echo '
+						<a class="a_section" href="feedback">
+							<section class="section sectionFeedback">
+								<p class="p_section">Feedback</p>
+							</section>
+						</a>
+					';
+				}
+			}
 		}
 	}
 ?>

@@ -512,6 +512,15 @@
             $db->close();
             return $result;
         }
+
+        function getUserFeedbackByFeedbackCategoryID($id, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$id' AND benutzer_id = '$userid'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
     
         function insertUser($username, $password, $name, $prename){
             $db = getDatabase();

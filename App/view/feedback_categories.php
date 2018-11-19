@@ -56,4 +56,7 @@
             header('Location: home');
         }
     }
+    else{
+        header('Location: home'); 
+    }
 ?>
