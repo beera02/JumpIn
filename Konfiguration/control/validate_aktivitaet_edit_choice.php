@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     if($_POST['submit_btn'] == "Bearbeiten"){
         $_SESSION['id_aktivitaet'] = $_POST['id_aktivitaet'];
         header('Location: aktivitaet_edit');

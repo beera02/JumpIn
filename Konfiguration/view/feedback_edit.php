@@ -11,6 +11,9 @@
                 <p class="p_form_title">
                     Feedbackkategorie bearbeiten
                 </p>
+        ';
+        require_once('error.php');
+        echo '
                 <p class="p_form">Frage des Feedbacks</p>
 		        <textarea class="forms_textarea" name="frage" maxlength="300">'.$datensatz['frage'].'</textarea>
                 <br>

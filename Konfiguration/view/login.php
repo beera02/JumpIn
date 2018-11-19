@@ -1,6 +1,9 @@
 <img id="img_login" src="./image/user.png" alt="usericon">
 <form action="validate_anmelden" method="post">
 	<div id="div_login">
+		<?php
+			require_once('error.php');
+		?>
 		<p class="p_login">Benutzername</p>
 		<input class="forms_login" type="text" name="benutzername" required/>
 		<br>

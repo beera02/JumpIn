@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $benutzerid = (int)$_SESSION['id_benutzer'];
 
     $iterated = array();

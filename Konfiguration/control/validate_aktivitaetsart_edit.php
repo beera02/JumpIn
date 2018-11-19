@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $invalid = false;
 
     if($_POST['submit_btn'] == "Ändern"){
@@ -11,11 +12,20 @@
                     if ($resultatstring != $_POST['aktivitaetsartname']){
                         $invalid = true;
                     }
+                    else{
+                        $_SESSION['error'] = "Aktivitätsart mit diesem Aktivitätsartname existiert bereits!";
+                    }
                 }
                 else{
                     $invalid = true;
                 }
-            } 
+            }
+            else{
+                $_SESSION['error'] = "Der Aktivitätsartname ist zu lang! Max. 30 Zeichen!";
+            }
+        }
+        else{
+            $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
             if($_POST['einschreiben'] == "true"){

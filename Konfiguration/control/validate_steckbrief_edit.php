@@ -14,7 +14,13 @@
                 if($_POST['einzeiler'] == "true"){
                     $einzeiler = 1;
                 }
-            } 
+            }
+            else{
+                $_SESSION['error'] = "Der Steckbriefkategoriename ist zu lang! Max. 30 Zeichen!";
+            }
+        }
+        else{
+            $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
             updateCharacteristicsCategory($_SESSION['id_steckbriefkategorie'], $_POST['name'], $obligation, $einzeiler);

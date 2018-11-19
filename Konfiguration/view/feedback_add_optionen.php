@@ -6,6 +6,9 @@
         <p class="p_form_title">
             Antwortoptionen zu Feedbackfrage hinzufügen
         </p>
+        <?php
+            require_once('error.php');
+        ?>
         <form action="validate_feedback_add_optionen" method="post">
             <div class="div_forms_checkbox">
                 <?php

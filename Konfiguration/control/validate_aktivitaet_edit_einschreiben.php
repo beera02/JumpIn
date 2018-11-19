@@ -1,10 +1,22 @@
 <?php
+    $_SESSION['error'] = NULL;
     $invalid = false;
 
     if(!empty($_POST['anzahlteilnehmer'])){
-        if(ctype_digit($_POST['anzahlteilnehmer']) & $_POST['aktivitaetblock'] != "null"){
-            $invalid = true;
+        if(ctype_digit($_POST['anzahlteilnehmer'])){
+            if($_POST['aktivitaetblock'] != "null"){
+                $invalid = true;
+            }
+            else{
+                $_SESSION['error'] = "Es wurde kein Aktivitätsblock ausgewählt!";
+            }
         }
+        else{
+            $_SESSION['error'] = "Anzahlteilnehmer muss eine Zahl sein!";
+        }
+    }
+    else{
+        $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
     }
     if($invalid){
         if(isset($_SESSION['info'])){

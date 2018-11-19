@@ -632,3 +632,9 @@ td, th {
         margin: 32px 20px 0 0;
     }
 }
+.p_error{
+    margin: 10px 20px 10px 20px;
+    word-wrap:break-word;
+    color: #a51728;
+    font-weight: 800;
+}

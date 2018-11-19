@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Neue Notfallkartenkategorie erstellen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Notfallname</p>
             <input class="forms_textfield" type="text" name="name"/>
 		    <br>

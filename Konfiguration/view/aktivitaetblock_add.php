@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Neuer Aktivitätsblock erstellen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Aktivitätsblockname</p>
             <input class="forms_textfield" type="text" name="name"/>
 		    <br>

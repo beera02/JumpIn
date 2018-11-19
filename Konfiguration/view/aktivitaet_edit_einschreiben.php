@@ -11,6 +11,9 @@
                 <p class="p_form_title">
                     Weitere Informationen für das Einschreiben bearbeiten
                 </p>
+        ';
+        require_once('error.php');
+        echo'
                 <p class="p_form">Aktivitätsblock</p>
                 <select class="forms_dropdown" name="aktivitaetblock">
                     <option value="null">-</option>

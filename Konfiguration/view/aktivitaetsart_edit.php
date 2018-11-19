@@ -11,6 +11,9 @@
                     <p class="p_form_title">
                         Aktivitätsart bearbeiten
                     </p>
+        ';
+        require_once('error.php');
+        echo '
                     <p class="p_form">Aktivitätsartname</p>
                     <input class="forms_textfield" type="text" name="aktivitaetsartname"  value="'.$datensatz['name'].'"/>
                     <br>

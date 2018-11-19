@@ -11,6 +11,9 @@
                 <p class="p_form_title">
                     Notfallkartenkategorie bearbeiten
                 </p>
+        ';
+        require_once('error.php');
+        echo '
                 <p class="p_form">Notfallname</p>
                 <input class="forms_textfield" type="text" name="name" value="'.$datensatz['name'].'"/>
                 <br>

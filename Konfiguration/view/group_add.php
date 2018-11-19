@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Gruppe zum JumpIn hinzufügen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Gruppenname</p>
             <input class="forms_textfield" type="text" name="gruppenname"/>
             <br>

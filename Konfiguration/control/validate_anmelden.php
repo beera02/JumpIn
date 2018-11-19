@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $invalid = false;
 
     if(!(empty($_POST['passwort'])) & !(empty($_POST['benutzername']))){
@@ -12,8 +13,15 @@
                 if(strtolower($gruppenabfragearray["gruppenname"]) == "admin"){
                     $invalid = true;
                 }
+                else{
+                    $_SESSION['error'] = "Benutzername und/oder Passwort sind nicht richtig!";
+                }
             }
         }
+        $_SESSION['error'] = "Benutzername und/oder Passwort sind nicht richtig!";
+    }
+    else{
+        $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
     }
     
     if($invalid){

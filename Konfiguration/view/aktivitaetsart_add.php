@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Aktivitätsart hinzufügen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Aktivitätsartname</p>
             <input class="forms_textfield" type="text" name="aktivitaetsartname"/>
             <br>

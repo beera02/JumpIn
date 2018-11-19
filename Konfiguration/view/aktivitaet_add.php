@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Neue Aktivität erstellen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Aktivitätsname</p>
             <input class="forms_textfield" type="text" name="aktivitaetsname"/>
 		    <br>

@@ -11,6 +11,9 @@
                     <p class="p_form_title">
                         Steckbriefkategorie bearbeiten
                     </p>
+        ';
+        require_once('error.php');
+        echo '
                     <p class="p_form">Steckbriefkategoriename</p>
                     <input class="forms_textfield" type="text" name="name" pattern="[a-zA-ZäöüÄÖÜß]{30}" value="'.$datensatz['name'].'"/>
                     <br>

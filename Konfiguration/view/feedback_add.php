@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Neue Feedbackkategorie erstellen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Frage des Feedbacks</p>
 		    <textarea class="forms_textarea" name="frage" maxlength="300"></textarea>
             <br>

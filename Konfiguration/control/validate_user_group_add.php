@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $benutzerid = (int)$_SESSION['user_add'];
 
     if($_POST['submit_btn'] == "Zurück"){

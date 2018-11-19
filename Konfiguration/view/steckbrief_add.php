@@ -7,6 +7,9 @@
             <p class="p_form_title">
                 Neue Steckbriefkategorie erstellen
             </p>
+            <?php
+                require_once('error.php');
+            ?>
             <p class="p_form">Steckbriefkategoriename</p>
             <input class="forms_textfield" type="text" name="name" pattern="[a-zA-ZäöüÄÖÜß]{30}"/>
 		    <br>
