@@ -1,15 +1,17 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $aktivitaetsartname;
 
     if($_POST['submit_btn'] == "Ändern"){
         if(!empty($_POST['aktivitaetsartname'])){
-            if(strlen($_POST['aktivitaetsartname']) <= 30){
+            $aktivitaetsartname = htmlspecialchars($_POST['aktivitaetsartname']);
+            if(strlen($aktivitaetsartname) <= 30){
                 $result = getArtByID($_SESSION['id_art']);
                 
-                if($result['name'] != $_POST['aktivitaetsartname']){
-                    $resultatstring = getArtnameByArtname($_POST['aktivitaetsartname']);
-                    if ($resultatstring != $_POST['aktivitaetsartname']){
+                if($result['name'] != $aktivitaetsartname){
+                    $resultatstring = getArtnameByArtname($aktivitaetsartname);
+                    if ($resultatstring != $aktivitaetsartname){
                         $invalid = true;
                     }
                     else{
@@ -29,11 +31,11 @@
         }
         if($invalid){
             if($_POST['einschreiben'] == "true"){
-                updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname'], 1);
+                updateArtByID($_SESSION['id_art'], $aktivitaetsartname, 1);
                 header('Location: aktivitaetsart_edit_choice');
             }
             else if($_POST['einschreiben'] == "false"){
-                updateArtByID($_SESSION['id_art'], $_POST['aktivitaetsartname'], 0);
+                updateArtByID($_SESSION['id_art'], $aktivitaetsartname, 0);
                 header('Location: aktivitaetsart_edit_choice');
             }
             else{

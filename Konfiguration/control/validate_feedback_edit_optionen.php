@@ -7,6 +7,7 @@
         foreach($_POST['antwort'] as $antwort){
             $validated[] = $antwort;
             if(!empty($antwort)){
+                $antwort = htmlspecialchars($antwort);
                 if(strlen($antwort) <= 300){
                     $invalid += 1;
                 }
@@ -16,6 +17,7 @@
     if($invalid == count($validated)){
         deleteAllOptionsByFeedbackID($_SESSION['id_feedbackkategorie']);
         foreach($validated as $row){
+            $row = htmlspecialchars($row);
             insertOption($_SESSION['id_feedbackkategorie'], $row);
         }
         header('Location: feedback');

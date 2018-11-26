@@ -1,14 +1,16 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $name;
 
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['gruppenname']) & !empty($_POST['level'])){
-            if(strlen($_POST['gruppenname']) <= 30){
+            $name = htmlspecialchars($_POST['gruppenname']);
+            if(strlen($name) <= 30){
                 if(ctype_digit($_POST['level'])){
-                    $dbgroupname = getGroupnameByGroupname($_POST['gruppenname']);
+                    $dbgroupname = getGroupnameByGroupname($name);
     
-                    if ($dbgroupname != $_POST['gruppenname']){
+                    if ($dbgroupname != $name){
                         $invalid = true;
                     }
                     else{
@@ -27,7 +29,7 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
-            insertGroup($_POST['gruppenname'], $_POST['level']);
+            insertGroup($name, $_POST['level']);
             header('Location: group');
         }
         else{

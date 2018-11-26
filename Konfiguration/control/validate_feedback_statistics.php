@@ -1,6 +1,6 @@
 <?php
-    $validated = false;
     $_SESSION['error'] = NULL;
+    $validated = false;
 
     if($_POST['submit_btn'] == "Anzeigen"){
         if(!empty($_POST['username'])){

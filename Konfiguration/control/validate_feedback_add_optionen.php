@@ -7,6 +7,7 @@
         foreach($_POST['antwort'] as $antwort){
             $iterated[] = $antwort;
             if(!empty($antwort)){
+                $antwort = htmlspecialchars($antwort);
                 if(strlen($antwort) <= 300){
                     $invalid += 1;
                 }
@@ -15,6 +16,7 @@
     }
     if($invalid == count($iterated)){
         foreach($iterated as $row){
+            $row = htmlspecialchars($row);
             insertOption($_SESSION['feedback_add'], $row);
         }
         header('Location: feedback');

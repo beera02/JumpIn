@@ -10,7 +10,8 @@
                 foreach($_POST['steckbrief'] as $validate){
                     $x++;
                     if(!empty($_POST[''.$validate.''])){
-                        if(strlen($_POST[''.$validate.'']) <= 300){
+                        $steckbrief = htmlspecialchars($_POST[''.$validate.'']);
+                        if(strlen($steckbrief) <= 300){
                             $y++;
                         }
                     }
@@ -51,7 +52,8 @@
         if($validated == true){
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
             foreach($_POST['steckbrief'] as $validate){
-                insertCharacteristics($validate, $userid, $_POST[''.$validate.'']);
+                $steckbrief = htmlspecialchars($_POST[''.$validate.'']);
+                insertCharacteristics($validate, $userid, $steckbrief);
             }
             header('Location: steckbrief_kategorie_add');
         }

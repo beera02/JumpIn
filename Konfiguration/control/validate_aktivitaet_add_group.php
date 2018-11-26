@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
     $aktivitaetid = $_SESSION['activity_add'];
 
     if(!empty($_POST['group'])){

@@ -1,13 +1,15 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $aktivitaetsartname;
 
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['aktivitaetsartname'])){
-            if(strlen($_POST['aktivitaetsartname']) <= 30){              
-                $dbArtname = getArtnameByArtname($_POST['aktivitaetsartname']);
+            $aktivitaetsartname = htmlspecialchars($_POST['aktivitaetsartname']);
+            if(strlen($aktivitaetsartname) <= 30){              
+                $dbArtname = getArtnameByArtname($aktivitaetsartname);
 
-	            if ($dbArtname != $_POST['aktivitaetsartname']){
+	            if ($dbArtname != $aktivitaetsartname){
                     $invalid = true;
                 }
                 else{
@@ -23,11 +25,11 @@
         }
         if($invalid){
             if($_POST['einschreiben'] == "true"){
-                insertArt($_POST['aktivitaetsartname'], 1);
+                insertArt($aktivitaetsartname, 1);
                 header('Location: aktivitaetsart');
             }
             else if($_POST['einschreiben'] == "false"){
-                insertArt($_POST['aktivitaetsartname'], 0);
+                insertArt($aktivitaetsartname, 0);
                 header('Location: aktivitaetsart');
             }
             else{

@@ -1,14 +1,16 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $name;
 
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['name']) & !empty($_POST['writeindate']) & !empty($_POST['writeintime'])){
-            if(strlen($_POST['name']) <= 30){  
+            $name = htmlspecialchars($_POST['name']);
+            if(strlen($name) <= 30){  
                 if($_POST['aktivitaetsart'] != "null"){
-                    $dbname = getActivityentitynameByName($_POST['name']);
+                    $dbname = getActivityentitynameByName($name);
 
-                    if ($dbname != $_POST['name']){
+                    if ($dbname != $name){
                         $invalid = true;
                     }
                     else{
@@ -27,7 +29,8 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
-            insertActivityentity($_POST['name'], getArtIDByName($_POST['aktivitaetsart']), validateDateTime($_POST['writeindate'], $_POST['writeintime']));
+            $aktivitaetsartname = htmlspecialchars($_POST['aktivitaetsart']);
+            insertActivityentity($name, getArtIDByName($aktivitaetsartname), validateDateTime($_POST['writeindate'], $_POST['writeintime']));
             header('Location: aktivitaetblock');
         }
         else{

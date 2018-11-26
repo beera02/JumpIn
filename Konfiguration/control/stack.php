@@ -1,4 +1,5 @@
 <?php
+    $_SESSION['error'] = NULL;
 	oneStackBack();
     //funktion um ein file im stack zurückzugehen
 	function oneStackBack(){

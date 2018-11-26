@@ -1,10 +1,16 @@
 <?php
+    $_SESSION['error'] = NULL;
     $invalid = false;
+    $name;
+    $info;
 
     if($_POST['submit_btn'] == "Ändern"){
         if(!empty($_POST['name']) & !empty($_POST['info'])){
-            if(strlen($_POST['name']) <= 30){    
-                if(strlen($_POST['info']) <= 300){
+            $name = htmlspecialchars($_POST['name']);
+            $info = htmlspecialchars($_POST['info']);
+
+            if(strlen($name) <= 30){    
+                if(strlen($info) <= 300){
                     $invalid = true;
                 }
                 else{
@@ -19,7 +25,7 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
-            updateEmergencyCategory($_SESSION['id_notfallkategorie'], $_POST['name'], $_POST['info']);
+            updateEmergencyCategory($_SESSION['id_notfallkategorie'], $name, $info);
             header('Location: notfallkarte');
         }
         else{

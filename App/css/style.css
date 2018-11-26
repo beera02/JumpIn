@@ -277,13 +277,6 @@ td, th {
 tr:nth-child(even){
     background-color: #bcb1a3;
 }
-tr:nth-child(even):hover{
-    background-color: #806f60;
-    color: black;
-}
-tr:hover {
-    background-color: #bcb1a3;
-}
 .forms_textarea{
     height: 100px;
     width: 80%;

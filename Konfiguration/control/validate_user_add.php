@@ -1,25 +1,51 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $name;
+    $vorname;
+    $benutzername;
 
     if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['benutzername']) & !empty($_POST['vorname']) & !empty($_POST['name']) & !empty($_POST['passwort']) & !empty($_POST['passwort2'])){
-            if(strlen($_POST['benutzername']) <= 30){
-                if(strlen($_POST['vorname']) <= 50){
-                    if(strlen($_POST['name']) <= 50){
-                        $dbbenutzername = getUsernameByUsername($_POST['benutzername']);;
+            $name = htmlspecialchars($_POST['name']);
+            $vorname = htmlspecialchars($_POST['vorname']);
+            $benutzername = htmlspecialchars($_POST['benutzername']);
+            if(strlen($benutzername) <= 30){
+                if(strlen($vorname) <= 50){
+                    if(strlen($name) <= 50){
+                        if(preg_match('/[a-z]/', $_POST["passwort"])){
+                            if(preg_match('/[A-Z]/', $_POST["passwort"])){
+                                if(preg_match('/\d/', $_POST["passwort"])){
+                                    if(strlen($_POST['passwort']) >= 8){      
+                                        $dbbenutzername = getUsernameByUsername($benutzername);;
     
-                        if ($dbbenutzername != $_POST['benutzername']){
-                            if($_POST['passwort'] == $_POST['passwort2']){
-                                $invalid = true;
+                                        if ($dbbenutzername != $benutzername){
+                                            if($_POST['passwort'] == $_POST['passwort2']){
+                                                $invalid = true;
+                                            }
+                                            else{
+                                                $_SESSION['error'] = "Passwörter sind nicht identisch!";
+                                            }
+                                        }
+                                        else{
+                                            $_SESSION['error'] = "Benutzer mit diesem Benutzernamen existiert bereits!";
+                                        } 
+                                    }
+                                    else{
+                                        $_SESSION['error'] = "Das Passwort muss mindestens 8 Zeichen lang sein!";
+                                    }
+                                }
+                                else{
+                                    $_SESSION['error'] = "Das Passwort muss eine Zahl beinhalten!";
+                                }
                             }
                             else{
-                                $_SESSION['error'] = "Passwörter sind nicht identisch!";
+                                $_SESSION['error'] = "Das Passwort muss einen Grossbuchstaben beinhalten!";
                             }
                         }
                         else{
-                            $_SESSION['error'] = "Benutzer mit diesem Benutzernamen existiert bereits!";
-                        } 
+                            $_SESSION['error'] = "Das Passwort muss einen Kleinbuchstaben beinhalten!";
+                        }
                     }
                     else{
                         $_SESSION['error'] = "Der Name ist zu lang! Max. 50 Zeichen!";
@@ -37,7 +63,7 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
-            insertUser($_POST['benutzername'], $_POST['passwort'], $_POST['name'], $_POST['vorname']);
+            insertUser($benutzername, $_POST['passwort'], $name, $vorname);
             $userid = getUserIDByUsername($_POST['benutzername']);
             $_SESSION['user_add'] = $userid;
             header('Location: user_group_add');

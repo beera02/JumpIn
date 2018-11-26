@@ -2,17 +2,22 @@
     $_SESSION['error'] = NULL;
     $invalid = false;
     $einschreiben = false;
+    $aktivitaetsname;
+    $treffpunkt;
 
     if($_POST['submit_btn'] == "Weiter"){
         if(!empty($_POST['aktivitaetsname']) & !empty($_POST['treffpunkt']) & !empty($_POST['startdate']) & !empty($_POST['starttime']) & !empty($_POST['enddate']) & !empty($_POST['endtime'])){
-            if(strlen($_POST['aktivitaetsname']) <= 30){
-                if(strlen($_POST['treffpunkt']) <= 30){
+            $aktivitaetsname = htmlspecialchars($_POST['aktivitaetsname']);
+            $treffpunkt = htmlspecialchars($_POST['treffpunkt']);
+            if(strlen($aktivitaetsname) <= 30){
+                if(strlen($treffpunkt) <= 30){
                     if($_POST['aktivitaetsart'] != "null"){
                         $invalid = true;
     
                         if(!empty($_POST['info'])){
-                            if(strlen($_POST['info']) <= 500){
-                                $_SESSION['info'] = $_POST['info'];
+                            $info = htmlspecialchars($_POST['info']);
+                            if(strlen($info) <= 500){
+                                $_SESSION['info'] = $info;
                             }
                             else{
                                 $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
@@ -40,9 +45,9 @@
         }
         if($invalid){
             if($einschreiben == true){
-                $_SESSION['aktivitaetsname'] = $_POST['aktivitaetsname'];
+                $_SESSION['aktivitaetsname'] = $aktivitaetsname;
                 $_SESSION['aktivitaetsart'] = $_POST['aktivitaetsart'];
-                $_SESSION['treffpunkt'] = $_POST['treffpunkt'];
+                $_SESSION['treffpunkt'] = $treffpunkt;
                 $_SESSION['startdate'] = $_POST['startdate'];
                 $_SESSION['starttime'] = $_POST['starttime'];
                 $_SESSION['enddate'] = $_POST['enddate'];
@@ -51,10 +56,10 @@
             }
             else{
                 if(isset($_SESSION['info'])){
-                    updateActivity($_SESSION['id_aktivitaet'], $_POST['aktivitaetsname'], NULL, getArtIDByName($_POST['aktivitaetsart']), $_POST['treffpunkt'], NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), $_SESSION['info']);
+                    updateActivity($_SESSION['id_aktivitaet'], $aktivitaetsname, NULL, getArtIDByName($_POST['aktivitaetsart']), $treffpunkt, NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), $_SESSION['info']);
                 }
                 else{
-                    updateActivity($_SESSION['id_aktivitaet'], $_POST['aktivitaetsname'], NULL, getArtIDByName($_POST['aktivitaetsart']), $_POST['treffpunkt'], NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), NULL);
+                    updateActivity($_SESSION['id_aktivitaet'], $aktivitaetsname, NULL, getArtIDByName($_POST['aktivitaetsart']), $treffpunkt, NULL, validateDateTime($_POST['startdate'], $_POST['starttime']), validateDateTime($_POST['enddate'], $_POST['endtime']), NULL);
                 }
                 header('Location: aktivitaet_edit_group');
             }

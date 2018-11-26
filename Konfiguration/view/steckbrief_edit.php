@@ -15,7 +15,7 @@
         require_once('error.php');
         echo '
                     <p class="p_form">Steckbriefkategoriename</p>
-                    <input class="forms_textfield" type="text" name="name" pattern="[a-zA-ZäöüÄÖÜß]{30}" value="'.$datensatz['name'].'"/>
+                    <input class="forms_textfield" type="text" name="name" value="'.$datensatz['name'].'"/>
                     <br>
                     <p class="p_form">Obligatorisch</p>
                     '.getObligation($datensatz['obligation']).'

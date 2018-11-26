@@ -1,13 +1,15 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $benutzername;
 
     if(!(empty($_POST['passwort'])) & !(empty($_POST['benutzername']))){
-        $dbpasswort = getPasswordByUsername($_POST['benutzername']);
-        $usrpasswort = hash('sha256', $_POST['passwort'] . $_POST['benutzername']);
+        $benutzername = htmlspecialchars($_POST['benutzername']);
+        $dbpasswort = getPasswordByUsername($benutzername);
+        $usrpasswort = hash('sha256', $_POST['passwort'] . $benutzername);
         
         if($usrpasswort == $dbpasswort){
-            $gruppenabfrage = getGroupnameByUsername($_POST['benutzername']);
+            $gruppenabfrage = getGroupnameByUsername($benutzername);
             
             while ($gruppenabfragearray = mysqli_fetch_assoc($gruppenabfrage)) {
                 if(strtolower($gruppenabfragearray["gruppenname"]) == "admin"){
@@ -27,7 +29,7 @@
     }
     
     if($invalid){
-        $_SESSION['benutzer'] = $_POST['benutzername'];
+        $_SESSION['benutzer'] = $benutzername;
         header('Location: home');
     }
     else{

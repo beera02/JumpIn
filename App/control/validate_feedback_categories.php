@@ -3,8 +3,9 @@
     if($_POST['submit_btn'] == "Weiter" | $_POST['submit_btn'] == "Abschliessen"){
         if(!empty($_POST['options'])){
             if(!empty($_POST['bemerkung'])){
-                if(strlen($_POST['bemerkung']) <= 500){
-                    insertUserFeedback(getUserIDByUsername($_SESSION['benutzer_app']), $_POST['feedbackid'], $_POST['options'], $_POST['bemerkung']);
+                $bemerkung = htmlspecialchars($_POST['bemerkung']);
+                if(strlen($bemerkung) <= 500){
+                    insertUserFeedback(getUserIDByUsername($_SESSION['benutzer_app']), $_POST['feedbackid'], $_POST['options'], $bemerkung);
                     if($_POST['submit_btn'] == "Abschliessen"){
                         header('Location: home');
                     }

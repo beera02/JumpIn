@@ -1,16 +1,18 @@
 <?php
     $_SESSION['error'] = NULL;
     $invalid = false;
+    $name;
 
     if($_POST['submit_btn'] == "Ändern"){
         if(!empty($_POST['gruppenname']) & !empty($_POST['level'])){
-            if(strlen($_POST['gruppenname']) <= 30){
+            $name = htmlspecialchars($_POST['gruppenname']);
+            if(strlen($name) <= 30){
                 if(ctype_digit($_POST['level'])){
                     $result = getGroupByID($_SESSION['id_gruppe']);
                 
-                    if($result['name'] != $_POST['gruppenname']){
-                        $resultatstring = getGroupnameByGroupname($_POST['gruppenname']);
-                        if ($resultatstring != $_POST['gruppenname']){
+                    if($result['name'] != $name){
+                        $resultatstring = getGroupnameByGroupname($name);
+                        if ($resultatstring != $name){
                             $invalid = true;
                         }
                         else{
@@ -33,7 +35,7 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($invalid){
-            updateGroupByID($_SESSION['id_gruppe'], $_POST['gruppenname'], $_POST['level']);
+            updateGroupByID($_SESSION['id_gruppe'], $name, $_POST['level']);
             header('Location: group_edit_choice');
         }
         else{

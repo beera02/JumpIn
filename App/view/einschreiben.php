@@ -50,7 +50,7 @@
                 $user = getUserByID($row['benutzer_id']);
                 echo '
                     <div class="div_wochenplan_view_teilnehmer">
-                        <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                        <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png" alt=" "/>
                         <p class="p_wochenplan_view">'.$user['vorname'].' '.$user['name'].'</p>
                     </div>               
                 ';

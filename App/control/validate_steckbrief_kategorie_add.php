@@ -1,12 +1,16 @@
 <?php
     $_SESSION['error'] = NULL;
     $validated = false;
+    $steckbriefkategoriename;
+    $antwort;
 
     if($_POST['submit_btn'] == "Erstellen"){
         $einzeiler = 1;
         if(!empty($_POST['steckbriefkategoriename']) & !empty($_POST['einzeiler'])  & !empty($_POST['antwort'])){
-            if(strlen($_POST['steckbriefkategoriename']) <= 30){
-                if(strlen($_POST['antwort']) <= 300){
+            $steckbriefkategoriename = htmlspecialchars($_POST['steckbriefkategoriename']);
+            $antwort = htmlspecialchars($_POST['antwort']);
+            if(strlen($steckbriefkategoriename) <= 30){
+                if(strlen($antwort) <= 300){
                     if($_POST['einzeiler'] == "false"){
                         $einzeiler = 0;
                     }
@@ -24,8 +28,8 @@
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
         if($validated == true){
-            $id = insertCharacteristicsCategory($_POST['steckbriefkategoriename'], 0, $einzeiler);
-            insertCharacteristics($id, getUserIDByUsername($_SESSION['benutzer_app']), $_POST['antwort']);
+            $id = insertCharacteristicsCategory($steckbriefkategoriename, 0, $einzeiler);
+            insertCharacteristics($id, getUserIDByUsername($_SESSION['benutzer_app']), $antwort);
             header('Location: steckbrief');
         }
         else{
