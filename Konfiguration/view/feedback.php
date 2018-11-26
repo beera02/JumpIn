@@ -19,6 +19,14 @@
                 </p>
             </div>
         </a>
+        <a href="feedback_statistics">
+            <div class="einstellungsbox">
+                <img class="img_einstellungsbox" src="./image/feedback_statistics.png" alt="Statistik Icon">
+                <p class="p_einstellungsbox">
+                    Feedback Statistik
+                </p>
+            </div>
+        </a>
     </div>
     <form action="stack" method="post">
         <input class="button_zurück_stack" type="submit" name="submit_btn" value="Zurück">

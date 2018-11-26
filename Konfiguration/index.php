@@ -196,7 +196,18 @@
 			case 'validate_feedback_edit_optionen':
 				build('validate_feedback_edit_optionen.php');
 				break;
-
+			case 'feedback_statistics':
+				build('./view/feedback_statistics.php');
+				break;
+			case 'validate_feedback_statistics':
+				build('validate_feedback_statistics.php');
+				break;
+			case 'feedback_statistics_user':
+				build('./view/feedback_statistics_user.php');
+				break;
+			case 'validate_feedback_statistics_user':
+				build('validate_feedback_statistics_user.php');
+				break;
 			case 'user':
 				build('./view/user.php');
 				break;

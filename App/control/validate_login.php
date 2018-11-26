@@ -19,7 +19,7 @@
         header('Location: home');
     }
     else{
-        $_SESSION['error'] = "Unbekannter Benutzername oder falsches Passwort!";
+        $_SESSION['error'] = "Unbekannter Benutzername und/oder falsches Passwort!";
         header('Location: login');
     }
 ?>

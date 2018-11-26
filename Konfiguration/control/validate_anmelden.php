@@ -18,7 +18,9 @@
                 }
             }
         }
-        $_SESSION['error'] = "Benutzername und/oder Passwort sind nicht richtig!";
+        else{
+            $_SESSION['error'] = "Benutzername und/oder Passwort sind nicht richtig!";
+        }
     }
     else{
         $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";

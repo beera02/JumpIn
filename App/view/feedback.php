@@ -6,7 +6,7 @@
     $start = 1;
     if(!empty($feedbackcategories)){
         while($row = mysqli_fetch_assoc($feedbackcategories)){
-            $data = getUserFeedbackByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
+            $data = getUserFeedbackArrayByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
             if(!empty($data)){
                 if($data['feedbackkategorie_id'] == $row['id_feedbackkategorie']){
                     $start++;

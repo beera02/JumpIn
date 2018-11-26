@@ -50,7 +50,7 @@
                 <form action="steckbrief_view" method="post">
                     <button class="button_steckbrief">
                         <div class="div_steckbrief_left">
-                            <img class="img_steckbrief" src="data:image/jpeg;base64,'.base64_encode($row['bild']).'" alt="Profilbild"/>
+                            <img class="img_steckbrief" src="./userimages/'.$row['id_benutzer'].'.png" alt="Profilbild"/>
                         </div>
                         <div class="div_steckbrief_right">
                             <p class="p_steckbrief_name">

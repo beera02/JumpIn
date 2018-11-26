@@ -16,12 +16,18 @@
                     }
                 }
                 if($x == $y){
-                    $allowed =  array('jpeg','png' ,'jpg');
+                    $validated = true;
+                    $allowed =  array('jpeg','png','jpg');
                     $filename = $_FILES['bild']['name'];
                     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                    if(in_array($extension,$allowed)) {
+                    var_dump($extension);
+                    if(in_array(strtolower($extension),$allowed)) {
                         if(filesize($_FILES['bild']['tmp_name']) < 8388608){
-                            $validated = true;
+                            $uploaddir = getcwd()."\userimages\ ";
+                            $uploaddir = trim($uploaddir);
+                            $filename = getUserIDByUsername($_SESSION['benutzer_app']);
+                            $uploadfile = $uploaddir.$filename.".png";
+                            move_uploaded_file($_FILES['bild']['tmp_name'], $uploadfile);
                         }
                         else{
                             $_SESSION['error'] = "Zu grosses Bild eingelesen!";
@@ -36,18 +42,14 @@
                 }
             }
             else{
-                $_SESSION['error'] = "Es wurden keine Kategorien im Steckbrief ausgefüllt!";
+                $validated = true;
             }
         }
         else{
             $_SESSION['error'] = "Es wurde kein Bild angegeben!";
         }
         if($validated == true){
-            var_dump($_FILES['bild']['name']);
-            var_dump($_FILES['bild']['tmp_name']);
-            $content = file_get_contents($_FILES['bild']['tmp_name']);
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
-            updateUserPictureByID($userid, $content);
             foreach($_POST['steckbrief'] as $validate){
                 insertCharacteristics($validate, $userid, $_POST[''.$validate.'']);
             }

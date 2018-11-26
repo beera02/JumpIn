@@ -47,6 +47,15 @@
             return $resultarray;
         }
 
+        function getUserByUsername($name){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM BENUTZER WHERE benutzername = '$name'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
         function getUserprenameByUsername($username){
             $db = getDatabase();
             $sql = ("SELECT vorname FROM BENUTZER WHERE benutzername = '$username'");
@@ -111,7 +120,7 @@
 
         function getUserByGroupID($id){
             $db = getDatabase();
-            $sql = ("SELECT b.id_benutzer AS id_benutzer, b.benutzername AS benutzername, b.name AS name, b.vorname AS vorname, b.bild AS bild FROM BENUTZER AS b
+            $sql = ("SELECT b.id_benutzer AS id_benutzer, b.benutzername AS benutzername, b.name AS name, b.vorname AS vorname FROM BENUTZER AS b
                 JOIN BENUTZER_GRUPPE AS bg ON bg.benutzer_id=b.id_benutzer
                 WHERE bg.gruppe_id = '$id'");
             $result = $db->query($sql);
@@ -353,6 +362,14 @@
             return $result;
         }
 
+        function getUserFeedbackByOptionIDAndFeedbackCategoryID($oid, $fid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$fid' AND optionen_id = '$oid'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
         function getAllActivityEntities(){
             $db = getDatabase();
             $sql = ("SELECT * FROM AKTIVITAETBLOCK");
@@ -502,7 +519,7 @@
 
         function getActivityAndWrittenInByActivityentityIDAndUserID($aeid, $userid){
             $db = getDatabase();
-            $sql = ("SELECT * FROM AKTIVITAET AS a
+            $sql = ("SELECT e.aktivitaet_id AS aktivitaet_id, a.startzeit AS startzeit FROM AKTIVITAET AS a
                 LEFT JOIN EINSCHREIBEN AS e ON e.aktivitaet_id = a.id_aktivitaet 
                 JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
                 JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
@@ -516,6 +533,40 @@
         function getUserFeedbackByFeedbackCategoryID($id, $userid){
             $db = getDatabase();
             $sql = ("SELECT * FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$id' AND benutzer_id = '$userid'");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getUserFeedbackByFeedbackCategoryIDAndBemerkung($id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$id' AND bemerkung IS NOT NULL");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getUserFeedbackArrayByFeedbackCategoryID($id, $userid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$id' AND benutzer_id = '$userid'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getUserFeedbackCountByFeedbackCategoryID($id){
+            $db = getDatabase();
+            $sql = ("SELECT COUNT(benutzer_id) AS counted FROM FEEDBACKBOGEN WHERE feedbackkategorie_id = '$id'");
+            $result = $db->query($sql);
+            $resultarray = mysqli_fetch_assoc($result);
+            $db->close();
+            return $resultarray;
+        }
+
+        function getOptionByOptionIDAndFeedbackcategoryID($oid, $fid){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM OPTIONEN WHERE id_optionen = '$oid' AND feedbackkategorie_id = '$fid'");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
             $db->close();
@@ -783,16 +834,6 @@
             $db = getDatabase();
             $preparedquery = $db->prepare("UPDATE AKTIVITAETBLOCK SET name = ?, art_id = ?, einschreibezeit = ? WHERE id_aktivitaetblock = '$id'");
             $preparedquery->bind_param("sis", $name, $artid, $writeintime);
-            $preparedquery->execute();
-            $db->close();
-        }
-
-        function updateUserPictureByID($id, $image){
-            $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE BENUTZER SET bild = ? WHERE id_benutzer = '$id'");
-            $null = NULL;
-            $preparedquery->bind_param("b", $null);
-            $preparedquery->send_long_data(0, $image);
             $preparedquery->execute();
             $db->close();
         }

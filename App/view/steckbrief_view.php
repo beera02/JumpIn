@@ -18,7 +18,7 @@
                 <form id="editForm" action="validate_steckbrief_view" method="post" enctype="multipart/form-data"></form>
                 <form id="deleteForm" action="validate_steckbrief_loeschen" method="post"></form>
                 <p class="p_form">Bild ändern</p>
-                <img class="img_steckbrief_details" src="data:image/jpeg;base64,'.base64_encode($user['bild']).'" alt="Profilbild"/>
+                <img class="img_steckbrief_details" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
                 <input class="forms_file_details" type="file" accept=".jpg, .jpeg, .png" name="bild" form="editForm"/>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();
@@ -77,7 +77,7 @@
             echo '
                 <h2>'.$user['vorname'].' '.$user['name'].'</h2>
                 <form action="validate_steckbrief_view" method="post">
-                    <img class="img_steckbrief_details_dontknow" src="data:image/jpeg;base64,'.base64_encode($user['bild']).'" alt="Profilbild"/>
+                <img class="img_steckbrief_details_dontknow" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
                     <div class="space_blocker"></div>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();

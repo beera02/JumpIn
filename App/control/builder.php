@@ -163,7 +163,7 @@
 	function getWriteinPossebilities($source){
 		$arts = getAllArts();
 		$i = 1;
-		$return = [];
+		$return = '';
 		$userid = getUserIDByUsername($_SESSION['benutzer_app']);
         while($row1 = mysqli_fetch_assoc($arts)){
             if($row1['einschreiben'] == "1"){
@@ -186,7 +186,7 @@
 										';
 									}
 									else if($source == 'header'){
-										$return = '
+										$return .= '
 											<form action="einschreiben_choice" method="post">
 												<button class="button_navigation">
 													<a class="a_header_special" href="">
@@ -237,7 +237,7 @@
 			$counteruser = 0;
 			while($row = mysqli_fetch_assoc($feedbackcategories)){
 				$counterdata++;
-				$data = getUserFeedbackByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
+				$data = getUserFeedbackArrayByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
 				if(!empty($data)){
 					if($data['feedbackkategorie_id'] == $row['id_feedbackkategorie']){
 						$counteruser++;
@@ -256,7 +256,7 @@
 						echo '
 							<a class="a_section" href="feedback">
 								<section class="section sectionFeedback">
-									<p class="p_section">Feedback</p>
+									<p class="p_section_default">Feedback</p>
 								</section>
 							</a>
 						';

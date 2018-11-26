@@ -57,6 +57,7 @@ else{
         </a>
     </div>';
 }
+
 ?>
 <script>
     document.getElementById('navigation_button').addEventListener('click', function () {

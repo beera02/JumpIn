@@ -22,7 +22,7 @@
             echo '
                 <form action="validate_feedback_categories" method="post">
                     <div class="div_progress">
-                        <span style="width: '.$width.'%"><p class="p_progress" style="margin-left:'.$margin.'%;">'.$width.'%</p></span>
+                        <span style="width: '.$width.'%"></span>
                     </div>
                     <h2>'.$feedbackcategory['frage'].'</h2>
             ';
@@ -31,7 +31,7 @@
             while($row = mysqli_fetch_assoc($options)){
                 echo '
                     <input class="forms_radio" type="radio" name="options"
-                    value="'.$row['id_optionen'].'"> '.$row['antwort'].'<br>
+                    value="'.$row['id_optionen'].'"><p class="p_feedback_radio">'.$row['antwort'].'</p><br>
                 ';
             }
             echo '

@@ -1,5 +1,5 @@
 <?php
-    //session zerstören und zurück zur login seite gehen
+    $_SESSION['error'] = NULL;
     session_unset();
     session_destroy();
     header('Location: login');
