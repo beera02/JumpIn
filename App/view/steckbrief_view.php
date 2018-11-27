@@ -42,28 +42,53 @@
                 }
             }
             $steckbriefkategorien = getCharacteristicsByUserIDAndObligation($user['id_benutzer']);
+            $steckbriefkategorienarray = [];
+            $numbersteckbrief = 0;
             while($row = mysqli_fetch_assoc($steckbriefkategorien)){
-                if($row['einzeiler'] == "1"){
-                    echo '
-                        <p class="p_form">'.$row['name'].'</p>
-                        <input class="forms_login_löschen" type="text" name="'.$row['id_steckbriefkategorie'].'" value="'.$row['antwort'].'" form="editForm"/>
-                        <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
-                        <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
-                        <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
-                        <br>
-                    ';
+                $numbersteckbrief++;
+                array_push($steckbriefkategorienarray, $row);
+            }
+            foreach($steckbriefkategorienarray as $row){
+                if($numbersteckbrief > 1){
+                    if($row['einzeiler'] == "1"){
+                        echo '
+                            <p class="p_form">'.$row['name'].'</p>
+                            <input class="forms_login_löschen" type="text" name="'.$row['id_steckbriefkategorie'].'" value="'.$row['antwort'].'" form="editForm"/>
+                            <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
+                            <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
+                            <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
+                            <br>
+                        ';
+                    }
+                    else{
+                        echo '
+                            <form id="deleteForm" action="validate_kategorie_loeschen" method="post">
+                            <textarea class="forms_textarea_löschen" name="'.$row['id_steckbriefkategorie'].'" maxlength="300" form="editForm">'.$row['antwort'].'</textarea>
+                            <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
+                            <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
+                            <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
+                            </form>
+                            <br>
+                        ';
+                    }
                 }
-                else{
+                else if($numbersteckbrief == 1){
                     echo '
                         <p class="p_form">'.$row['name'].'</p>
-                        <form id="deleteForm" action="validate_kategorie_loeschen" method="post">
-                        <textarea class="forms_textarea_löschen" name="'.$row['id_steckbriefkategorie'].'" maxlength="300" form="editForm">'.$row['antwort'].'</textarea>
-                        <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
                         <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
-                        <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
-                        </form>
-                        <br>
                     ';
+                    if($row['einzeiler'] == "1"){
+                        echo '
+                            <input class="forms_login" type="text" name="'.$row['id_steckbriefkategorie'].'" value="'.$row['antwort'].'" form="editForm"/>
+                            <br>
+                        ';
+                    }
+                    else{
+                        echo '
+                            <textarea class="forms_textarea" name="'.$row['id_steckbriefkategorie'].'" maxlength="300" form="editForm">'.$row['antwort'].'</textarea>
+                            <br>
+                        ';
+                    }
                 }
             }
             echo '

@@ -12,6 +12,7 @@
             <h2>Aktivitäten zum einschreiben</h2>
             <p class="p_untertitel">Hier kannst du dich in eine Aktivität des Aktivitätblockes <b>'.getActivityentityNameByID($_POST['id']).'</b> einschreiben.</p>
         ';
+        $counter = 0;
         $activities = getActivityByActivityentityID($id);
         $userid = getUserIDByUsername($_SESSION['benutzer_app']);
         while($row = mysqli_fetch_assoc($activities)){
@@ -32,7 +33,16 @@
                         <input type="hidden" name="id" value="'.$row['id_aktivitaet'].'">
                     </form>
                 ';
+                $counter++;
             }
+        }
+        if($counter == 0){
+
+        }
+        else if($counter > 0){           
+            $array = array();
+            array_push($array, "einschreiben", "validate_einschreiben");
+            removeSessionInvalid($array);
         }
         echo '
             <form action="validate_einschreiben_choice_aktivitaeten" method="post">

@@ -170,20 +170,18 @@ CREATE TABLE FEEDBACKBOGEN(
 );
 
 INSERT INTO BENUTZER VALUES
-(NULL, "Admin", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "adminus", "grandus");
-
-INSERT INTO BENUTZER VALUES
-(NULL, "beera", "dbe9787aaf4002c6662e490b3f1f7512807459b6dee2e1c2e56738e1cbbd993c", "Aaron", "Beer");
+(NULL, "admin", "b766deb8974054182bae96bc91aa0916cc57263dd19d5362b305928637319c7d", "Admin", "Grande");
 
 INSERT INTO GRUPPE VALUES
+(NULL, "Alle", 0),
 (NULL, "Admin", 0),
-(NULL, "Coach", 1),
+(NULL, "Coach", 3),
 (NULL, "Informatiker", 1),
 (NULL, "Mediamatiker", 1),
 (NULL, "Informatiker EFZ", 2),
 (NULL, "Informatiker PiBS", 2),
 (NULL, "Informatiker WayUp", 2),
-(NULL, "Hilfscoach", 1);
+(NULL, "Hilfscoach", 3);
 
 INSERT INTO BENUTZER_GRUPPE VALUES
-(1,1);
+(2,1);

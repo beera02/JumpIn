@@ -36,7 +36,10 @@
 	
 	function addSessionInvalid($file){
 		$invalidfiles = $_SESSION['invalidfiles'];
-		array_push($invalidfiles, $file);
+		$schnittmenge = array_diff($file, $invalidfiles);
+		foreach($schnittmenge as $value){
+			array_push($invalidfiles, $value);
+		}
 		$_SESSION['invalidfiles'] = $invalidfiles;
 	}
 
@@ -55,18 +58,6 @@
 			return false;
 		}
 		
-	}
-
-	function addSessionValid($file){
-		$validfiles = $_SESSION['validfiles'];
-		array_push($validfiles, $file);
-		$_SESSION['validfiles'] = $validfiles;
-	}
-
-	function removeSessionValid($files){
-		$validfiles = $_SESSION['validfiles'];
-		$difference = array_diff($validfiles, $files);
-		$_SESSION['validfiles'] = $difference;
 	}
 
 	function inSessionValid($file){
@@ -162,7 +153,7 @@
 	
 	function getWriteinPossebilities($source){
 		$arts = getAllArts();
-		$i = 1;
+		$counter = 0;
 		$return = '';
 		$userid = getUserIDByUsername($_SESSION['benutzer_app']);
         while($row1 = mysqli_fetch_assoc($arts)){
@@ -197,14 +188,24 @@
 											</form>
 										';
 									}
-									$i++;
+									$counter++;
 									break 2;
 								}
 							}
 						}
-                    }
+					}
                 }
             }
+		}
+		if($counter == 0){
+			$array = array();
+            array_push($array, "einschreiben_choice", "validate_einschreiben_choice", "einschreiben_choice_aktivitaeten", "validate_einschreiben_choice_aktivitaeten", "einschreiben", "validate_einschreiben");
+            addSessionInvalid($array);
+		}
+		else if($counter > 0){
+			$array = array();
+			array_push($array, "einschreiben_choice", "validate_einschreiben_choice");
+			removeSessionInvalid($array);
 		}
 		if(!empty($return)){
 			return $return;
@@ -232,6 +233,7 @@
 	function getFeedback($source){
 		$feedbackcategory = getLowestFeedbackCategory();
 		$feedbackcategories = getAllFeedbackCategories();
+		$counter = 0;
 		if(!empty($feedbackcategory) & !empty($feedbackcategories)){
 			$counterdata = 0;
 			$counteruser = 0;
@@ -266,9 +268,19 @@
 							<a href="feedback">Feedback</a>
 						';
 					}
-
+					$counter++;
 				}
 			}
+		}
+		if($counter == 0){
+			$array = array();
+			array_push($array, "feedback", "feedback_categories", "validate_feedback_categories");
+			addSessionInvalid($array);
+		}
+		else if($counter > 0){
+			$array = array();
+			array_push($array, "feedback");
+			removeSessionInvalid($array);
 		}
 		if(!empty($return)){
 			return $return;

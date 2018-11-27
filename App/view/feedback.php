@@ -29,6 +29,9 @@
             <input class="button_weiter" type="submit" name="submit_btn" value="Starten"/>
         ';
     }
+    $array = array();
+    array_push($array, "feedback_categories", "validate_feedback_categories");
+    removeSessionInvalid($array);
     echo '
         <input type="hidden" name="startid" value="'.$start.'"/>
     ';

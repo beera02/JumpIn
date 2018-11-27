@@ -848,7 +848,7 @@
         
         function resetJumpin(){
             $db = getDatabase();
-            $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('Admin','Coach','Informatiker','Mediamatiker','Informatiker EFZ','Informatiker PiBS','Informatiker WayUp','Hilfscoach')";
+            $sql1 = "DELETE FROM GRUPPE WHERE name NOT IN ('Admin','Coach')";
             mysqli_query($db,$sql1);
             $sql2 = "DELETE FROM BENUTZER
                 WHERE id_benutzer NOT IN(
@@ -864,6 +864,12 @@
             mysqli_query($db,$sql3);
             $sql4 = "DELETE FROM STECKBRIEFKATEGORIE WHERE obligation != 1";
             mysqli_query($db,$sql4);
+            $sql5 = "DELETE FROM AKTIVITAETBLOCK";
+            mysqli_query($db,$sql5);
+            $sql6 = "DELETE FROM FEEDBACKBOGEN";
+            mysqli_query($db,$sql6);
+            $sql7 = "DELETE FROM STECKBRIEF";
+            mysqli_query($db,$sql7);
             $db->close();
         }
         

@@ -8,6 +8,7 @@
         $_SESSION['artid'] = $id;
     }
     if(!empty($id)){
+        $counter = 0;
         $activityentities = getActivityentityByArtID($id);
         while($row1 = mysqli_fetch_assoc($activityentities)){
             if(strtotime(date("Y-m-d H:i:s")) - strtotime($row1['einschreibezeit']) >= 0){
@@ -25,11 +26,22 @@
                                     <input type="hidden" name="id" value="'.$row1['id_aktivitaetblock'].'">
                                 </form>
                             ';
+                            $counter++;
                             break;
                         }
                     }    
                 }
             }
+        }
+        if($counter == 0){
+            $array = array();
+            array_push($array, "einschreiben_choice", "validate_einschreiben_choice", "einschreiben_choice_aktivitaeten", "validate_einschreiben_choice_aktivitaeten", "einschreiben", "validate_einschreiben");
+            addSessionInvalid($array);
+        }
+        else if($counter > 0){
+            $array = array();
+            array_push($array, "einschreiben_choice_aktivitaeten", "validate_einschreiben_choice_aktivitaeten");
+            removeSessionInvalid($array);
         }
         echo '
             <form action="validate_einschreiben_choice" method="post">

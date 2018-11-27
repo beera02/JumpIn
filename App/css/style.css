@@ -15,8 +15,8 @@ body{
 }
 main{
     margin: 0;
-    height: 100%;
     width: 100%;
+    height: 100%;
 }
 header{
     position: relative;
@@ -376,6 +376,7 @@ tr:nth-child(even){
 }
 .div_wochenplan_view_teilnehmer{
     margin: 10px 0 0 20px;
+    height: 55px;
 }
 .img_wochenplan_view{
     height: 50px;
@@ -793,3 +794,5 @@ input[type='radio'] {
     word-wrap: break-word;
     margin: 0 0 0 40px;
 }
+
+

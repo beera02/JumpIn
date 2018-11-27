@@ -26,5 +26,6 @@
     }
     else{
         $_SESSION['validfiles'] = array("home", "login", "validate_login");
+        echo 'MIAUUUU';
     }
 ?>
