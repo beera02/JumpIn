@@ -25,6 +25,7 @@
         }
     }
     else{
+        echo '2';
         header('Location: home');
     }
 ?>

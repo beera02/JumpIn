@@ -1,5 +1,5 @@
 <h2>Gib uns ein Feedback!</h2>
-<p class="p_untertitel">Gib uns doch eine Rückmeldung wie du das diesjährige JumpIn fandest, sodass das nächste noch besser werden kann!</p>
+<p class="p_untertitel">Gib uns doch eine Rückmeldung wie du das diesjährige Jump-in fandest, sodass das nächste noch besser werden kann!</p>
 <form action="feedback_categories" method="post">
 <?php
     $feedbackcategories = getAllFeedbackCategories();

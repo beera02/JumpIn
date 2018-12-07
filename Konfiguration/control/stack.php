@@ -1,4 +1,5 @@
 <?php
+    //error session leeren
     $_SESSION['error'] = NULL;
 	oneStackBack();
     //funktion um ein file im stack zurückzugehen

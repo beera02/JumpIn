@@ -18,8 +18,10 @@
                 <form id="editForm" action="validate_steckbrief_view" method="post" enctype="multipart/form-data"></form>
                 <form id="deleteForm" action="validate_steckbrief_loeschen" method="post"></form>
                 <p class="p_form">Bild ändern</p>
-                <img class="img_steckbrief_details" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
-                <input class="forms_file_details" type="file" accept=".jpg, .jpeg, .png" name="bild" form="editForm"/>
+                <div class="div_steckbrief_details_blocker">
+                    <img class="img_steckbrief_details" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                    <input class="forms_file_details" type="file" accept=".jpg, .jpeg, .png" name="bild" form="editForm"/>
+                </div>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();
             while($row = mysqli_fetch_assoc($steckbriefkategorien)){

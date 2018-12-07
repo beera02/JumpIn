@@ -9,6 +9,8 @@
 				<title>Jump-In Konfiguration</title>
 				<link rel="stylesheet" href="./css/style.css">
 				<meta charset="UTF-8">
+				<meta name="viewport"
+					content="width=device-width, initial-scale=1, maximum-scale=1"/>
 			</head>
 			<body>
 				<?php
@@ -27,7 +29,7 @@
 							}
 						}
 						/*wenn der benutzer auf die validiere anmelden seite kommen will
-						geschieht stattdessen nichts*/
+						lädt das vorgsehene Ziel*/
 						elseif ($path == 'validate_anmelden.php') {}
 						else {
 							/*wenn der benutzer keine session hat
@@ -103,9 +105,6 @@
 			$_SESSION['stack'] .= $finalstring.'/';
 		}
 	}
-
-	//alle datenbankmethoden aus dem file database.php laden
-	require_once 'database.php';
 
 	function getArt($id){
 		$allarts = getAllArts();
@@ -210,7 +209,7 @@
 		return $result;
 	}
 
-	/*funktion für ja/nein auszugeben wür eine zahl von 1 oder 0*/
+	/*funktion für die Zahlen 1 oder 0 Ja oder Nein auszugeben*/
 	function getJaNein($id){
 		if($id == 1){
 			return 'Ja';
@@ -219,4 +218,7 @@
 			return 'Nein';
 		}
 	}
+
+	//alle datenbankmethoden aus dem file database.php laden
+	require_once 'database.php';
 ?>

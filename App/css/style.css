@@ -260,7 +260,6 @@ table{
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    word-break:break-all;
     word-wrap: break-word;
     width: 85%;
     margin: 20px;
@@ -373,6 +372,10 @@ tr:nth-child(even){
     width: 75px;
     border-radius: 50%;
     margin: 5px 0 0 20px;
+    line-height: 75px;
+}
+.div_steckbrief_details_blocker{
+    height: 75px;
 }
 .div_wochenplan_view_teilnehmer{
     margin: 10px 0 0 20px;
@@ -398,7 +401,7 @@ tr:nth-child(even){
     font-size: 8pt;
     border-radius: 3px;
     border: 2px solid #806f60;
-    margin: 28px 0 0 5px;
+    margin: 22px 0 0 5px;
 }
 .button_hinzufügen{
     margin: 0 calc(100% - 210px) 20px 20px;

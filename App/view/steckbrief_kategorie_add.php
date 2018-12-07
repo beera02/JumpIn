@@ -1,5 +1,5 @@
 <h2>Erzähle noch mehr über dich!</h2>
-<p class="p_untertitel">Erstelle eine persönliche Steckbriefkategorie und nutze die Chance noch mehr über dich zu erzählen.</p>
+<p class="p_untertitel">Erstelle deine persönliche Steckbriefkategorie und nutze die Chance noch mehr über dich zu erzählen.</p>
 <?php
     require_once('error.php');
 ?>

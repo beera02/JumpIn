@@ -15,7 +15,7 @@
                     }
                 }
                 else{
-                    $_SESSION['error'] = "Die Bemerkung ist zu lang! Max. 500 Zeichen.";
+                    $_SESSION['error'] = "Deine Bemerkung ist zu lang! Max. 500 Zeichen.";
                     $_SESSION['startid'] = (intval($_POST['startid']) - 1);
                     header('Location: feedback_categories');
                 }

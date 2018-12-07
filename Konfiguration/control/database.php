@@ -1,6 +1,6 @@
 <?php
     	function getDatabase(){
-            $db = array("localhost", "jumpin", "1234", "jumpin");
+            $db = array("localhost", "jumpin", "1234", "JumpIn");
             return new Mysqli($db[0], $db[1], $db[2], $db[3]);
         }
         
@@ -34,6 +34,7 @@
             $sql = ("SELECT passwort FROM BENUTZER WHERE benutzername = '$username' LIMIT 1");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
+            var_dump($resultarray);
             $db->close();
             return $resultarray['passwort'];
         }
@@ -104,9 +105,11 @@
 
         function getGroupnameByUsername($username){
             $db = getDatabase();
-            $sql = ("SELECT g.name AS gruppenname FROM gruppe AS g INNER JOIN benutzer_gruppe AS bg ON g.id_gruppe=bg.gruppe_id INNER JOIN benutzer AS b ON bg.benutzer_id=b.id_benutzer WHERE b.benutzername = '" . $username . "'");
-            return $db->query($sql);
+            $sql = ("SELECT g.name AS gruppenname FROM GRUPPE AS g INNER JOIN BENUTZER_GRUPPE AS bg ON g.id_gruppe=bg.gruppe_id INNER JOIN BENUTZER AS b ON bg.benutzer_id=b.id_benutzer WHERE b.benutzername = '" . $username . "'");
+            $result = $db->query($sql);
+            var_dump($result);
             $db->close();
+            return $result;
         }
     
         function getGroupIDByName($name){
@@ -131,8 +134,8 @@
         function getGroupByUsernameAndLevel($name){
             $db = getDatabase();
             $sql = ("SELECT g.name AS name FROM GRUPPE AS g
-                JOIN benutzer_gruppe AS bg ON bg.gruppe_id = g.id_gruppe
-                JOIN benutzer AS b ON b.id_benutzer = bg.benutzer_id
+                JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe
+                JOIN BENUTZER AS b ON b.id_benutzer = bg.benutzer_id
                 WHERE b.benutzername = '$name' ORDER BY g.level DESC LIMIT 1");
             $result = $db->query($sql);
             $resultarray = mysqli_fetch_assoc($result);
@@ -241,7 +244,7 @@
         
         function getActivityByUserID($id){
             $db = getDatabase();
-            $sql = ("SELECT * FROM AKTIVITAET AS a
+            $sql = ("SELECT DISTINCT(a.id_aktivitaet) AS id_aktivitaet, a.aktivitaetsname, a.aktivitaetblock_id, a.art_id, a.treffpunkt, a.anzahlteilnehmer, a.startzeit, a.endzeit, a.info FROM AKTIVITAET AS a
                 JOIN AKTIVITAET_GRUPPE AS ag ON ag.aktivitaet_id = a.id_aktivitaet
                 JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
                 JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
@@ -432,7 +435,7 @@
 
         function getCharacteristicsByObligationAndID($id){
             $db = getDatabase();
-            $sql = ("SELECT * FROM steckbrief AS s JOIN steckbriefkategorie AS sk ON s.steckbriefkategorie_id = sk.id_steckbriefkategorie WHERE sk.obligation = '0' AND s.benutzer_id = '$id'");
+            $sql = ("SELECT * FROM STECKBRIEF AS s JOIN STECKBRIEFKATEGORIE AS sk ON s.steckbriefkategorie_id = sk.id_steckbriefkategorie WHERE sk.obligation = '0' AND s.benutzer_id = '$id'");
             $result = $db->query($sql);
             $db->close();
             return $result;
@@ -512,6 +515,16 @@
                 JOIN GRUPPE AS g ON g.id_gruppe = ag.gruppe_id
                 JOIN BENUTZER_GRUPPE AS bg ON bg.gruppe_id = g.id_gruppe                
                 WHERE bg.benutzer_id = '$userid' AND a.startzeit >= '$starttime' AND a.id_aktivitaet != '$activityid' ORDER BY a.startzeit");
+            $result = $db->query($sql);
+            $db->close();
+            return $result;
+        }
+
+        function getActivityByStartzeitAndID($starttime, $id){
+            $db = getDatabase();
+            $sql = ("SELECT * FROM AKTIVITAET
+                WHERE endzeit > '$starttime' AND id_aktivitaet = '$id'
+                ORDER BY startzeit");
             $result = $db->query($sql);
             $db->close();
             return $result;
@@ -608,7 +621,7 @@
 
         function insertActivity($activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info){
             $db = getDatabase();
-            $preparedquery = $db->prepare("INSERT INTO aktivitaet (id_aktivitaet, aktivitaetsname, aktivitaetblock_id, art_id, treffpunkt, anzahlteilnehmer, startzeit, endzeit, info) VALUES (NULL,?,?,?,?,?,?,?,?)");
+            $preparedquery = $db->prepare("INSERT INTO AKTIVITAET (id_aktivitaet, aktivitaetsname, aktivitaetblock_id, art_id, treffpunkt, anzahlteilnehmer, startzeit, endzeit, info) VALUES (NULL,?,?,?,?,?,?,?,?)");
             $preparedquery->bind_param("siisisss", $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info);
             $preparedquery->execute();
             $_SESSION['activity_add'] = $db->insert_id;
@@ -800,7 +813,7 @@
 
         function updateActivity($activityid, $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info){
             $db = getDatabase();
-            $preparedquery = $db->prepare("UPDATE aktivitaet SET aktivitaetsname = ?, aktivitaetblock_id = ?, art_id = ?, treffpunkt = ?, anzahlteilnehmer = ?, startzeit = ?, endzeit = ?, info = ? WHERE id_aktivitaet = '$activityid'");
+            $preparedquery = $db->prepare("UPDATE AKTIVITAET SET aktivitaetsname = ?, aktivitaetblock_id = ?, art_id = ?, treffpunkt = ?, anzahlteilnehmer = ?, startzeit = ?, endzeit = ?, info = ? WHERE id_aktivitaet = '$activityid'");
             $preparedquery->bind_param("siisisss", $activityname, $activityentityid, $artid, $meetpoint, $participants, $starttime, $endtime, $info);
             $preparedquery->execute();
             $db->close();

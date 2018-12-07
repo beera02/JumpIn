@@ -10,6 +10,6 @@
 		<p class="p_login">Passwort</p>
 		<input class="forms_login" type="password" name="passwort" required/>
 		<br>
-		<input id="button_login" type="submit" value="Login"/>
+		<input id="button_login" type="submit" name="submit_btn" value="Login"/>
 	</div>
 </form>

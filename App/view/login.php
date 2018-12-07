@@ -1,5 +1,5 @@
 <h2>Einloggen</h2>
-<p class="p_untertitel">Melden Sie sich mit Ihren erhaltenen Benutzerdaten an.</p>
+<p class="p_untertitel">Melde dich mit deinen erhaltenen Benutzerdaten an.</p>
 <?php
     require_once('error.php');
 ?>
@@ -12,7 +12,7 @@
 		<input class="forms_login" type="password" name="passwort"/>
         <br>
         <div class="separation_line"></div>
-        <input class="button_zurück" name="submit_btn" type="submit" value="Abbrechen"/>
 		<input class="button_weiter" name="submit_btn" type="submit" value="Login"/>
+		<input class="button_zurück" name="submit_btn" type="submit" value="Abbrechen"/>
 	</div>
 </form>
