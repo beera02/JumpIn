@@ -538,6 +538,7 @@ tr:nth-child(even){
     margin-left: 25%;
     width: 75%;
     overflow: auto;
+    position: relative;
 }
 .button_wochenplan{
     width: calc(100% - 30px);
@@ -548,7 +549,7 @@ tr:nth-child(even){
     cursor: pointer;
     border-radius: 1.5px;
     z-index: 1;
-    overflow: hidden;
+    position: absolute;
 }
 .button_wochenplan:hover{
     opacity: 0.5;
