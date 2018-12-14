@@ -4,6 +4,7 @@
         private $aktivitaetsname;
         private $startzeit;
         private $endzeit;
+        private $activityclass;
         private $height;
         private $width;
         private $left;
@@ -11,11 +12,12 @@
         private $column;
         private $number = 0;
 
-        public function __construct($id_aktivitaet, $aktivitaetsname, $startzeit, $endzeit, $column, $number) {
+        public function __construct($id_aktivitaet, $aktivitaetsname, $startzeit, $endzeit, $activityclass, $column, $number) {
             $this->id_aktivitaet = $id_aktivitaet;
             $this->aktivitaetsname = $aktivitaetsname;
             $this->startzeit = $startzeit;
             $this->endzeit = $endzeit;
+            $this->activityclass = $activityclass;
             $this->column = $column;
             $this->number = $number;
         }
@@ -31,6 +33,9 @@
         }
         public function getEndzeit() {
             return $this->endzeit;
+        }
+        public function getActivityClass() {
+            return $this->activityclass;
         }
         public function getHeight() {
             return $this->height;
@@ -64,56 +69,98 @@
             $this->top = $top;
         }
     }
-    global $daylistcolumns, $daylisttime;
+    global $daylistcolumns, $daylisttime, $nowline, $colors, $activityclasses;
+    $colors = array("f49e00", "00545e", "a5c400", "3d6f1a", "a51728", "00b5d1", "A895E2");
+    $nowline = false;
     $daylistcolumns = array();
     $daylisttime = array();
+    $activityclasses = array();
     buildWeekschedule();
 
     function buildWeekschedule(){
         $userid = getUserIDByUsername($_SESSION['benutzer_app']);
         setDayList($userid);
         setValuesDayList();
-        //printDebug();
         printWeekschedule();
-    }
-
-    function printDebug(){
-        global $daylistcolumns, $daylisttime;
-        foreach($daylistcolumns as $day){
-            echo 'Tag<br>';
-            foreach($day as $column){
-                echo 'x x x Spalte<br>';
-                foreach($column as $activity){
-                    echo 'x x x x x x Name: '.$activity->getAktivitaetsname().'<br>';
-                    echo 'x x x x x x Startzeit: '.$activity->getStartzeit().'<br>';
-                    echo 'x x x x x x Endzeit: '.$activity->getEndzeit().'<br>';
-                    echo 'x x x x x x Nummer: '.$activity->getNumber().'<br>';
-                    echo 'x x x x x x Spalte: '.$activity->getColumn().'<br>';
-                }
-            }
-        }
     }
 
     function printWeekschedule(){
         global $daylisttime;
+        global $nowline;
         foreach($daylisttime as $day){
-            echoDay($day[0]->getStartzeit(), colorDay($day[0], date('Y-m-d H:i:s')), getContainerHeight($day));
+            if(!$nowline){
+                getNowLine($daylisttime, $day);
+            }
+            echoDay($day[0]->getStartzeit(), colorDay($day[0], date('Y-m-d H:i:s')));
             foreach($day as $activity){
-                echoActivity($activity->getStartzeit(), $activity->getEndzeit(), $activity->getAktivitaetid(), $activity->getAktivitaetsname(), $activity->getHeight(), $activity->getWidth(), $activity->getLeft(), $activity->getTop());
+                if($activity->getEndzeit() == getBiggestEndHeight($day)){
+                    echoDivBlocker($activity->getHeight(), $activity->getTop());
+                }
+                echoActivity($activity->getStartzeit(), $activity->getEndzeit(), $activity->getAktivitaetid(), $activity->getAktivitaetsname(), $activity->getHeight(), $activity->getWidth(), $activity->getLeft(), $activity->getTop(), $activity->getActivityClass());
             }  
             echoCloseDay();
         }
     }
 
-    function getContainerHeight($day){
-        $height = 0;
-        foreach($day as $activity){
-            $height += calculateHeight($activity->getStartzeit(), $activity->getEndzeit()) + 20;
+    function getNowLine($daylisttime, $day){
+        global $nowline;
+        $now = date("Y-m-d H:i:s");
+        end($daylisttime[array_search($day, $daylisttime)]);
+        if(strtotime($now) < strtotime($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit())){
+            echoNowLine(5);
+            $nowline = true;
         }
-        return "min-height: ".$height."px;";
+        else if(strtotime($now)> strtotime($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit()) && strtotime($now)< strtotime($daylisttime[array_search($day, $daylisttime)][key($daylisttime[array_search($day, $daylisttime)])]->getEndzeit())){
+            $diffrenceabsolute = calculateHeight($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit(), $now);
+            $gap = getGapNowPointer($now, $day);
+            echoNowLine($diffrenceabsolute - ($gap + 30));
+            $nowline = true;
+        }
+        else{
+            $lastElement = end($daylisttime);
+            if($day == $lastElement){
+                $diffrenceabsolute = calculateHeight($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit(), $now);
+                $gap = getGapNowPointer($now, $day);
+                echoNowLine(($diffrenceabsolute - $gap) + 5);
+                $nowline = true;
+            }
+        }
     }
 
-    function echoDay($starttime, $cssday, $containerheight){
+    function getGapNowPointer($nowtime, $day){
+        global $daylistcolumns, $daylisttime;
+        $gap = 0;
+        $i = 10;
+        foreach($daylistcolumns[array_search($day, $daylisttime)][0] as $activitytwo){
+            if(strtotime($nowtime) >= strtotime($activitytwo->getStartzeit())){
+                $gapshort = calculateHeight(getBiggestEnd($day, $activitytwo), $activitytwo->getStartzeit());
+                if($gapshort > 0){
+                    $gap += ($gapshort - $i);
+                }
+            }
+            $i += 10;
+        }
+        return $gap;
+    }
+
+    function echoDivBlocker($height, $top){
+        $parts = explode(" ",$top);
+        $pixel = explode("p", $parts[1]);
+        $newtop = intval($pixel[0]) + 20;
+        echo '
+            <div style="'.$height.' margin-top:'.$newtop.'px; visibility: hidden;"></div>
+        ';
+    }
+
+    function echoNowLine($margintopnowpointer){
+        $margintopnowpoint = $margintopnowpointer - 7.5;
+        echo '
+            <div class="nowline" style="margin-top: '.$margintopnowpointer.'px;"></div>
+            <div class="nowpoint" style="margin-top: '.$margintopnowpoint.'px;"></div>
+        ';
+    }
+
+    function echoDay($starttime, $cssday){
         echo '
             <div class="div_wochenplan_day">
                 <div class="div_wochenplan_day_left" style="'.$cssday.'">
@@ -124,21 +171,28 @@
                         '.getDateString($starttime).'
                     </p>
                 </div>
-                <div class="div_wochenplan_day_right" style="'.$containerheight.'">
+                <div class="div_wochenplan_day_right">
         ';
     }
 
-    function echoActivity($starttime, $endtime, $activityid, $activityname, $containerheight, $containerwidth, $left, $top){
+    function echoActivity($starttime, $endtime, $activityid, $activityname, $containerheight, $containerwidth, $left, $top, $backgoundcolor){
+        global $colors, $activityclasses;
         echo '
             <form action="wochenplan_view" method="post">
-                <button class="button_wochenplan" style="'.$containerheight.' '.$containerwidth.' '.$left.' '.$top.'">
+                <button class="button_wochenplan" style="'.$containerheight.' '.$containerwidth.' '.$left.' '.$top.' background-color: #'.$colors[array_search($backgoundcolor, $activityclasses)].';">
                     <div class="div_wochenplan_aktivitaet">
                         <p class="p_wochenplan_aktivitaet_title">
                             '.$activityname.'
                         </p>
-                        <p class="p_wochenplan_aktivitaet_time">
-                            '.getHours($starttime).' - '.getHours($endtime).'
-                        </p>
+        ';
+        if(strtotime($endtime) - strtotime($starttime) > 1800){
+            echo '
+                <p class="p_wochenplan_aktivitaet_time">
+                    '.getHours($starttime).'- '.getHours($endtime).'
+                </p>
+            ';
+        }
+        echo '
                     </div>
                 </button>
                 <input type="hidden" name="id" value="'.$activityid.'">
@@ -154,7 +208,7 @@
     }
 
     function setDayList($userid){
-        global $daylistcolumns, $daylisttime;
+        global $daylistcolumns, $daylisttime, $activityclasses;
         $activities = getActivityByUserID($userid);
         $activitybefore;
         $number = 1;
@@ -165,7 +219,7 @@
                         $daytime = array();
                         $daycolumns = array();
                         $column = array();
-                        $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], 0, $number);
+                        $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], $activity['art_id'], 0, $number);
                         array_push($daytime, $activityobject);
                         array_push($daylisttime, $daytime);
                         array_push($column, $activityobject);
@@ -176,7 +230,7 @@
                         $daycolumns = $daylistcolumns[count($daylistcolumns) - 1];
                         $columns = count($daycolumns);
                         $nextcolumn = getNextColumn($activity, $daycolumns, $columns, 1);
-                        $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], $nextcolumn, $number);
+                        $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], $activity['art_id'], $nextcolumn, $number);
                         array_push($daylisttime[count($daylisttime) - 1], $activityobject);
                         if($nextcolumn >= $columns){
                             $column = array();
@@ -192,12 +246,15 @@
                     $daytime = array();
                     $daycolumns = array();
                     $column = array();
-                    $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], 0, $number);
+                    $activityobject = new Activity($activity['id_aktivitaet'], $activity['aktivitaetsname'], $activity['startzeit'], $activity['endzeit'], $activity['art_id'], 0, $number);
                     array_push($daytime, $activityobject);
                     array_push($daylisttime, $daytime);
                     array_push($column, $activityobject);
                     array_push($daycolumns, $column);
                     array_push($daylistcolumns, $daycolumns);
+                }
+                if(!in_array($activity['art_id'], $activityclasses)){
+                    array_push($activityclasses, $activity['art_id']);
                 }
                 $activitybefore = $activity;
                 $number++;
@@ -244,11 +301,23 @@
     function setValuesDayList(){
         global $daylistcolumns, $daylisttime;
         foreach($daylisttime as $day){
+            $gaptobefore = -10;
+            $overlapping = 0;
             foreach($day as $activity){
+                if(!isOverlapping($day, $activity)){
+                    $gaptobefore += 10;
+                    $overlapping = 0;
+                }
+                else{
+                    if($overlapping == 0){
+                        $gaptobefore += 10;
+                    }
+                    $overlapping++;
+                }
                 getHeight($activity);
                 getWidth($daylistcolumns, $daylisttime, $day, $activity);
                 getLeft($daylistcolumns, $daylisttime, $day, $activity);
-                getTop($daylisttime, $day, $activity);
+                getTop($daylisttime, $day, $activity, $gaptobefore);
             }
         }
     }
@@ -285,17 +354,13 @@
         $activity->setLeft($left);
     }
 
-    function getTop($daylisttime, $day, $activity){
+    function getTop($daylisttime, $day, $activity, $gaptobefore){
         $diffrenceabsolute = calculateHeight($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit(), $activity->getStartzeit());
         $gapslength = getGapsLength($day, $activity);
-        var_dump($gapslength);
-        $topnumber =  $diffrenceabsolute - ($gapslength / 2);
+        $topnumber =  ($diffrenceabsolute + $gaptobefore) - $gapslength;
         $top = "top: ".$topnumber."px;";
         $activity->setTop($top);
-        /*echo '
-            <div class="nowline" style="'.$margintopnowpointer.'"></div>
-            <div class="nowpoint" style="'.$margintopnowpointer.'"></div>
-        ';*/
+        return $gaptobefore;
     }
 
     function getGapsLength($day, $activity){
@@ -303,10 +368,27 @@
         $gap = 0;
         foreach($daylistcolumns[array_search($day, $daylisttime)][0] as $activitytwo){
             if($activity->getNumber() >= $activitytwo->getNumber()){
-                $gap += calculateHeight($activity->getStartzeit(), getBiggestEnd($day, $activitytwo));
+                $gapshort = calculateHeight(getBiggestEnd($day, $activitytwo), $activitytwo->getStartzeit());
+                if($gapshort > 0){
+                    $gap += $gapshort;
+                }
             }
         }
         return $gap;
+    }
+
+    function getBiggestEndHeight($day){
+        global $daylisttime;
+        $biggestendnumber = 0;
+        $biggestend;
+        foreach($daylisttime[array_search($day, $daylisttime)] as $activitytwo){
+            $end = strtotime($activitytwo->getEndzeit());
+            if($end > $biggestendnumber){
+                $biggestendnumber = $end;
+                $biggestend = $activitytwo->getEndzeit();
+            }
+        }
+        return $biggestend;
     }
 
     function getBiggestEnd($day, $activity){
@@ -326,6 +408,27 @@
             $biggestend = $activity->getStartzeit();
         }
         return $biggestend;
+    }
+
+    function isOverlapping($day, $activity){
+        global $daylistcolumns, $daylisttime;
+        $allcolumns = count($daylistcolumns[array_search($day, $daylisttime)]);
+        $column = $activity->getColumn();
+        for($i = 1; $i <= $allcolumns - ($column + 1); $i++){
+            foreach($daylistcolumns[array_search($day, $daylisttime)][$column + $i] as $activitytwo){
+                if(!(strtotime($activity->getEndzeit()) <= strtotime($activitytwo->getStartzeit()) || strtotime($activitytwo->getEndzeit()) <= strtotime($activity->getStartzeit()))){
+                    return true;
+                }
+            }
+        }
+        for($i = 1; $i < $column + 1; $i++){
+            foreach($daylistcolumns[array_search($day, $daylisttime)][$column - $i] as $activitytwo){
+                if(!(strtotime($activity->getEndzeit()) <= strtotime($activitytwo->getStartzeit()) || strtotime($activitytwo->getEndzeit()) <= strtotime($activity->getStartzeit()))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     function calculateHeight($starttime, $endtime){

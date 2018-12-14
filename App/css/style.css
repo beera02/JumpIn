@@ -544,15 +544,17 @@ tr:nth-child(even){
     width: calc(100% - 30px);
     margin: 10px 0 10px 10px;
     background-color: #ebe4d1;
-    border: none;
+    color: white;
+    border: 0.5px solid black;
     text-align: left;
     cursor: pointer;
     border-radius: 1.5px;
     z-index: 1;
+    overflow: hidden;
     position: absolute;
 }
 .button_wochenplan:hover{
-    opacity: 0.5;
+    opacity: 0.7;
 }
 .p_wochenplan_aktivitaet_title{
     margin: 0;
@@ -566,7 +568,7 @@ tr:nth-child(even){
     background-color: #806f60;
     position: absolute;
     left: 25%;
-    z-index: 0;
+    z-index: 100;
     opacity: 0.6;
 }
 .nowpoint{
@@ -577,7 +579,7 @@ tr:nth-child(even){
     position: absolute;
     left: calc(25% - 7.5px);
     margin-top: -7.5px;
-    z-index: 0;
+    z-index: 100;
 }
 .button_navigation{
     width: 100%;
