@@ -19,7 +19,7 @@
 		            <br>
 		            <p class="p_form">Aktivitätsart</p>
 		            <select class="forms_dropdown" name="aktivitaetsart">
-                        '.getArt($datensatz['art_id']).'
+                        '.getArtEinschreiben($datensatz['art_id']).'
                     </select>
                     <br>
                     <p class="p_form">Aufschaltzeit zum einschreiben</p>

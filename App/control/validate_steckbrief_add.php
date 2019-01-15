@@ -1,8 +1,11 @@
 <?php
+    //Fehlermeldung löschen
     $_SESSION['error'] = NULL;
     $validated = false;
 
+    //Wenn der Knopf Erstellen geklickt wurde
     if($_POST['submit_btn'] == "Erstellen"){
+        //Wenn ein File angegeben wurde
         if(!$_FILES['bild']['name'] == ""){
             if(!empty($_POST['steckbrief'])){
                 $x = 0;
@@ -16,19 +19,23 @@
                         }
                     }
                 }
+                //Wenn alle Kategorien ausgefüllt wurden
                 if($x == $y){
-                    $validated = true;
                     $allowed =  array('jpeg','png','jpg');
                     $filename = $_FILES['bild']['name'];
                     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                    var_dump($extension);
+                    //Wenn die File-Endung erlaubt ist
                     if(in_array(strtolower($extension),$allowed)) {
+                        //Wenn das Bild kleiner ist als 8MB
                         if(filesize($_FILES['bild']['tmp_name']) < 8388608){
-                            $uploaddir = getcwd()."\userimages\ ";
+                            $uploaddir = getcwd()."/userimages/ ";
                             $uploaddir = trim($uploaddir);
                             $filename = getUserIDByUsername($_SESSION['benutzer_app']);
+                            //pfad zum speichern festlegen
                             $uploadfile = $uploaddir.$filename.".png";
+                            //das Bild verschieben und benennen
                             move_uploaded_file($_FILES['bild']['tmp_name'], $uploadfile);
+                            $validated = true;
                         }
                         else{
                             $_SESSION['error'] = "Zu grosses Bild eingelesen!";
@@ -43,16 +50,19 @@
                 }
             }
             else{
-                $validated = true;
+                $_SESSION['error'] = "Es wurden keine Kategorien im Steckbrief ausgefüllt!";
             }
         }
         else{
             $_SESSION['error'] = "Es wurde kein Bild angegeben!";
         }
-        if($validated == true){
+        //wenn richtig validiert
+        if($validated){
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
+            //für jede ausgefüllte kategorie
             foreach($_POST['steckbrief'] as $validate){
                 $steckbrief = htmlspecialchars($_POST[''.$validate.'']);
+                //in datenbank einfügen
                 insertCharacteristics($validate, $userid, $steckbrief);
             }
             header('Location: steckbrief_kategorie_add');
@@ -62,6 +72,9 @@
         }
     }
     if($_POST['submit_btn'] == "Zurück"){
+        header('Location: home');
+    }
+    else{
         header('Location: home');
     }
 ?>

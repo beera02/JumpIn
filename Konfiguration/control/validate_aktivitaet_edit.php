@@ -22,19 +22,16 @@
                     if($_POST['aktivitaetsart'] != "null"){
                         //validierungsvariable auf richtig setzen
                         $invalid = true;
-                        //wenn eine info eingegeben wurde
-                        if(!empty($_POST['info'])){
-                            //spezielle zeichen von Info escapen
-                            $info = htmlspecialchars($_POST['info']);
-                            //wenn die info höchstens 500 zeichen lang ist
-                            if(strlen($info) <= 500){
-                                //session info setzen
-                                $_SESSION['info'] = $info;
-                            }
-                            else{
-                                //error session setzen
-                                $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
-                            }
+                        //spezielle zeichen von Info escapen
+                        $info = htmlspecialchars($_POST['info']);
+                        //wenn die info höchstens 500 zeichen lang ist
+                        if(strlen($info) <= 500){
+                            //session info setzen
+                            $_SESSION['info'] = $info;
+                        }
+                        else{
+                            //error session setzen
+                            $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
                         }
                         //wenn die aktivitätsart zum einschreiben ist
                         $resultarray = getArtByName($_POST['aktivitaetsart']);
@@ -99,6 +96,6 @@
     //Wenn der knopf Zurück gedrückt wurde
     if($_POST['submit_btn'] == "Zurück"){
         //weiterleiten nach aktivitaet.php
-        header('Location: aktivitaet');
+        header('Location: aktivitaet_edit_choice');
     }
 ?>

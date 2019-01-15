@@ -4,4 +4,7 @@
     if($_POST['submit_btn'] == "Zurück"){
         header('Location: feedback_statistics');
     }   
+    else{
+        header('Location: home');
+    }
 ?>

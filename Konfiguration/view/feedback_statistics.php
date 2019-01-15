@@ -7,7 +7,7 @@
             Feedback Statistiken
         </p>
         <?php
-            $colors = ['navy', 'red', 'green', 'purple', 'teal', 'olive', 'blue', 'fuchisia'];
+            $colors = array("286DA8", "CD5360", "B37D4E", "438496", "A895E2", "780CE8", "E8880C", "9B7E84", "67C06B", "362866", "664222", "0D375B", "802731", "A35971", "EC9B24", "009B32", "4A6068", "4E383D", "8E3306", "867A4A");
             $categories = getAllFeedbackCategories();
             while($row1 = mysqli_fetch_assoc($categories)){
                 echo '
@@ -29,7 +29,7 @@
                     }
                     echo '
                         <div class="div_feedback_statistik_line_container">
-                            <div class="div_feedback_statistik_optionen" style="color: '.$color.';">
+                            <div class="div_feedback_statistik_optionen" style="color: #'.$color.';">
                                 '.$row2['antwort'].'
                             </div>
                     ';
@@ -41,7 +41,7 @@
                     if($answercount != 0){
                         $percentage = round(100*($answercountoption / $answercount), 1);
                         echo '
-                                <div class="div_feedback_statistik_antwort" style="width: calc(((100% - 400px)/100)*'.$percentage.'); background-color: '.$color.';"></div>
+                                <div class="div_feedback_statistik_antwort" style="width: calc(((100% - 400px)/100)*'.$percentage.'); background-color: #'.$color.';"></div>
                                 <p class="p_feedback_statistik_antwort">'.$percentage.'%</p>
                             </div>
                         ';

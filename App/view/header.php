@@ -1,4 +1,5 @@
 <?php
+//Wenn der Benutzer eine Session hat
 if($_SESSION['benutzer_app']){
     echo '
     <div id="div_navigation" class="div_navigation_overlay">
@@ -17,19 +18,14 @@ if($_SESSION['benutzer_app']){
                     <img class="img_header_login" src="./image/logout.png" alt="logout">
                 </a>
             </div>
+            <a href="home">
+                <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
+            </a>
             <div class="div_nav_open">
                 <span id="navigation_button" onclick="openNav()"></span>
             </div>
         </nav>
-    </header>
-    <div class="div_header_two">
-        <a href="home">
-            <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
-        </a>
-        <p id="p_header_login">
-            Hallo, '.getUserprenameByUsername($_SESSION['benutzer_app']).'!
-        </p>
-    </div>';
+    </header>';
 }
 else{
     echo '
@@ -46,16 +42,14 @@ else{
                     <img class="img_header_login" src="./image/login.png" alt="login">
                 </a>
             </div>
+            <a href="home">
+                <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
+            </a>
             <div class="div_nav_open">
                 <span id="navigation_button" onclick="openNav()"></span>
             </div>
         </nav>
-    </header>
-    <div class="div_header_two">
-        <a href="home">
-            <img class="img_header_two" src="./image/postlogo.png" alt="postlogo">
-        </a>
-    </div>';
+    </header>';
 }
 
 ?>

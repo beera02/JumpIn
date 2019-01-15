@@ -4,6 +4,7 @@
 	<select class="steckbrief_dropdown" name="gruppe">
         <option value="null">-</option>
         <?php
+            //Wenn zuvor ein Filter ausgewählt wurde
             if(!empty($_SESSION['groupselected'])){
                 $groupid = $_SESSION['groupselected'];
             }
@@ -13,8 +14,11 @@
             $groupselected = 0;
             $groups = getAllGroups();
             $notGroupGroups = $_SESSION['notGroupGroups'];
+            //Für alle Gruppen
             while($row = mysqli_fetch_assoc($groups)){
+                //Wenn es eine filterbare Gruppe ist
                 if(!in_array(strtolower($row['name']), $notGroupGroups)){
+                    //Wenn es die ausgewählte Gruppe ist
                     if($groupid == $row['id_gruppe']){
                         $groupselected = $row['id_gruppe'];
                         echo '
@@ -34,14 +38,17 @@
 </form>
 <?php
     $user;
+    //Wenn keine Gruppe als Filter ausgewählt wurde
     if($groupselected == 0){
         $user = getAllUserOrdered();
     }
     else{
+        //hole nur die benutzer einer bestimmten Gruppe
         $user = getUserByGroupID($groupselected);
     }
     $anzahleintraege = 0;
     $notUserUsers = $_SESSION['notUserUsers'];
+    //Für alle geholten Benutzer
     while($row = mysqli_fetch_assoc($user)){
         if(!in_array(strtolower($row['benutzername']), $notUserUsers)){
             $resultarray = getGroupByUsernameAndLevel($row['benutzername']);
@@ -66,6 +73,7 @@
             ';
         }
     }
+    //Wenn es noch keine Einträge hat
     if($anzahleintraege == 0){
         echo '
             <div id="no_characteristics">

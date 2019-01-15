@@ -3,7 +3,6 @@
 	$temp = trim($_SERVER['REQUEST_URI'], '/');
 	$url = explode('/', $temp);
 	error_reporting(E_ALL & ~E_NOTICE);
-	$_SESSION['benutzer'] = 'xyz';
 	session_start(); 
 
 
@@ -84,6 +83,9 @@
 				break;
 			case 'validate_feedback_categories':
 				build('validate_feedback_categories.php');
+				break;
+			case 'validate_wochenplan_steckbrief_view':
+				build('validate_wochenplan_steckbrief_view.php');
 				break;
 			default:
 				build('./view/home.php');

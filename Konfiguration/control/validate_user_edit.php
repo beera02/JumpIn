@@ -81,7 +81,10 @@
             header('Location: user_edit');
         }
     }      
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: user_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

@@ -4,8 +4,11 @@
         $_SESSION['id_notfallkategorie'] = $_POST['id_notfallkategorie'];
         header('Location: notfallkarte_edit');
     }      
-    if($_POST['submit_btn'] == "Löschen"){
+    else if($_POST['submit_btn'] == "Löschen"){
         deleteEmergencyCategoryByID($_POST['id_notfallkategorie']);
         header('Location: notfallkarte_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

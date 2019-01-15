@@ -4,7 +4,10 @@
         resetJumpin();
         header('Location: allgemein');
     }      
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: allgemein');
+    }
+    else{
+        header('Location: home');
     }
 ?>

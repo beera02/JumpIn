@@ -4,8 +4,11 @@
         $_SESSION['id_aktivitaetblock'] = $_POST['id_aktivitaetblock'];
         header('Location: aktivitaetblock_edit');
     }      
-    if($_POST['submit_btn'] == "Löschen"){
+    else if($_POST['submit_btn'] == "Löschen"){
         deleteActivityentityByID($_POST['id_aktivitaetblock']);
         header('Location: aktivitaetblock_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

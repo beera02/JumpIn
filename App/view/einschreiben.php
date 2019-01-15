@@ -1,9 +1,20 @@
 <?php
-    if(!empty($_POST['id'])){
-        $activity = getActivityByID($_POST['id']);
+    $id;
+    //Hole die richtige AktivitätID. Entweder aus Session oder aus Post
+    if(empty($_POST['id_aktivitaet'])){
+        $id = intval($_SESSION['id_aktivitaet']);
+        $_SESSION['id_aktivitaet'] = $id;
+    }
+    else{
+        $id = $_POST['id_aktivitaet'];
+        $_SESSION['id_aktivitaet'] = $id;
+    }
+    if(!empty($id)){
+        $activity = getActivityByID($id);
         echo '
             <h2>In Aktivität einschreiben</h2>
         ';
+        //Das Error Element holen um mögliche Fehlermeldungen anzeigen zu können
         require_once('error.php');
         echo '
             <p class="p_form">Aktivitätsname</p>
@@ -17,6 +28,7 @@
             </p>
             <br>
         ';
+        //Wenn die Aktivität eine Info hat
         if($activity['info'] != NULL){
             echo '
                 <p class="p_form">Info</p>
@@ -27,7 +39,7 @@
             ';
         }
         echo '
-            <p class="p_form">Anzahl Teilnehmer</p>
+            <p class="p_form">Maximale Anzahl Teilnehmer</p>
             <p class="p_details">
                 '.$activity['anzahlteilnehmer'].'
             </p>
@@ -40,22 +52,31 @@
             </p>
             <br>
         ';
+        //Wenn es 
         if($activity['anzahlteilnehmer'] != NULL){
-            $teilnehmer = getWrittenInByActivityID($_POST['id']);
+            $teilnehmer = getWrittenInByActivityID($id);
             $anzahlteilnehmer = 0;
             echo '
                 <p class="p_form">Teilnehmer</p>
             ';
+            //Für jeden Teilnehmer ein Link zu dessen Steckbrief echoen
             while($row = mysqli_fetch_assoc($teilnehmer)){
                 $user = getUserByID($row['benutzer_id']);
                 echo '
-                    <div class="div_wochenplan_view_teilnehmer">
-                        <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png" alt=" "/>
-                        <p class="p_wochenplan_view">'.$user['vorname'].' '.$user['name'].'</p>
-                    </div>               
+                    <form action="validate_wochenplan_steckbrief_view" method="post">
+                        <button class="button_wochenplan_steckbrief">
+                            <div class="div_wochenplan_view_teilnehmer">
+                                <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                                <p class="p_wochenplan_view">'.$user['vorname'].' '.$user['name'].'</p>
+                            </div>
+                        </button> 
+                        <input type="hidden" name="id" value="'.$user['id_benutzer'].'">
+                        <input type="hidden" name="mode" value="2">
+                    </form>
                 ';
                 $anzahlteilnehmer++;
             }
+            //Wenn es keine Teilnehmer hat
             if($anzahlteilnehmer == 0){
                 echo '
                     <div id="no_participants">
@@ -90,6 +111,7 @@
             <input class="button_zurück_einschreiben" type="submit" name="submit_btn" value="Zurück"/>
         </form>
         ';
+        //Wenn es noch freie Plätze in der Aktivität hat
         if($anzahlteilnehmer < $maxteilnehmer){
             echo '
                 <button id="modal_einschreiben_button" class="button_weiter_modal">Einschreiben</button>

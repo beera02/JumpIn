@@ -42,7 +42,10 @@
             header('Location: group_edit');
         }
     }      
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: group_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

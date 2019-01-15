@@ -6,7 +6,7 @@
         deleteUser($benutzerid);
         header('Location: user_add');
     }
-    if($_POST['submit_btn'] == "Erstellen"){
+    else if($_POST['submit_btn'] == "Erstellen"){
         if(!empty($_POST['group'])){
             foreach($_POST['group'] as $checked){
                 $resultatstring = getGroupIDByName($checked);

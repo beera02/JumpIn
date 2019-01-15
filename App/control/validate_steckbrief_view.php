@@ -1,8 +1,10 @@
 <?php
+    //Fehlermeldung löschen
     $_SESSION['error'] = NULL;
     $validated = false;
     $bild = false;
 
+    //Wenn der Knopf Ändern geklickt wurde
     if($_POST['submit_btn'] == "Ändern"){
         if(!empty($_POST['steckbrief'])){
             $x = 0;
@@ -16,20 +18,23 @@
                     }
                 }
             }
+            //Wenn jede Kategorie ausgefüllt wurde
             if($x == $y){
+                //Wenn ein File angegeben wurde
                 if(!$_FILES['bild']['name'] == ""){
-                    $validated = true;
                     $allowed =  array('jpeg','png','jpg');
                     $filename = $_FILES['bild']['name'];
                     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-                    var_dump($extension);
+                    //Wenn die Dateiendung erlaubt ist
                     if(in_array(strtolower($extension),$allowed)) {
+                        //Wenn Bild < als 8MB
                         if(filesize($_FILES['bild']['tmp_name']) < 8388608){
-                            $uploaddir = getcwd()."\userimages\ ";
+                            $uploaddir = getcwd()."/userimages/ ";
                             $uploaddir = trim($uploaddir);
                             $filename = getUserIDByUsername($_SESSION['benutzer_app']);
                             $uploadfile = $uploaddir.$filename.".png";
                             move_uploaded_file($_FILES['bild']['tmp_name'], $uploadfile);
+                            $validated = true;
                         }
                         else{
                             $_SESSION['error'] = "Zu grosses Bild eingelesen!";
@@ -47,10 +52,13 @@
                 $_SESSION['error'] = "Nicht alle Kategorien im Steckbrief wurden richtig ausgefüllt!";
             }
         }
+        //Wenn richtig validiert
         if($validated){
             $userid = getUserIDByUsername($_SESSION['benutzer_app']);
+            //Für jede Kategorie
             foreach($_POST['steckbrief'] as $validate){
                 $steckbrief = htmlspecialchars($_POST[''.$validate.'']);
+                //in der Datenbank den Datensatz ändern
                 updateCharacteristics($validate, $userid, $steckbrief);
             }
             header('Location: steckbrief_view');
@@ -63,6 +71,22 @@
         header('Location: steckbrief_kategorie_add');
     }
     else if($_POST['submit_btn'] == "Zurück"){
-        header('Location: steckbrief');
+        //herausfinden wo man zurückgeschickt wird
+        $mode = intval($_SESSION['mode']);
+        if(empty($mode)){
+            header('Location: steckbrief');
+        }
+        else if($mode == 1) {
+            header('Location: wochenplan_view');
+        }
+        else if($mode == 2){
+            header('Location: einschreiben');
+        }
+        else{
+            header('Location: home');
+        }
+    }
+    else{
+        header('Location: home');
     }
 ?>

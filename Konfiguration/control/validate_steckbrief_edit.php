@@ -33,7 +33,10 @@
             header('Location: steckbrief_edit');
         }
     }      
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: steckbrief_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

@@ -5,6 +5,7 @@
     $feedbackcategories = getAllFeedbackCategories();
     $start = 1;
     if(!empty($feedbackcategories)){
+        //Den Startpunkt erhöhen wenn schon Fragen ausgefüllt wurden
         while($row = mysqli_fetch_assoc($feedbackcategories)){
             $data = getUserFeedbackArrayByFeedbackCategoryID($row['id_feedbackkategorie'], getUserIDByUsername($_SESSION['benutzer_app']));
             if(!empty($data)){
@@ -17,6 +18,7 @@
     else{
         $start = 1;
     }
+    //Wenn schon eine Feedbackfrage beantwortet wurde
     if($start != 1){
         echo '
             <p class="p_untertitel">Mit dem Knopf unten kommst du zur begonnenen Umfrage. Du kannst genau dort fortfahren, wo du das letzte mal aufgehört hast.</p>

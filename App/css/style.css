@@ -22,7 +22,7 @@ header{
     position: relative;
     top: 0;
     height: 50px;
-    background-color: #584125;;
+    background-color: #FFCC00;;
 }
 h2{
     font-weight: 900;
@@ -77,7 +77,7 @@ h2{
     height: 100%;
     width: 0;
     z-index: 1000;
-    top: 100px;
+    top: 48px;
     background-color: #FFCC00; 
     transition: 0.23s;
 }
@@ -117,10 +117,10 @@ h2{
 #div_header_login{
     height: 50px;
     width: 50px;
-    background-color: #FFCC00;
+    background-color: #584125;
 }
 #div_header_login:hover{
-    background-color: white;
+    background-color: #FFCC00;
 }
 #span_nav_login_open{
     position: absolute;
@@ -140,13 +140,10 @@ h2{
 #div_header_logout{
     height: 50px;
     width: 50px;
-    background-color: #584125;
-}
-#div_header_logout:hover{
     background-color: #FFCC00;
 }
-#div_header_logout:hover .img_header_login{
-    content: url("../image/logout_braun.png");
+#div_header_logout:hover{
+    background-color: white;
 }
 #span_nav_logout_open{
     position: absolute;
@@ -171,12 +168,17 @@ h2{
     margin-left: 20px;
 }
 .img_header_two{
+    position: absolute;
+    top: 0;
+    left: 50px; 
     height: 50px;
 }
 #p_header_login{
-    display: inline;
-    margin-right: 10px;
-    float: right;
+    position: absolute;
+    white-space: nowrap;
+    top: 0;
+    left: 190px;
+    display: hidden;
 }
 
 .p_untertitel{
@@ -206,12 +208,12 @@ h2{
 }
 .a_section{
     text-decoration: none;
-    height: 40%;
+    height: 300px;
     width: 100%;
 }
 .section{
     position: relative;
-    height: 40%;
+    height: 300px;
     width: calc(100% - 4px);
     left: 0;
     background-color: #bcb1a3;
@@ -220,7 +222,7 @@ h2{
     background-size: cover;
 }
 .sectionWanderung{
-    background-image: url('../image/wanderung.JPG') !important;
+    background-image: url('../image/wanderung.jpg') !important;
     background-size: cover;
     background-position: center center;
 }
@@ -251,7 +253,7 @@ h2{
     left: 5%;
     font-size: 18pt;
     color: #584125;
-    width: 160px;
+    min-width: 160px;
     margin: 0;
     padding: 10px 0;
     background-color: #FFCC00;
@@ -336,8 +338,22 @@ tr:nth-child(even){
     cursor: pointer;
     width: 100%;
 }
-.button_steckbrief:hover{
+.button_steckbrief:hover, .button_wochenplan_steckbrief:hover{
     background-color: #ebe4d1;
+}
+
+.button_wochenplan_steckbrief{
+    height: 65px;
+    border-bottom: 1px solid #ebe4d1;
+    border-top: 1px solid #ebe4d1;
+    border-right: none;
+    background-color: white;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: -1px;
+    float: left;
+    cursor: pointer;
+    width: 100%;
 }
 .div_steckbrief_left{
     width: 140px;
@@ -378,21 +394,26 @@ tr:nth-child(even){
     height: 75px;
 }
 .div_wochenplan_view_teilnehmer{
-    margin: 10px 0 0 20px;
+    margin: 5px 0 0 20px;
     height: 55px;
+    width: 100%;
 }
 .img_wochenplan_view{
     height: 50px;
     width: 50px;
+    line-height: 45px;
     border-radius: 50%;
+    position: absolute;
+    left: 25px;
 }
 .p_wochenplan_view{
+    position: absolute;
     font-size: 15pt;
-    width: 200px;
-    margin: 10px calc(100% - 260px) 0 0;
+    left: 85px;
+    margin: 10px 0 0 0;
     font-weight: 400;
-    float: right;
-    word-wrap:break-word;
+    overflow: hidden;
+    word-wrap: nowrap;
 }
 .forms_file_details{
     position: absolute;
@@ -523,7 +544,7 @@ tr:nth-child(even){
 }
 .div_wochenplan_day_left{
     float: left;
-    width: 25%;
+    width: calc(25% - 7.5px);
 }
 .p_wochenplan_day_title{
     font-weight: 900;
@@ -535,15 +556,15 @@ tr:nth-child(even){
     margin: 0 0 0 20px;
 }
 .div_wochenplan_day_right{
-    margin-left: 25%;
-    width: 75%;
+    margin-left: calc(25% - 7.5px);
+    width: calc(75% + 7.5px);
     overflow: auto;
     position: relative;
 }
 .button_wochenplan{
     width: calc(100% - 30px);
     margin: 10px 0 10px 10px;
-    background-color: #ebe4d1;
+    background-color: #806f60;
     color: white;
     border: 0.5px solid black;
     text-align: left;
@@ -558,27 +579,29 @@ tr:nth-child(even){
 }
 .p_wochenplan_aktivitaet_title{
     margin: 0;
+    font-size: 15pt;
+    z-index: 150;
 }
 .p_wochenplan_aktivitaet_time{
+    font-size: 10pt;
     margin: 0;
+    z-index: 150;
 }
 .nowline{
     height: 1px;
-    width: calc(75% - 15px);
-    background-color: #806f60;
+    width: calc(100% - 7.5px);
+    background-color: black;
     position: absolute;
-    left: 25%;
     z-index: 100;
     opacity: 0.6;
 }
 .nowpoint{
     height: 15px;
     width: 15px;
-    background-color: #806f60;
+    background-color: #584125;
     border-radius: 50%;
     position: absolute;
-    left: calc(25% - 7.5px);
-    margin-top: -7.5px;
+    margin-top: -7px;
     z-index: 100;
 }
 .button_navigation{
@@ -595,7 +618,7 @@ tr:nth-child(even){
     margin: -2px 0 0 0;
     cursor: pointer;
     overflow: hidden;
-    height: 200px;
+    height: 300px;
     width: 100%;
     left: 0;
     text-align: center;
@@ -679,8 +702,7 @@ tr:nth-child(even){
 }
 .button_zurück_einschreiben{
     float: left;
-    margin-right: calc(90% - 200px);
-    margin-left: 20px;
+    margin: 10px calc(90% - 200px) 0 20px;
     height: 30px;
     width: 90px;
     font-size: 9pt;
@@ -690,6 +712,7 @@ tr:nth-child(even){
     border: 1px solid #584125;
 }
 .button_weiter_modal{
+    margin-top: 10px;
     height: 30px;
     width: 90px;
     font-size: 9pt;
@@ -789,16 +812,41 @@ input[type='radio'] {
     font-size: 18pt;
     color: #584125;
     font-weight: 600;
-    width: 160px;
+    min-width: 160px;
     margin: 0;
     padding: 10px 0;
     background-color: #FFCC00;
 }
-
 .p_feedback_radio{
     width: calc(90% - 50px);
     word-wrap: break-word;
     margin: 0 0 0 40px;
+}
+.slideshow{
+    display: none;
+}
+.img_slideshow {
+    vertical-align: middle;
+    max-height: 600px;
+    max-width: 900px;
+}
+.slideshow_container {
+  position: relative;
+  margin: auto;
+}
+.transition {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
 }
 
 

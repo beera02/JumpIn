@@ -1,4 +1,5 @@
 <?php
+    //Hole die richtige SteckbriefID. Entweder aus Session oder aus Post
     if(empty($_POST['id'])){
         $userid = $_SESSION['steckbrief_id'];
     }
@@ -6,13 +7,15 @@
         $_SESSION['steckbrief_id'] = $_POST['id'];
         $userid = $_SESSION['steckbrief_id'];
     }
-    if(!empty($_POST['id']) | !empty($_SESSION['steckbrief_id'])){
+    if(!empty($userid)){
+        //Wenn es dein eigner Steckbrief ist
         if($userid == getUserIDByUsername($_SESSION['benutzer_app'])){
             $user = getUserByID($userid);
             echo '
                 <h2>Dein Steckbrief</h2>
                 <p class="p_untertitel">Gefällt dir etwas an deinem Steckbrief nicht mehr? Kein Problem, verändere ihn hier.</p>
             ';
+            //Hole den Fehlermeldung Code
             require_once('error.php');
             echo '
                 <form id="editForm" action="validate_steckbrief_view" method="post" enctype="multipart/form-data"></form>
@@ -24,8 +27,11 @@
                 </div>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();
+            //Für jede obligatorische Steckbriefkategorie
             while($row = mysqli_fetch_assoc($steckbriefkategorien)){
+                //Hole die Antwort zur Kategorie
                 $answerarray = getCharacteristicsByUserIDAndCharacteristicsID($user['id_benutzer'], $row['id_steckbriefkategorie']);
+                //Wenn es ein Einzeiler ist
                 if($row['einzeiler'] == "1"){
                     echo '
                         <p class="p_form">'.$row['name'].'</p>
@@ -50,35 +56,42 @@
                 $numbersteckbrief++;
                 array_push($steckbriefkategorienarray, $row);
             }
+            //Für jede nicht obligatorische Steckbriefkategorie
             foreach($steckbriefkategorienarray as $row){
+                //Wenn es mehr als 1 Nicht obligatorische Steckbriefkategorie ist, dann kann man sie auch löschen
                 if($numbersteckbrief > 1){
                     if($row['einzeiler'] == "1"){
                         echo '
+                            <form id="'.$row['id_steckbriefkategorie'].'" action="validate_steckbrief_loeschen" method="post">
                             <p class="p_form">'.$row['name'].'</p>
                             <input class="forms_login_löschen" type="text" name="'.$row['id_steckbriefkategorie'].'" value="'.$row['antwort'].'" form="editForm"/>
-                            <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
+                            <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="'.$row['id_steckbriefkategorie'].'"/>
                             <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
-                            <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
+                            <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="'.$row['id_steckbriefkategorie'].'"/>
+                            </form>
                             <br>
                         ';
                     }
                     else{
                         echo '
-                            <form id="deleteForm" action="validate_kategorie_loeschen" method="post">
-                            <textarea class="forms_textarea_löschen" name="'.$row['id_steckbriefkategorie'].'" maxlength="300" form="editForm">'.$row['antwort'].'</textarea>
-                            <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="deleteForm"/>
-                            <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
-                            <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="deleteForm"/>
+                            <form id="'.$row['id_steckbriefkategorie'].'" action="validate_steckbrief_loeschen" method="post">
+                                <p class="p_form">'.$row['name'].'</p>
+                                <textarea class="forms_textarea_löschen" name="'.$row['id_steckbriefkategorie'].'" maxlength="300" form="editForm">'.$row['antwort'].'</textarea>
+                                <input class="button_löschen" type="submit" name="submit_btn" value="Löschen" form="'.$row['id_steckbriefkategorie'].'"/>
+                                <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
+                                <input type="hidden" name="kategorielöschen" value="'.$row['id_steckbriefkategorie'].'" form="'.$row['id_steckbriefkategorie'].'"/>
                             </form>
                             <br>
                         ';
                     }
                 }
+                //Wenn es nur 1 freiwillige Steckbriefkategorie ist
                 else if($numbersteckbrief == 1){
                     echo '
                         <p class="p_form">'.$row['name'].'</p>
                         <input type="hidden" name="steckbrief[]" value="'.$row['id_steckbriefkategorie'].'" form="editForm"/>
                     ';
+                    //Wenn es ein einzeiler ist
                     if($row['einzeiler'] == "1"){
                         echo '
                             <input class="forms_login" type="text" name="'.$row['id_steckbriefkategorie'].'" value="'.$row['antwort'].'" form="editForm"/>
@@ -99,6 +112,7 @@
                 <input class="button_zurück" type="submit" name="submit_btn" value="Zurück" form="editForm"/>
             ';
         }
+        //Wenn es nicht dein eigener Steckbrief ist
         else{
             $user = getUserByID($userid);
             echo '
@@ -108,8 +122,11 @@
                     <div class="space_blocker"></div>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();
+            //Für alle obligatorischen Steckbriefkategorien
             while($row = mysqli_fetch_assoc($steckbriefkategorien)){
+                //Hole Antwort zur Steckbriefkategorie
                 $answerarray = getCharacteristicsByUserIDAndCharacteristicsID($user['id_benutzer'], $row['id_steckbriefkategorie']);
+                //Wenn es eine Antwort hat
                 if(strlen($answerarray['antwort']) > 0){
                     echo '
                         <p class="p_form">'.$row['name'].'</p>
@@ -121,6 +138,7 @@
                 }
             }
             $steckbriefkategorien = getCharacteristicsByUserIDAndObligation($user['id_benutzer']);
+            //Für alle freiwilligen Steckbriefkategorien
             while($row = mysqli_fetch_assoc($steckbriefkategorien)){
                 echo '
                     <p class="p_form">'.$row['name'].'</p>

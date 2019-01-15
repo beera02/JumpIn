@@ -5,7 +5,7 @@
 ?>
 <form action="validate_steckbrief_kategorie_add" method="post">
     <p class="p_form">Steckbriefkategoriename</p>
-    <input class="forms_login" type="text" name="steckbriefkategoriename" placeholder="Wohnort" pattern="[a-zA-ZäöüÄÖÜß]{1-30}" required/>
+    <input class="forms_login" type="text" name="steckbriefkategoriename" placeholder="bsp. Wohnort" required/>
     <br>
     <p class="p_form">Einzeilige Antwort</p>
     <div class="div_margin-left">
@@ -16,7 +16,7 @@
     </div>
     <br>
     <p class="p_form">Deine Antwort</p>
-    <textarea class="forms_textarea" name="antwort" maxlength="300" placeholder="Bern"></textarea>
+    <textarea class="forms_textarea" name="antwort" maxlength="300" placeholder="bsp. Bern"></textarea>
     <br>
     <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen"/>
 </form>

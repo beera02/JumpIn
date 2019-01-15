@@ -9,10 +9,13 @@
         header('Location: aktivitaet_edit');
     }
     //wenn der knopf Löschen gedrückt wurde
-    if($_POST['submit_btn'] == "Löschen"){
+    else if($_POST['submit_btn'] == "Löschen"){
         //aktivität via der aktivitätsid in der datenbank löschen
         deleteActivityByID($_POST['id_aktivitaet']);
         //weiterleiten nach aktivitaet_edit_choice.php
         header('Location: aktivitaet_edit_choice');
+    }
+    else{
+        header('Location: home');
     }
 ?>

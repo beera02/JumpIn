@@ -26,5 +26,7 @@
     else if($_POST['submit_btn'] == "Zurück"){
         header('Location: feedback');
     }
-
+    else{
+        header('Location: home');
+    }
 ?>

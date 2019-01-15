@@ -65,7 +65,7 @@
         //wenn alles richtig eingegeben wurde
         if($invalid){
             //wenn die aktivität zum einschreiben ist
-            if($einschreiben == true){
+            if($einschreiben){
                 //setze die daten in sessions um erst später in datenbank zu inserten
                 $_SESSION['aktivitaetsname'] = $aktivitaetsname;
                 $_SESSION['aktivitaetsart'] = $_POST['aktivitaetsart'];
@@ -97,7 +97,10 @@
         }
     }
     //Wenn der knopf Zurück gedrückt wurde
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: aktivitaet');
+    }
+    else{
+        header('Location: home');
     }
 ?>

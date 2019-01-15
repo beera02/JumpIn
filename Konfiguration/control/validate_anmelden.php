@@ -11,7 +11,6 @@
             
             if($usrpasswort == $dbpasswort){
                 $gruppenabfrage = getGroupnameByUsername($benutzername);
-                
                 while ($gruppenabfragearray = mysqli_fetch_assoc($gruppenabfrage)) {
                     if(strtolower($gruppenabfragearray["gruppenname"]) == "admin"){
                         $invalid = true;

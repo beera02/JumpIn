@@ -36,7 +36,10 @@
             header('Location: group_add');
         }
     }      
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: group');
+    }
+    else{
+        header('Location: home');
     }
 ?>
