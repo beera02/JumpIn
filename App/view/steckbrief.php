@@ -68,7 +68,8 @@
                             </p>
                         </div>
                     </button>
-                    <input type="hidden" name="id" value="'.$row['id_benutzer'].'">
+                    <input type="hidden" name="id_user" value="'.$row['id_benutzer'].'">
+                    <input type="hidden" name="mode" value="steckbrief">
                 </form>
             ';
         }

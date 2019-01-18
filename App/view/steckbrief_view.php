@@ -1,13 +1,16 @@
 <?php
     //Hole die richtige SteckbriefID. Entweder aus Session oder aus Post
-    if(empty($_POST['id'])){
+    if(empty($_POST['id_user'])){
         $userid = $_SESSION['steckbrief_id'];
     }
     else{
-        $_SESSION['steckbrief_id'] = $_POST['id'];
+        $_SESSION['steckbrief_id'] = $_POST['id_user'];
         $userid = $_SESSION['steckbrief_id'];
     }
     if(!empty($userid)){
+        if($_POST['mode'] == "steckbrief"){
+            $_SESSION['mode'] = $_POST['mode'];
+        }
         //Wenn es dein eigner Steckbrief ist
         if($userid == getUserIDByUsername($_SESSION['benutzer_app'])){
             $user = getUserByID($userid);

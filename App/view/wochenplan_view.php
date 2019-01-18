@@ -55,8 +55,8 @@
                                 <p class="p_wochenplan_view">'.$user['vorname'].' '.$user['name'].'</p>
                             </div>
                         </button> 
-                        <input type="hidden" name="id" value="'.$user['id_benutzer'].'">
-                        <input type="hidden" name="mode" value="1">
+                        <input type="hidden" name="id_user" value="'.$user['id_benutzer'].'">
+                        <input type="hidden" name="mode" value="wochenplan">
                     </form>       
                 ';
             }

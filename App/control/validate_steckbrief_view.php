@@ -72,14 +72,16 @@
     }
     else if($_POST['submit_btn'] == "Zurück"){
         //herausfinden wo man zurückgeschickt wird
-        $mode = intval($_SESSION['mode']);
-        if(empty($mode)){
+        if(isset($_POST['mode'])){
+            $_SESSION['mode'] = $_POST['mode'];
+        }
+        if($_SESSION['mode'] == "steckbrief"){
             header('Location: steckbrief');
         }
-        else if($mode == 1) {
+        else if($_SESSION['mode'] == "wochenplan") {
             header('Location: wochenplan_view');
         }
-        else if($mode == 2){
+        else if($_SESSION['mode'] == "einschreiben"){
             header('Location: einschreiben');
         }
         else{
