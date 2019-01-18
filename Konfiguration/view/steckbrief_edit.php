@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Steckbriefkategorie datensatz mit der ID der Session holen
         $idsteckbrief = intval($_SESSION['id_steckbriefkategorie']);
         $datensatz = getCharacteristicsCategoriesByID($idsteckbrief);
 
@@ -12,6 +14,7 @@
                         Steckbriefkategorie bearbeiten
                     </p>
         ';
+        //Fehlercode integrieren
         require_once('error.php');
         echo '
                     <p class="p_form">Steckbriefkategoriename</p>
@@ -28,40 +31,5 @@
                 </form>
             </div>
         ';
-
-        function getObligation($obligation){
-            if($obligation == 1){
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="obligation" value="true" checked>
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="obligation" value="false">
-                    <label for="false">Nein</label>
-                ';
-            }
-            else{
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="obligation" value="true">
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="obligation" value="false" checked>
-                    <label for="false">Nein</label>
-                ';
-            }
-
-        }
-
-        function getEinzeiler($einzeiler){
-            if($einzeiler == 1){
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einzeiler" value="true" checked>
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="einzeiler" value="false">
-                    <label for="false">Nein</label>
-                ';
-            }
-            else{
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einzeiler" value="true">
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="einzeiler" value="false" checked>
-                    <label for="false">Nein</label>
-                ';
-            }
-        }
     ?>
 </div>

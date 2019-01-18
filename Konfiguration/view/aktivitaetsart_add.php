@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgbeen
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">

@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -9,8 +10,10 @@
         <form action="validate_user_group_add" method="post">
             <div class="div_forms_checkbox">
                 <?php
+                    //Hole alle Gruppen
                     $gruppenabfrage = getAllGroups();
 
+                    //Für jede Gruppe
                     while($row = mysqli_fetch_assoc($gruppenabfrage)){
                         echo '
                             <input class="forms_checkbox" type="checkbox" name="group[]"

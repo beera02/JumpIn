@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Mit der AktivitätblockID den Datensatz dazu holen
         $idart = intval($_SESSION['id_aktivitaetblock']);
         $datensatz = getActivityentityByID($idart);
 
@@ -12,6 +14,7 @@
                         Aktivitätsblock bearbeiten
                     </p>
         ';
+        //Fehlercode
         require_once('error.php');
         echo '        
                     <p class="p_form">Aktivitätsblockname</p>

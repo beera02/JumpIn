@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -13,8 +14,11 @@
                 <th></th>
             </tr>
             <?php
+                //Alle Gruppen holen
                 $allgroups = getAllGroups();
+                //für jede Gruppe
                 while($row = mysqli_fetch_assoc($allgroups)){
+                    //Wenn die Gruppe admin oder coach ist
                     if(strtolower($row['name']) == "admin" | strtolower($row['name']) == "coach"){
                         echo '
                             <tr>

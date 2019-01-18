@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -13,7 +14,9 @@
                 <th></th>
             </tr>
             <?php
+                //Alle Aktivitätblöcke holen
                 $allactivitiyentities = getAllActivityEntities();
+                //Für jeden Aktivitätblock
                 while($row = mysqli_fetch_assoc($allactivitiyentities)){
                     echo '
                         <tr>

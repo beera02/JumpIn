@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Aktivität Datensatz mit der ID aus der Session holen
         $idactivity = intval($_SESSION['id_aktivitaet']);
         $datensatz = getActivityByID($idactivity);
 
@@ -12,6 +14,7 @@
                     Aktivität bearbeiten
                 </p>
         ';
+        //Fehlercode
         require_once('error.php');
         echo '
                 <p class="p_form">Aktivitätsname</p>
@@ -41,22 +44,5 @@
             </form>
         <div>
         ';
-
-
-        function getEinschreiben($einschreiben){
-            if($einschreiben == '1'){
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true" checked>
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="einschreiben" value="false">
-                    <label for="false">Nein</label>';
-            }
-            else{
-                return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true">
-                    <label for="true">Ja</label>
-                    <input class="forms_radio" type="radio" name="einschreiben" value="false" checked>
-                    <label for="false">Nein</label>';
-            }
-
-        }
     ?>
 </div>

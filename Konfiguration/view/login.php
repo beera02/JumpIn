@@ -2,6 +2,7 @@
 <form action="validate_anmelden" method="post">
 	<div id="div_login">
 		<?php
+			//Fehlercode integrieren
 			require_once('error.php');
 		?>
 		<p class="p_login">Benutzername</p>

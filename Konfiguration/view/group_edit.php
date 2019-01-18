@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Der Datensatz der Gruppe durch die Id aus der Session holen
         $idgroup = intval($_SESSION['id_gruppe']);
         $datensatz = getGroupByID($idgroup);
 
@@ -12,6 +14,7 @@
                         Gruppe bearbeiten
                     </p>
         ';
+        //Fehlercode integrieren
         require_once('error.php');
         echo '
                     <p class="p_form">Gruppenname</p>

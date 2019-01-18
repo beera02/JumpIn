@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Datensatz des Benutzer mit der ID aus der Session holen 
         $idbenutzer = intval($_SESSION['id_benutzer']);
         $datensatz = getUserByID($idbenutzer);
 
@@ -12,6 +14,7 @@
                         Benutzer bearbeiten
                     </p>
         ';
+        //Fehlercode integrieren
         require_once('error.php');
         echo '
                     <p class="p_form">Name</p>

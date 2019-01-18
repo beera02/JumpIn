@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -35,6 +36,7 @@
     </div>
 </div>
 <script>
+    //Javascript für Reminder auszugeben
     var modal = document.getElementById('modal_reset');
     var btn = document.getElementById("modal_reset_button");
     var btn2 = document.getElementById("button_abbrechen");

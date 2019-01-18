@@ -1,13 +1,19 @@
 <?php
-	include_once 'control/builder.php';	
+	//In dieses File wird alles zusammengetragen
+	//builder integrieren
+	include_once 'control/builder.php';
+	//Die URI holen und so abschneiden, dass man das geladene File herauslesen kann
 	$temp = trim($_SERVER['REQUEST_URI'], '/');
 	$url = explode('/', $temp);
+	//elche Fehler und Warnungen werden im Broser ausgegeben
 	error_reporting(E_ALL & ~E_NOTICE);
+	//start eine neue session oder lasse die alte
 	session_start(); 
 
-
+	//wenn das zu ladene File überhaupt besteht
 	if(!empty($url[2])){
 		$url[2] = strtolower($url[2]);
+		//für alle möglichen files ein case
 		switch($url[2]){
 			case 'login':
 				build('./view/login.php');
@@ -92,6 +98,7 @@
 				break;
 		}
 	}
+	//ansonsten home aufrufen
 	else{
 		build('./view/home.php');
 	}

@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //Den Datensatz der Notfallkategorie mit der ID aus der Session holen
         $idnotfallkategorie = intval($_SESSION['id_notfallkategorie']);
         $datensatz = getEmergencyCategoryByID($idnotfallkategorie);
 
@@ -12,6 +14,7 @@
                     Notfallkartenkategorie bearbeiten
                 </p>
         ';
+        //Fehlercode integrieren
         require_once('error.php');
         echo '
                 <p class="p_form">Notfallname</p>

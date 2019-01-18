@@ -1,13 +1,19 @@
 <?php
-	include_once 'control/builder.php';	
+	//File um alles andere zu integrieren
+	//builder integrieren
+	include_once 'control/builder.php';
+	//URI holen und auf das relevante trennen
 	$temp = trim($_SERVER['REQUEST_URI'], '/');
 	$url = explode('/', $temp);
+	//Fehlermeldungen oder Warnungen die ausgegeben werden sollen
 	error_reporting(E_ALL & ~E_NOTICE);
+	//Session starten wenn keine besteht oder eine obenbehalten wenn eine besteht
 	session_start();
 
-
+	//Wenn der relevante Teil der URi nicht leer ist
 	if(!empty($url[2])){
 		$url[2] = strtolower($url[2]);
+		//zwischen den möglichen Fällen auswählen
 		switch($url[2]){
 			case 'validate_anmelden':
 				build('validate_anmelden.php');
@@ -278,6 +284,7 @@
 				break;
 		}
 	}
+	//Wenn kein relevanter Teuil angegeben wurde
 	else{
 		build('./view/login.php');
 	}

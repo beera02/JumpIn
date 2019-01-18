@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -8,6 +9,7 @@
                 Neuer Aktivitätsblock erstellen
             </p>
             <?php
+                //Fehlercode
                 require_once('error.php');
             ?>
             <p class="p_form">Aktivitätsblockname</p>
@@ -17,8 +19,11 @@
 		    <select class="forms_dropdown" name="aktivitaetsart">
                 <option value="null">-</option>
                 <?php
+                    //Hole alle Aktivitätarten
                     $allarts = getAllArts();
+                    //Für jede Aktivitätart
                     while($row = mysqli_fetch_assoc($allarts)){
+                        //Wenn die Aktivität zum einschreiben ist
                         if($row['einschreiben'] == "1"){
                             echo '
                                 <option value="'.$row['name'].'">'.$row['name'].'</option>

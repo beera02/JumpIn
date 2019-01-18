@@ -1,5 +1,6 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>
     <div class="div_form">
@@ -17,7 +18,9 @@
 		    <select class="forms_dropdown" name="aktivitaetsart">
                 <option value="null">-</option>
                 <?php
+                //Alle Aktivitätsarten holen
                     $allarts = getAllArts();
+                    //Für jede Aktivitätsart
                     while($row = mysqli_fetch_assoc($allarts)){
                         echo '
                             <option value="'.$row['name'].'">'.$row['name'].'</option>

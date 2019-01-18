@@ -1,6 +1,6 @@
 <?php
-	/*funktion für einen bestimmten main part zu laden
-	$path ist der pfad des files welches geladen werden soll*/
+	//Methode für einen bestimmten main abschnitt zu laden
+	//$path ist der pfad des files welches geladen werden soll
     function build($path){
 ?>
         <!DOCTYPE html>
@@ -51,15 +51,16 @@
 		<?php	 
 	}
 
-	//funktion für das geladene file in den stack zu schreiben
+	//Methode für das geladene file in den stack zu schreiben
+	//$path das geladene File
     function setStack($path){
 		//holt den vorherigen stack aus der sessionvariable
         $stackstring = $_SESSION['stack'];
 		$stackarray = explode("/",$stackstring);
 		$finalstringbefore = $stackarray[count($stackarray) - 2];
 
-		/*teilt den pfad des geladenen files
-		nur noch auf das benötigte zu*/
+		//teilt den pfad des geladenen files
+		//nur noch auf das benötigte zu
 		$patharray = explode(".",$path);
 		$pathstring = $patharray[count($patharray) - 2];
 		$patharray2 = explode("/",$pathstring);
@@ -79,8 +80,8 @@
 					$finalstackarray = array();
 					//durch den vorherigen stack durchiterieren
 					foreach($stackarray as $value){
-						/*wenn die anzahl iterationen kleiner als die position
-						vom zu ladenden file ist*/
+						//wenn die anzahl iterationen kleiner als die position
+						//vom zu ladenden file ist
 						if($i <= $number){
 							//den teil aus dem stack in das array schreiben und iterator variable um 1 erhöhen
 							$finalstackarray[$i] = $value;
@@ -106,37 +107,44 @@
 		}
 	}
 
+	//Methode um alle Aktivitätarten als Select-Option im Edit-Modus als ein String zusammenzufassen
+	//$id ist die zuvor ausgewählte Aktivitätart
 	function getArt($id){
 		$allarts = getAllArts();
 		$result = '';
 		while($row = mysqli_fetch_assoc($allarts)){
-			if($row['id_art'] == $id){
-				$result .= '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
-			}
-			else{
-				$result .= '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-			}
+			$result .= getOptionSelect($row, $id);
 		}
 		return $result;
 	}
 
+	//Wiederum Methode um alle Aktivitätarten als Select-Option im Edit-Modus als ein String zusammenfassen
+	//, jedoch nur Aktivitätsarten zum einschreiben
+	//$id ist die zuvor Ausgewählte Aktivitätsart
 	function getArtEinschreiben($id){
 		$allarts = getAllArts();
 		$result = '';
 		while($row = mysqli_fetch_assoc($allarts)){
 			if($row['einschreiben'] == "1"){
-				if($row['id_art'] == $id){
-					$result .= '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
-				}
-				else{
-					$result .= '<option value="'.$row['name'].'">'.$row['name'].'</option>';
-				}
+				$result .= getOptionSelect($row, $id);
 			}
 		}
 		return $result;
 	}
 
-	//funktion um alle benötigten attribute von einer aktivität zu validieren
+	//Methode die für eine bestimmte Aktivitätsart eine Select-Option als String zusammenbaut
+	//$row Aktivitätsart
+	//$id die zuvor Ausgewählte Aktivitätsart
+	function getOptionSelect($row, $id){
+		if($row['id_art'] == $id){
+			return '<option value="'.$row['name'].'" selected>'.$row['name'].'</option>';
+		}
+		else{
+			return '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+		}
+	}
+
+	//Methode um alle benötigten attribute von einer Aktivität zu validieren
 	function validateActivity($artofactivity, $startdate, $starttime, $enddate, $endtime, $writeindate, $writeintime){
 		//das format des datums und der zeit durch funktion validateDateTime ändern
 		$startdatetime = validateDateTime($startdate, $starttime);
@@ -144,7 +152,7 @@
 
 		//die aktivitätsartid via des aktivitätsartnamens aus der datenbank holen
 		$artid = getArtIDByName($artofactivity);
-		//wenn es eine aktivität mit einschreiben ist
+		//wenn es eine aktivität zum einschreiben ist
 		if($writeintime != null & $writeindate != null){
 			//das format des datums und der zeit von der einschreibzeit ändern
 			$writeindatetime = validateDateTime($writeindate, $writeintime);
@@ -157,7 +165,7 @@
 		}
 	}
 
-	//funktion um das format von datum und zeit zu ändern
+	//Methode um das format von datum und zeit zu ändern
 	function validateDateTime($date, $time){
 		//die string werte zu zeit werten machen
 		$time = strtotime($time);
@@ -178,17 +186,17 @@
 		return date("Y-m-d H:i:s", $newdate);
 	}
 
-	//funktion um das datum zurückzugeben
+	//Methode um das datum zurückzugeben
 	function returnDate($olddate){
 		return date("Y-m-d", strtotime($olddate));
 	}
 
-	//funktion um die zeit zurückzugeben
+	//Methode um die Zeit zurückzugeben
 	function returnTime($oldtime){
 		return date("H:i", strtotime($oldtime));
 	}
 
-	//funktion um anzahl tage und minuten bis zu einem zeitpunkt herauszufinden
+	//Methode um anzahl tage und minuten bis zu einem zeitpunkt herauszufinden
 	function getDaysHours($time){
 		//datum und zeit bei leerzeichen trennen und dann einzeln als datum und zeit speichern
 		$trimmed1 = explode(' ',$time);
@@ -225,7 +233,7 @@
 		return $result;
 	}
 
-	/*funktion für die Zahlen 1 oder 0 Ja oder Nein auszugeben*/
+	//Methode für die Zahlen 1 oder 0 Ja oder Nein auszugeben
 	function getJaNein($id){
 		if($id == 1){
 			return 'Ja';
@@ -235,6 +243,41 @@
 		}
 	}
 
-	//alle datenbankmethoden aus dem file database.php laden
+	//Methode um für den Einschreiben Wert den richtigfen radio Button auszuwählen
+	function getEinschreiben($einschreiben){
+		if($einschreiben == '1'){
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true" checked>
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="einschreiben" value="false">
+				<label for="false">Nein</label>';
+		}
+		else{
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einschreiben" value="true">
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="einschreiben" value="false" checked>
+				<label for="false">Nein</label>';
+		}
+	}
+
+	//Methode um für den Obligationswert den richtigen RadioButton auszuwählen
+	function getObligation($obligation){
+		if($obligation == 1){
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="obligation" value="true" checked>
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="obligation" value="false">
+				<label for="false">Nein</label>
+			';
+		}
+		else{
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="obligation" value="true">
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="obligation" value="false" checked>
+				<label for="false">Nein</label>
+			';
+		}
+
+	}
+
+	//alle Datenbankmethoden aus dem file database.php laden
 	require_once 'database.php';
 ?>

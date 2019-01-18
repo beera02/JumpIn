@@ -1,15 +1,25 @@
 <?php
+    //Error Session leeren
     $_SESSION['error'] = NULL;
+    //Validierungsvariabble
     $invalid = false;
+    //Variable für die htmlspecialchars Validierung
     $aktivitaetsartname;
 
+    //Wenn der knopf Erstellen gedrückt wurde
     if($_POST['submit_btn'] == "Erstellen"){
+        //Wenn alle benötigten Felder nicht leer sind
         if(!empty($_POST['aktivitaetsartname'])){
+            //den Aktivitätsartnamen nach specialchars validieren
             $aktivitaetsartname = htmlspecialchars($_POST['aktivitaetsartname']);
-            if(strlen($aktivitaetsartname) <= 30){              
+            //Wenn der Name kürzer oder gleich 30 Zeichen ist
+            if(strlen($aktivitaetsartname) <= 30){
+                //Suche in der Datenbank nach diesem Aktivitätsartnamen              
                 $dbArtname = getArtnameByArtname($aktivitaetsartname);
 
+                //Wenn es diesen Namen noch nicht gibt
 	            if ($dbArtname != $aktivitaetsartname){
+                    //Eingaben richtig
                     $invalid = true;
                 }
                 else{
@@ -23,23 +33,24 @@
         else{
             $_SESSION['error'] = "Es wurden nicht alle Felder ausgefüllt!";
         }
+        //Wenn alle Eingaben richtig sind
         if($invalid){
+            $einschreiben;
+            //Wenn es eine Aktivitätsart zum einschreiben ist
             if($_POST['einschreiben'] == "true"){
-                insertArt($aktivitaetsartname, 1);
-                header('Location: aktivitaetsart');
+                $einschreiben = 1;
             }
             else if($_POST['einschreiben'] == "false"){
-                insertArt($aktivitaetsartname, 0);
-                header('Location: aktivitaetsart');
+                $einschreiben = 0;
             }
-            else{
-                header('Location: aktivitaetsart_add');
-            }
+            insertArt($aktivitaetsartname, $einschreiben);
+            header('Location: aktivitaetsart');
         }
         else{
             header('Location: aktivitaetsart_add');
         }
-    }      
+    }
+    //Wenn Zurück geklickt wurde
     else if($_POST['submit_btn'] == "Zurück"){
         header('Location: aktivitaetsart');
     }

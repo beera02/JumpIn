@@ -1,7 +1,9 @@
 <div class="div_main">
     <?php
+        //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
 
+        //FeedbackKategorie Datensatz mit der ID aus der Session holen
         $idfeedbackkategorie = intval($_SESSION['id_feedbackkategorie']);
         $datensatz = getFeedbackCategoryByID($idfeedbackkategorie);
 
@@ -12,6 +14,7 @@
                     Feedbackkategorie bearbeiten
                 </p>
         ';
+        //Fehlercode
         require_once('error.php');
         echo '
                 <p class="p_form">Frage des Feedbacks</p>
@@ -30,6 +33,7 @@
             </form>
         <div class="div_form">
         ';
+        //Anzahloptionen in Session speichern
         $_SESSION['feedbackkategorie_oldoptions'] = $datensatz['anzahloptionen'];
     ?>
 </div>
