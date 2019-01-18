@@ -24,14 +24,19 @@
                         $invalid = true;
                         //spezielle zeichen von Info escapen
                         $info = htmlspecialchars($_POST['info']);
-                        //wenn die info höchstens 500 zeichen lang ist
-                        if(strlen($info) <= 500){
-                            //session info setzen
-                            $_SESSION['info'] = $info;
+                        if(!empty($_POST['info'])){
+                            //wenn die info höchstens 500 zeichen lang ist
+                            if(strlen($info) <= 500){
+                                //session info setzen
+                                $_SESSION['info'] = $info;
+                            }
+                            else{
+                                //error session setzen
+                                $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
+                            }
                         }
                         else{
-                            //error session setzen
-                            $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
+                            $_SESSION['info'] = NULL;
                         }
                         //wenn die aktivitätsart zum einschreiben ist
                         $resultarray = getArtByName($_POST['aktivitaetsart']);

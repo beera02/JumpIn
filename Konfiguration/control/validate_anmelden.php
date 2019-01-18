@@ -29,7 +29,7 @@
                         $invalid = true;
                     }
                     else{
-                        $_SESSION['error'] = "Dieser benutzer verfügt nicht über genügend Berechtigung!";
+                        $_SESSION['error'] = "Dieser Benutzer verfügt nicht über genügend Berechtigung!";
                     }
                 }
             }

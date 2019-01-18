@@ -36,6 +36,9 @@
                                 $_SESSION['error'] = "Die Info ist zu lang! Max. 500 Zeichen!";
                             }
                         }
+                        else{
+                            $_SESSION['info'] = NULL;
+                        }
                         //wenn die aktivitätsart zum einschreiben ist
                         $resultarray = getArtByName($_POST['aktivitaetsart']);
                         if($resultarray['einschreiben'] == "1"){
