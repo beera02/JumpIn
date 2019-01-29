@@ -39,7 +39,7 @@
             removeSessionInvalid($array);
             $array2 = array("steckbrief_add", "validate_steckbrief_add");
             addSessionInvalid($array2);
-            header('Location: steckbrief');
+            header('Location: steckbrief_view');
         }
         else{
             header('Location: steckbrief_kategorie_add');

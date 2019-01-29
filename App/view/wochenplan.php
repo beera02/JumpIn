@@ -587,7 +587,7 @@
                 $diffrenceabsolute = calculateHeight($daylisttime[array_search($day, $daylisttime)][0]->getStartzeit(), $now);
                 //get all time gaps between
                 $gap = getGapNowPointer($now, $day);
-                echoNowLine(($diffrenceabsolute + getGapToBefore($now, $day)) - $gap);
+                echoNowLine($diffrenceabsolute + getGapToBefore($now, $day) + 10 - $gap);
             }
             $nowline = true;
         }
