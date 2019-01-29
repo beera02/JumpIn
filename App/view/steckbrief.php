@@ -4,6 +4,8 @@
 	<select class="steckbrief_dropdown" name="gruppe">
         <option value="null">-</option>
         <?php
+            //Error Session leeren
+            $_SESSION['error'] = NULL;
             //Wenn zuvor ein Filter ausgewählt wurde
             if(!empty($_SESSION['groupselected'])){
                 $groupid = $_SESSION['groupselected'];
@@ -57,7 +59,7 @@
                 <form action="steckbrief_view" method="post">
                     <button class="button_steckbrief">
                         <div class="div_steckbrief_left">
-                            <img class="img_steckbrief" src="./userimages/'.$row['id_benutzer'].'.png" alt="Profilbild"/>
+                            <img class="img_steckbrief" src="./userimages/'.$row['id_benutzer'].'.png?t='.filemtime('./userimages/'.$row['id_benutzer'].'.png').'" alt="Profilbild"/>
                         </div>
                         <div class="div_steckbrief_right">
                             <p class="p_steckbrief_name">

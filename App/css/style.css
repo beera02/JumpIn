@@ -30,7 +30,6 @@ h2{
     margin: 15px calc(100% - 80% - 20px) 15px 20px;
     word-wrap:break-word;
 }
-
 #navigation_button {
     display: block;
     width: 30px;
@@ -40,25 +39,24 @@ h2{
     margin: 15% auto;
     -webkit-transition: all .3s ease, -webkit-transform .2s ease;
             transition: all .3s ease, transform .2s ease;
-    background: -webkit-linear-gradient(top, transparent 0%, transparent 23%, #584125 23%, #584125 29%, transparent 29%, transparent 52%, #584125 52%, #584125 58%, transparent 58%, transparent 78%, #584125 78%, #584125 84%, transparent 84%);
-    background: linear-gradient(to bottom, transparent 0%, transparent 23%, #584125 23%, #584125 29%, transparent 29%, transparent 52%, #584125 52%, #584125 58%, transparent 58%, transparent 78%, #584125 78%, #584125 84%, transparent 84%);
-  }
-  #navigation_button:active {
-    -webkit-transform: scale(0.9);
-        -ms-transform: scale(0.9);
-            transform: scale(0.9);
-  }
+    background: linear-gradient(to bottom, transparent 0%, transparent 23%, #584125 23%, #584125 29%, transparent 29%, transparent 52%, #584125 52%, #584125 58%, transparent 58%, transparent 81%, #584125 81%, #584125 87%, transparent 87%);
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    #navigation_button {
+        background: linear-gradient(to bottom, transparent 0%, transparent 23%, #584125 23%, #584125 29%, transparent 29%, transparent 52%, #584125 52%, #584125 61%, transparent 61%, transparent 84%, #584125 84%, #584125 90%, transparent 90%);
+    }
+}
+@-moz-document url-prefix() {
+    #navigation_button {
+        background: linear-gradient(to bottom, transparent 0%, transparent 23%, #584125 23%, #584125 29%, transparent 29%, transparent 52%, #584125 52%, #584125 58%, transparent 58%, transparent 81%, #584125 81%, #584125 87%, transparent 87%);
+    }
+}
   #navigation_button.clicked {
     background: -webkit-linear-gradient(135deg, transparent 0%, transparent 46%, #584125 46%, #584125 52%, transparent 52%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #584125 46%, #584125 52%, transparent 52%, transparent 100%);
     background: linear-gradient(-45deg, transparent 0%, transparent 46%, #584125 46%, #584125 52%, transparent 52%, transparent 100%), linear-gradient(45deg, transparent 0%, transparent 46%, #584125 46%, #584125 52%, transparent 52%, transparent 100%);
     -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
             transform: rotate(180deg);
-  }
-  #navigation_button.clicked:active {
-    -webkit-transform: scale(0.9) rotate(180deg);
-        -ms-transform: scale(0.9) rotate(180deg);
-            transform: scale(0.9) rotate(180deg);
   }
 
 .div_nav_open{
@@ -622,7 +620,7 @@ tr:nth-child(even){
     width: 100%;
     left: 0;
     text-align: center;
-    border: 2px solid #584125;
+    border: 2px solid #FFCC00;
     background-image: url('../image/aktivität_default.jpg');
     background-size: cover;
 

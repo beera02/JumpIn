@@ -5,7 +5,7 @@
 	//Die URI holen und so abschneiden, dass man das geladene File herauslesen kann
 	$temp = trim($_SERVER['REQUEST_URI'], '/');
 	$url = explode('/', $temp);
-	//elche Fehler und Warnungen werden im Broser ausgegeben
+	//etliche Fehler und Warnungen werden im Broser ausgegeben
 	error_reporting(E_ALL & ~E_NOTICE);
 	//start eine neue session oder lasse die alte
 	session_start(); 

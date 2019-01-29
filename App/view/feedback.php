@@ -2,6 +2,8 @@
 <p class="p_untertitel">Gib uns doch eine Rückmeldung wie du das diesjährige Jump-in fandest, sodass das nächste noch besser werden kann!</p>
 <form action="feedback_categories" method="post">
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     $feedbackcategories = getAllFeedbackCategories();
     $start = 1;
     if(!empty($feedbackcategories)){

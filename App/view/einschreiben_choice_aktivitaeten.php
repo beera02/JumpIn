@@ -1,4 +1,6 @@
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     $id;
     //Hole die richtige AktivitätsblockID. Entweder aus Session oder aus Post
     if(empty($_POST['id_aktivitaetsblock'])){

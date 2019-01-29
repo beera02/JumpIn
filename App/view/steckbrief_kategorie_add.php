@@ -1,10 +1,10 @@
 <h2>Erzähle noch mehr über dich!</h2>
-<p class="p_untertitel">Erstelle deine persönliche Steckbriefkategorie und nutze die Chance noch mehr über dich zu erzählen.</p>
+<p class="p_untertitel">Erstelle nun einen persönlichen Eintrag in deinem Steckbrief und nutze die Chance somit noch mehr über dich zu erzählen.</p>
 <?php
     require_once('error.php');
 ?>
 <form action="validate_steckbrief_kategorie_add" method="post">
-    <p class="p_form">Steckbriefkategoriename</p>
+    <p class="p_form">Steckbriefeintragname</p>
     <input class="forms_login" type="text" name="steckbriefkategoriename" placeholder="bsp. Wohnort" required/>
     <br>
     <p class="p_form">Einzeilige Antwort</p>

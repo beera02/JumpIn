@@ -1,4 +1,6 @@
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     //Wenn der benutzer eingeloggt ist
     if($_SESSION['benutzer_app']){
         //Hole alle Aktivitätsarten die momentan etwas einzuschreiben haben

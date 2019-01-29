@@ -79,6 +79,9 @@
     $activityclasses = array();
     buildWeekschedule();
 
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
+
     //Methode buildWeekschedule steuert den ganzen Aufbau des Wochenplans
     function buildWeekschedule(){
         $userid = getUserIDByUsername($_SESSION['benutzer_app']);

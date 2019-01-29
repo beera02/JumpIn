@@ -35,6 +35,10 @@
         if($validated){
             $id = insertCharacteristicsCategory($steckbriefkategoriename, 0, $einzeiler);
             insertCharacteristics($id, getUserIDByUsername($_SESSION['benutzer_app']), $antwort);
+            $array = array("steckbrief_kategorie_add", "validate_steckbrief_kategorie_add", "steckbrief", "steckbrief_view", "validate_steckbrief_order", "validate_steckbrief_loeschen");
+            removeSessionInvalid($array);
+            $array2 = array("steckbrief_add", "validate_steckbrief_add");
+            addSessionInvalid($array2);
             header('Location: steckbrief');
         }
         else{

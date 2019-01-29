@@ -65,13 +65,17 @@
                 //in datenbank einfügen
                 insertCharacteristics($validate, $userid, $steckbrief);
             }
+            $array = array("steckbrief_kategorie_add", "validate_steckbrief_kategorie_add");
+            removeSessionInvalid($array);
+            $array2 = array("steckbrief_add", "validate_steckbrief_add", "steckbrief", "steckbrief_view", "validate_steckbrief_order", "validate_steckbrief_loeschen");
+            addSessionInvalid($array2);
             header('Location: steckbrief_kategorie_add');
         }
         else{
             header('Location: steckbrief_add');
         }
     }
-    if($_POST['submit_btn'] == "Zurück"){
+    else if($_POST['submit_btn'] == "Zurück"){
         header('Location: home');
     }
     else{

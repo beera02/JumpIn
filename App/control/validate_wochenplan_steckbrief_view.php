@@ -1,4 +1,6 @@
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     if(!empty($_POST['id_user'])){
         $array = array();
         //Neu erlaubte Seiten

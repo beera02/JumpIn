@@ -259,6 +259,21 @@
 		}
 	}
 
+	function getEinzeiler($einzeiler){
+		if($einzeiler == '1'){
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einzeiler" value="true" checked>
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="einzeiler" value="false">
+				<label for="false">Nein</label>';
+		}
+		else{
+			return '<input id="froms_radio_left" class="forms_radio" type="radio" name="einzeiler" value="true">
+				<label for="true">Ja</label>
+				<input class="forms_radio" type="radio" name="einzeiler" value="false" checked>
+				<label for="false">Nein</label>';
+		}
+	}
+
 	//Methode um für den Obligationswert den richtigen RadioButton auszuwählen
 	function getObligation($obligation){
 		if($obligation == 1){

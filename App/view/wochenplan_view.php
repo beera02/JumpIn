@@ -1,4 +1,6 @@
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     $aktivitaet;
     //Hole die richtige AktivitätID. Entweder aus Session oder aus Post
     if(!empty($_POST['id'])){
@@ -51,7 +53,7 @@
                     <form action="validate_wochenplan_steckbrief_view" method="post">
                         <button class="button_wochenplan_steckbrief">
                             <div class="div_wochenplan_view_teilnehmer">
-                                <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                                <img class="img_wochenplan_view" src="./userimages/'.$user['id_benutzer'].'.png?t='.filemtime('./userimages/'.$user['id_benutzer'].'.png').'" alt="Profilbild"/>
                                 <p class="p_wochenplan_view">'.$user['vorname'].' '.$user['name'].'</p>
                             </div>
                         </button> 

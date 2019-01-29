@@ -1,4 +1,6 @@
 <?php
+    //Error Session leeren
+    $_SESSION['error'] = NULL;
     $characteristics = 0;
     $array = array();
     $id=getUserIDByUsername($_SESSION['benutzer_app']);

@@ -1,5 +1,7 @@
 <div class="div_main">
     <?php
+        //Error Session leeren
+        $_SESSION['error'] = NULL;
         //Stack ausgeben
         echo '<p id="p_stack">'.$_SESSION['stack'].'</p>';
     ?>

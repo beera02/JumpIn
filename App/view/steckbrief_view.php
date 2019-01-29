@@ -25,7 +25,7 @@
                 <form id="deleteForm" action="validate_steckbrief_loeschen" method="post"></form>
                 <p class="p_form">Bild ändern</p>
                 <div class="div_steckbrief_details_blocker">
-                    <img class="img_steckbrief_details" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                    <img class="img_steckbrief_details" src="./userimages/'.$user['id_benutzer'].'.png?t='.filemtime('./userimages/'.$user['id_benutzer'].'.png').'" alt="Profilbild"/>
                     <input class="forms_file_details" type="file" accept=".jpg, .jpeg, .png" name="bild" form="editForm"/>
                 </div>
             ';
@@ -121,7 +121,7 @@
             echo '
                 <h2>'.$user['vorname'].' '.$user['name'].'</h2>
                 <form action="validate_steckbrief_view" method="post">
-                <img class="img_steckbrief_details_dontknow" src="./userimages/'.$user['id_benutzer'].'.png" alt="Profilbild"/>
+                <img class="img_steckbrief_details_dontknow" src="./userimages/'.$user['id_benutzer'].'.png?t='.filemtime('./userimages/'.$user['id_benutzer'].'.png').'" alt="Profilbild"/>
                     <div class="space_blocker"></div>
             ';
             $steckbriefkategorien = getCharacteristicsCategoryByObligation();
