@@ -15,6 +15,7 @@
             <input class="forms_textfield" type="text" name="gruppenname"/>
             <br>
             <p class="p_form">Level</p>
+            <p class="p_form_comment">Das höchste Level einer Gruppe eines Benutzers wird beim Steckbrief des Benutzers angezeigt!</p>
             <input class="forms_textfield" type="text" name="level"/>
 		    <br>
             <input class="button_weiter" type="submit" name="submit_btn" value="Erstellen"/>

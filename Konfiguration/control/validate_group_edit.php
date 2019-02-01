@@ -37,7 +37,7 @@
                     }
                 }
                 else{
-                    $_SESSION['error'] = "Level muss eine Zahl sein! Das höchste Level einer Gruppe eines Benutzers wird beim Steckbrief des Benutzers angezeigt!";
+                    $_SESSION['error'] = "Level muss eine Zahl sein!";
                 }
             }
             else{
